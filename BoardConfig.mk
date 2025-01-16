@@ -37,7 +37,7 @@ RECOVERY_TOUCHSCREEN_FLIP_X:= true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 buildvariant=eng androidboot.selinux=permissiv
+BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x05400000
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -94,12 +94,12 @@ PLATFORM_VERSION := 16.1.0
 # TWRP Configuration
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
-TW_SCREEN_BLANK_ON_BOOT := true
+#TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 # ToyBox (disables busybox?)
-#TW_USE_TOOLBOX := true
+TW_USE_TOOLBOX := true
 # add an option in reboot menu to reboot into Download Mode
-TW_HAS_DOWNLOAD_MODE := true
+#TW_HAS_DOWNLOAD_MODE := true
 # some devices don't have a temp sensor, disable in such case to stop spamming recovery.log
 TW_NO_CPU_TEMP := true
 # system won't be unmounted,
