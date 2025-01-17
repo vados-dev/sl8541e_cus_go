@@ -7,9 +7,9 @@
 
 # Inherit from those products. Most specific first.
 #$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
-$(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/embedded.mk)
-#$(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/embedded.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 #$(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Inherit from sl8541e_cus_go device
@@ -25,7 +25,16 @@ PRODUCT_BRAND := sprd
 PRODUCT_MODEL := D41
 PRODUCT_MANUFACTURER := sprd
 
-PRODUCT_GMS_CLIENTID_BASE := android-sprd
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.treble.enabled=true \
+    persist.sys.usb.config=mtp \
+    persist.service.adb.enable=1 \
+    persist.service.debuggable=1 \
+    ro.secure=1 \
+    ro.adb.secure=0 \
+    ro.allow.mock.location=0
+
+#PRODUCT_GMS_CLIENTID_BASE := android-sprd
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.security_patch=2099-12-31
