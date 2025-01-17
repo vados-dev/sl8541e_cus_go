@@ -16,7 +16,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, device/sprd/sl8541e_cus_go/device.mk)
 
 # Inherit some common Omni stuff.
-$(call inherit-product, vendor/pb/config/common.mk)
+$(call inherit-product, vendor/omni/config/common.mk)
 
 PRODUCT_DEVICE := sl8541e_cus_go
 PRODUCT_NAME := omni_sl8541e_cus_go
