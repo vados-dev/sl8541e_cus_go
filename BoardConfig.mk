@@ -8,7 +8,7 @@
 DEVICE_PATH := device/sprd/sl8541e_cus_go
 
 # PBRP specific build flags
-PB_DISABLE_DEFAULT_DM_VERITY := true
+#PB_DISABLE_DEFAULT_DM_VERITY := true
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -31,6 +31,7 @@ TARGET_BOOTLOADER_BOARD_NAME := sl8541e_cus_32b
 TARGET_NO_BOOTLOADER := true
 
 # Display
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_SCREEN_DENSITY := 320
 # Touchscreen based on landscape screen but TWRP displays portraitly
 # This option makes touchscreen portrait 
@@ -60,7 +61,7 @@ ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 TARGET_PREBUILT_DT := $(DEVICE_PATH)/prebuilt/dt.img
 BOARD_MKBOOTIMG_ARGS += --dt $(TARGET_PREBUILT_DT)
-BOARD_KERNEL_SEPARATED_DT := 
+BOARD_KERNEL_SEPARATED_DT := true
 endif
 
 # Partitions
@@ -79,6 +80,7 @@ TARGET_BOARD_PLATFORM := sp9832e
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
