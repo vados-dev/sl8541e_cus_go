@@ -20,6 +20,7 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic
 TARGET_CPU_VARIANT_RUNTIME := generic
+TARGET_CPU_SMP := true
 
 TARGET_USES_64_BIT_BINDER := true
 
@@ -118,17 +119,23 @@ PLATFORM_VERSION := 16.1.0
 DEVICE_SCREEN_WIDTH := 1280
 DEVICE_SCREEN_HEIGHT := 320
 
+# TWRP specific build flags by Depesh
+TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness"
+TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
+HAVE_SELINUX := true
+#RECOVERY_SDCARD_ON_DATA := true
+TW_NO_LEGACY_PROPS := true
 # TWRP Configuration
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
-#TW_SCREEN_BLANK_ON_BOOT := true
+TW_SCREEN_BLANK_ON_BOOT := false
 TW_INPUT_BLACKLIST := "hbtp_vm"
 # ToyBox (disables busybox?)
 TW_USE_TOOLBOX := true
 # Not For sprd! - add an option in reboot menu to reboot into Download Mode
 #TW_HAS_DOWNLOAD_MODE := true
 # some devices don't have a temp sensor, disable in such case to stop spamming recovery.log
-TW_NO_CPU_TEMP := true
+#TW_NO_CPU_TEMP := true
 # system won't be unmounted,
 TW_NEVER_UNMOUNT_SYSTEM := true
 #TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
@@ -139,6 +146,12 @@ TW_NO_SCREEN_BLANK := true
 BOARD_SUPPRESS_SECURE_ERASE := true
 TW_DEFAULT_LANGUAGE := ru
 TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
+
+#PIE
+PLATFORM_SDK_VERSION := 27
+
+# Show build time on the splash screen
+TW_DEVICE_VERSION=$(shell date '+%Y%m%d') by vados-dev
 
 # Debug
 TARGET_USES_LOGD := true
