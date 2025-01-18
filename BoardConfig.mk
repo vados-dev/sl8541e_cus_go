@@ -148,7 +148,7 @@ TW_USE_TOOLBOX := true
 # system won't be unmounted,
 TW_NEVER_UNMOUNT_SYSTEM := true
 #TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
+#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_NO_SCREEN_BLANK := true
