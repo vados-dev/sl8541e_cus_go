@@ -94,10 +94,10 @@ TARGET_USERIMAGES_USE_F2FS := true
 #BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
 # Crypto
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
-BOARD_USES_METADATA_PARTITION := true
+#TW_INCLUDE_CRYPTO := true
+#TW_INCLUDE_CRYPTO_FBE := true
+#TW_INCLUDE_FBE_METADATA_DECRYPT := true
+#BOARD_USES_METADATA_PARTITION := true
 
 # Encryption by Depesh
 #TARGET_HW_DISK_ENCRYPTION := true
@@ -132,7 +132,7 @@ DEVICE_SCREEN_HEIGHT := 320
 # TWRP specific build flags by Depesh
 TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
-HAVE_SELINUX := true
+#HAVE_SELINUX := true
 #RECOVERY_SDCARD_ON_DATA := true
 #TW_NO_LEGACY_PROPS := true
 # TWRP Configuration
