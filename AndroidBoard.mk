@@ -7,6 +7,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter sl8541e_cus_go,$(TARGET_DEVICE)),)
-include $(call all-makefiles-under,$(LOCAL_PATH))
+ifeq ($(TARGET_DEVICE),sl8541e_cus_go)
+include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif
