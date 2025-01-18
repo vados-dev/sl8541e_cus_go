@@ -148,7 +148,7 @@ TW_DEFAULT_LANGUAGE := ru
 TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 
 #PIE
-PLATFORM_SDK_VERSION := 27
+#PLATFORM_SDK_VERSION := 28
 
 # Show build time on the splash screen
 TW_DEVICE_VERSION=$(shell date '+%Y%m%d') by vados-dev
