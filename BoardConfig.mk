@@ -31,7 +31,7 @@ TARGET_BOOTLOADER_BOARD_NAME := sl8541e_cus_32b
 TARGET_NO_BOOTLOADER := true
 
 # Display
-TARGET_SCREEN_DENSITY := 160
+TARGET_SCREEN_DENSITY := 320
 # Touchscreen based on landscape screen but TWRP displays portraitly
 # This option makes touchscreen portrait 
 RECOVERY_TOUCHSCREEN_SWAP_XY:= true
@@ -48,7 +48,7 @@ BOARD_KERNEL_SECOND_OFFSET := 0x00f00000
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
-BOARD_KERNEL_IMAGE_NAME := zImage
+BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_SEPARATED_DT := true
 TARGET_KERNEL_CONFIG := sprd_sharkle_defconfig
 TARGET_KERNEL_SOURCE := kernel/sprd/sl8541e_cus_go
@@ -80,6 +80,12 @@ TARGET_BOARD_PLATFORM := sp9832e
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
+# Crypto
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+BOARD_USES_METADATA_PARTITION := true
+
 # system.prop
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 
@@ -87,12 +93,12 @@ TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 VENDOR_SECURITY_PATCH := 2021-08-01
 
 # Verified Boot
-#BOARD_AVB_ENABLE := true
-#BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
-#BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
-#BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
-#BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
-#BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
+BOARD_AVB_ENABLE := true
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
+BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
+BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
 
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
@@ -116,7 +122,8 @@ TW_USE_TOOLBOX := true
 TW_NO_CPU_TEMP := true
 # system won't be unmounted,
 TW_NEVER_UNMOUNT_SYSTEM := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
+#TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_NO_SCREEN_BLANK := true
