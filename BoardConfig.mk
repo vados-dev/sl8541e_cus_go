@@ -8,7 +8,7 @@
 DEVICE_PATH := device/sprd/sl8541e_cus_go
 
 # PBRP specific build flags
-#PB_DISABLE_DEFAULT_DM_VERITY := true
+PB_DISABLE_DEFAULT_DM_VERITY := true
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -40,13 +40,15 @@ RECOVERY_TOUCHSCREEN_FLIP_X:= true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x05400000
+BOARD_KERNEL_SECOND_OFFSET := 0x00f00000
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
-BOARD_KERNEL_IMAGE_NAME := Image
+BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_SEPARATED_DT := true
 TARGET_KERNEL_CONFIG := sprd_sharkle_defconfig
 TARGET_KERNEL_SOURCE := kernel/sprd/sl8541e_cus_go
@@ -108,11 +110,16 @@ TW_EXTRA_LANGUAGES := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 # ToyBox (disables busybox?)
 TW_USE_TOOLBOX := true
-# add an option in reboot menu to reboot into Download Mode
+# Not For sprd! - add an option in reboot menu to reboot into Download Mode
 #TW_HAS_DOWNLOAD_MODE := true
 # some devices don't have a temp sensor, disable in such case to stop spamming recovery.log
 TW_NO_CPU_TEMP := true
 # system won't be unmounted,
 TW_NEVER_UNMOUNT_SYSTEM := true
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
 TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_NO_SCREEN_BLANK := true
+BOARD_SUPPRESS_SECURE_ERASE := true
+TW_DEFAULT_LANGUAGE := ru
+TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
