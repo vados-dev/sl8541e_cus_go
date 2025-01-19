@@ -30,7 +30,7 @@
 /system              ext4     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/system           flags=display=system;backup=1;flashimg=1
 /system_image	     emmc     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/system		flags=flashimg=1;backup=1
 /vendor              ext4     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/vendor           flags=display=vendor;backup=1;flashimg=1
-/data                f2fs     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/userdata         flags=display=data;backup=1;flashimg=1;encryptable=footer;encryptable=check;
+/data                f2fs     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/userdata         flags=display=data;backup=1;flashimg=1;encryptable=footer;encryptable=check
 #/data       	     f2fs     /dummydevice 						                flags=altdevice=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/userdata;encryptable=footer;encryptable=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/miscdata;length=-16384;encryptable=ice:aes-256-cts
 #/data                ext4     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/userdata         flags=display=data;backup=1;flashimg=1
 /cache               ext4     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/cache            flags=display=cache;backup=1;flashimg=1
@@ -38,12 +38,12 @@
 #
 #SD cards
 #/external_sd	auto	/dev/block/mmcblk1p1	/dev/block/mmcblk1		flags=display="External SDcard";storage;wipeingui;removable;backup=0
-/external_sd	  auto	     /dev/block/platform/soc/soc:ap-ahb/20300000.sdio/mmcblk1p1			flags=fsflags=utf8;display="Micro SDcard";storage;wipeingui;removable
+/external_sd	  auto	     /dev/block/platform/soc/soc:ap-ahb/20300000.sdio/mmcblk1p1			flags=fsflags=utf8;display="Micro SDcard";storage;wipeingui;removable;backup=0
 
 
 #/external_sd	auto	/dev/block/mmcblk1p1	/dev/block/mmcblk1		flags=display="External SDcard";storage;wipeingui;removable;backup=0
 #/external_sd	vfat		/dev/block/mmcblk0p1	/dev/block/mmcblk0	flags=display="MicroSD Card 1";storage;wipeingui;removable
-#/external_sd    vfat        /dev/block/mmcblk1p1	/dev/block/mmcblk1 	flags=display="MicroSD Card 2";storage;wipeingui;removable
+#/external_sd    vfat        /dev/block/mmcblk1p1	/dev/block/mmcblk1 	flags=display="MicroSD Card 2";storage;wipeingui;removable;backup=0
 #/external_sd	auto		/dev/block/mmcblk0p1	/dev/block/mmcblk0	flags=display="MicroSD Card 3";storage;wipeingui;removable
 #/external_sd    auto        /dev/block/mmcblk1p1	/dev/block/mmcblk1 	flags=display="MicroSD Card 4";storage;wipeingui;removable
 
