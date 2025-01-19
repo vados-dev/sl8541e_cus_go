@@ -1,24 +1,3 @@
-#
-# BOOTIMAGE_BUILD_PROPERTIES
-#
-ro.bootimage.build.date=Sat Aug 3 10:32:34 UTC 2024
-ro.bootimage.build.date.utc=1722681154
-ro.bootimage.build.fingerprint=SPRD/sl8541e_cus_gofu_osea/sl8541e_cus_go:8.1.0/OPM2.171019.012/08515:user/release-keys
-
-ro.secure=0
-ro.adb.secure=0
-ro.debuggable=1
-persist.sys.usb.config=mtp,adb
-ro.allow.mock.location=1
-ro.treble.enabled=true
-persist.sys.timezone = Europe/Moscow
-ro.sf.swrotation=90
-ro.sf.hwrotation=90
-ro.screenmode.shape=0
-sys.rotation.animscale=0.5
-persist.service.adb.enable=1
-persist.service.debuggable=1
-persist.sys.root_access=1	
 # Crypt
 ro.hardware.keystore=sprdtrusty
 sys.usb.controller=musb-hdrc.0.auto
@@ -26,13 +5,83 @@ ro.crypto.fde_algorithm=adiantum
 ro.crypto.fde_sector_size=4096
 ro.crypto.volume.contents_mode=adiantum
 ro.crypto.volume.filenames_mode=adiantum
-# DefVendor
+
+#
+# BOOTIMAGE_BUILD_PROPERTIES
+#
+ro.secure=0
+ro.adb.secure=0
+ro.debuggable=1
+persist.sys.usb.config=mtp,adb
+persist.service.adb.enable=1
+# enable tcp adb
+service.adb.tcp.port=5555
+ro.allow.mock.location=0
+ro.treble.enabled=true
+persist.sys.timezone = Europe/Moscow
+ro.sf.hwrotation=90
+ro.screenmode.shape=0
+sys.rotation.animscale=0.5
+persist.service.adb.enable=1
+persist.service.acm.enable=0
+persist.service.debuggable=1
+persist.sys.root_access=1	
+ro.config.low_ram=false
 ro.zygote=zygote32
+ro.mount.fs=EXT4
 dalvik.vm.image-dex2oat-Xms=64m
 dalvik.vm.image-dex2oat-Xmx=64m
 dalvik.vm.dex2oat-Xms=64m
 dalvik.vm.dex2oat-Xmx=512m
 ro.dalvik.vm.native.bridge=0
+camera.disable_zsl_mode=1
+# builinfoDefault:
+ro.build.id=OPM2.171019.012
+ro.build.display.id=eplutus_D41_M5_936_Media_Sleep_2025012005
+# Do not try to parse description, fingerprint, or thumbprint
+ro.build.description=sl8541e_cus_gofu_osea-user 8.1.0 OPM2.171019.012 08515 release-keys
+ro.build.fingerprint=SPRD/sl8541e_cus_gofu_osea/sl8541e_cus_go:8.1.0/OPM2.171019.012/08515:user/release-keys
+ro.build.characteristics=default
+ro.build.version.incremental=52215
+ro.build.version.sdk=27
+ro.build.version.preview_sdk=0
+ro.build.version.codename=REL
+ro.build.version.all_codenames=REL
+ro.build.version.release=16.1.0
+ro.build.version.security_patch=2018-09-05
+ro.build.version.base_os=
+ro.build.date=Wed Dec 18 16:50:25 CET 2024
+ro.build.date.utc=1734537025
+ro.build.type=eng
+ro.build.user=vados
+ro.build.host=local086.vados.ru
+ro.build.tags=dev-keys
+ro.build.flavor=omni_sl8541e_cus_go
+# ro.build.product is obsolete; use ro.product.device
+ro.build.product=D41
+ro.build.version.min_supported_target_sdk=17
+ro.build.selinux=1
+ro.product.model=D41
+ro.product.brand=FX
+ro.product.name=FXMirror
+ro.product.device=sl8541e_cus_32b
+ro.product.board=sl8541e_cus_32b
+ro.product.hardware=sl8541e_1h10_go
+ro.omni.device=D41
+ro.omni.version.security_patch=
+#
+ro.product.cpu.abi=armeabi-v7a
+ro.product.cpu.abi2=armeabi
+ro.product.cpu.abilist=armeabi-v7a,armeabi
+ro.product.cpu.abilist32=armeabi-v7a,armeabi
+ro.product.cpu.abilist64=
+ro.product.manufacturer=sprd
+ro.product.locale=ru-RU
+ro.product.locale.language=ru
+ro.product.locale.region=RU
+ro.board.platform=sp9832e
+
+# xz
 dalvik.vm.usejit=true
 dalvik.vm.usejitprofiles=true
 dalvik.vm.dexopt.secondary=true
@@ -49,65 +98,15 @@ pm.dexopt.inactive=verify
 pm.dexopt.shared=speed
 tombstoned.max_tombstone_count=50
 debug.atrace.tags.enableflags=0
-camera.disable_zsl_mode=1
 ro.gpu.boost=1
 ro.gpu.boost.path=/vendor/lib/libboost.so
-sys.usb.controller=musb-hdrc.0.auto
 ro.support.auto.roam=disabled
 ro.hwui.use_offline_shader=1
-# builinfoDefault:
-ro.build.id=OPM2.171019.012
-ro.build.display.id=eplutus_D41_M5_936_Media_Sleep_2025012005
-ro.build.version.incremental=52215
-ro.build.version.sdk=28
-ro.build.version.preview_sdk=0
-ro.build.version.codename=REL
-ro.build.version.all_codenames=REL
-ro.build.version.release=16.1.0
-ro.build.version.security_patch=2018-09-05
-ro.omni.version.security_patch=
-ro.build.version.base_os=
-ro.build.version.min_supported_target_sdk=17
-ro.build.date=Wed Dec 18 16:50:25 CET 2024
-ro.build.date.utc=1734537025
-ro.build.type=eng
-ro.build.user=vados
-ro.build.host=local086.vados.ru
-ro.build.tags=test-keys
-ro.build.flavor=omni_sl8541e_cus_go
-ro.product.model=D41
-ro.product.brand=FX
-ro.product.name=FXMirror
-ro.product.device=sl8541e_cus_32b
-# ro.product.cpu.abi and ro.product.cpu.abi2 are obsolete,
-# use ro.product.cpu.abilist instead.
-ro.product.cpu.abi=armeabi-v7a
-ro.product.cpu.abi2=armeabi
-ro.product.cpu.abilist=armeabi-v7a,armeabi
-ro.product.cpu.abilist32=armeabi-v7a,armeabi
-ro.product.cpu.abilist64=
-ro.product.manufacturer=sprd
-ro.product.locale=en-US
-# ro.build.product is obsolete; use ro.product.device
-ro.build.product=D41
-# Do not try to parse description, fingerprint, or thumbprint
-ro.build.description=sl8541e_cus_gofu_osea-user 8.1.0 OPM2.171019.012 08515 release-keys
-ro.build.fingerprint=SPRD/sl8541e_cus_gofu_osea/sl8541e_cus_go:8.1.0/OPM2.171019.012/08515:user/release-keys
-ro.build.characteristics=default
-ro.omni.device=D41
-ro.sf.lcd_density=160
-persist.service.adb.enable=1
-# enable tcp adb
-service.adb.tcp.port=5555
-# xz:
-ro.product.board=sl8541e_cus_32b
-ro.board.platform=sp9832e
-ro.vendor.product.manufacturer=sprd
-ro.vendor.product.model=sl8541e_cus_gofu
-ro.vendor.product.brand=SPRD
-ro.vendor.product.name=sl8541e_cus_gofu_osea
-ro.vendor.product.device=sl8541e_cus_go
-ro.product.hardware=sl8541e_1h10_go
+
+# Display
+ro.sf.lcd_density=320
+ro.sf.lcd_width=54
+ro.sf.lcd_height=96
 
 # Orig
 # FRP property for pst device
@@ -147,10 +146,7 @@ ro.keybox.id.value=SPRD
 ro.ifaa.support=true
 ro.ifaa.testmode.off=false
 ro.ifaa.device.vendor=0x08
-ro.config.low_ram=false
-ro.sf.lcd_density=320
-ro.sf.lcd_width=54
-ro.sf.lcd_height=96
+
 ro.opengles.version=196610
 persist.sys.cam.fr.blur.version=1
 persist.sys.cam.ba.blur.version=3
@@ -205,7 +201,7 @@ ro.com.google.clientidbase=android-sprd
 ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html
 ro.com.android.wifi-watchlist=GoogleGuest
 ro.setupwizard.enterprise_mode=1
-ro.build.selinux=1
+
 persist.sys.disable_rescue=true
 ro.opa.eligible_device=true
 net.tethering.noprovisioning=true
