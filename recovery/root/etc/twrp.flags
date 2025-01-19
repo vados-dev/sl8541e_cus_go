@@ -38,8 +38,12 @@
 #
 #SD cards
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /external_sd	auto	/dev/block/mmcblk1p1	/dev/block/mmcblk1		flags=display="External SDcard";storage;wipeingui;removable;backup=0
 #/external_sd	  auto	     /dev/block/platform/soc/soc:ap-ahb/20300000.sdio/mmcblk1p1			flags=fsflags=utf8;display="Micro SDcard";storage;wipeingui;removable
+=======
+/external_sd	  auto	     /dev/block/platform/soc/soc:ap-ahb/20300000.sdio/mmcblk1p1			flags=fsflags=utf8;display="Micro SDcard";storage;wipeingui;removable
+>>>>>>> Stashed changes
 =======
 /external_sd	  auto	     /dev/block/platform/soc/soc:ap-ahb/20300000.sdio/mmcblk1p1			flags=fsflags=utf8;display="Micro SDcard";storage;wipeingui;removable
 >>>>>>> Stashed changes
@@ -54,10 +58,14 @@
 #/usb-otg    auto        /dev/block/sda1 /dev/block/sda        flags=display="USB OTG 2";backup=0
 #/usb-otg    auto        /dev/block/sdg1 /dev/block/sdg        flags=display="USB-OTG 3";backup=0)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #/usb_otg    auto        /dev/block/sdd1 /dev/block/sdd        flags=display="USB-OTG 5";backup=0
 
 #/usb_otg    auto        /dev/block/sdd1 /dev/block/sdd        flags=display="USB-OTG 5";backup=0
 
+=======
+#/usb_otg    auto        /dev/block/sdd1 /dev/block/sdd        flags=display="USB-OTG 5";backup=0
+>>>>>>> Stashed changes
 =======
 #/usb_otg    auto        /dev/block/sdd1 /dev/block/sdd        flags=display="USB-OTG 5";backup=0
 >>>>>>> Stashed changes

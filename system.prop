@@ -33,7 +33,10 @@ dalvik.vm.image-dex2oat-Xmx=64m
 dalvik.vm.dex2oat-Xms=64m
 dalvik.vm.dex2oat-Xmx=512m
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ro.dalvik.vm.native.bridge=0
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 dalvik.vm.usejit=true
@@ -41,9 +44,12 @@ dalvik.vm.usejitprofiles=true
 dalvik.vm.dexopt.secondary=true
 dalvik.vm.appimageformat=lz4
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 pm.dexopt.first-boot=quicken
 pm.dexopt.boot=verify
 pm.dexopt.install=quicken
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 pm.dexopt.first-boot=extract
@@ -221,11 +227,14 @@ ro.config.notification_sound=omni_notification1.ogg
 ro.config.alarm_alert=omni_alarm1.ogg
 ro.services.whitelist.packagelist=com.google.android.gms
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ro.modversion=OmniROM-16.1.0-20240803-HSL67E_G-HOMEMADE
 ro.omni.version=16.1.0-20240803-HSL67E_G-HOMEMADE
 ro.vndk.version=28
 ro.vndk.lite=true
 ro.zygote=zygote32
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 ro.vndk.version=28
