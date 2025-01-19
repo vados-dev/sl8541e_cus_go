@@ -14,34 +14,34 @@
 		<xmlfile name="extras.xml"/>
 	</include>
 	<resources>
-	    <font name="font_exl" filename="pb.ttf" size="59"/>
-		<font name="font_l" filename="pb.ttf" size="45"/>
-		<font name="cons" filename="DroidSansMono.ttf" size="30"/>
-		<font name="font_about" filename="pb.ttf" size="37"/>
-		<font name="font_install_subheader" filename="pb.ttf" size="36"/>
-		<font name="font_install_option" filename="pb.ttf" size="40"/>
-		<font name="font_m" filename="Roboto_Medium.ttf" size="34"/>
-		<font name="font_card" filename="Roboto_Regular.ttf" size="38"/>
-		<font name="font_sub_header" filename="Roboto_Regular.ttf" size="35"/>
-		<font name="font_slider" filename="pb.ttf" size="40"/>
-		<font name="font_roboto_m" filename="Roboto_Medium.ttf" size="39"/>
+	    <font name="font_exl" filename="pb.ttf" size="60"/>
+		<font name="font_l" filename="pb.ttf" size="54"/>
+		<font name="cons" filename="DroidSansMono.ttf" size="32"/>
+		<font name="font_about" filename="pb.ttf" size="39"/>
+		<font name="font_install_subheader" filename="pb.ttf" size="38"/>
+		<font name="font_install_option" filename="pb.ttf" size="42"/>
+		<font name="font_m" filename="Roboto_Medium.ttf" size="42"/>
+		<font name="font_card" filename="Roboto_Regular.ttf" size="40"/>
+		<font name="font_sub_header" filename="Roboto_Regular.ttf" size="37"/>
+		<font name="font_slider" filename="pb.ttf" size="32"/>
+		<font name="font_roboto_m" filename="Roboto_Medium.ttf" size="42"/>
 		<font name="font_roboto" filename="Roboto_Medium.ttf" size="45"/>
-		<font name="font_n" filename="pb.ttf" size="20"/>
-		<font name="font_o" filename="pb.ttf" size="30"/>
+		<font name="font_n" filename="pb.ttf" size="22"/>
+		<font name="font_o" filename="pb.ttf" size="32"/>
 		<font name="chin" filename="DroidSansFallback.ttf" size="30" ignorable="1"/>
 		<font name="ja" filename="NotoSansCJKjp-Regular.ttf" size="30" ignorable="1"/>
 		<font name="ko" filename="RoboNoto-Medium.ttf" size="30" ignorable="1"/>
 		<font name="eng" filename="pb.ttf" size="30"/>
-		<font name="font_s" filename="pb.ttf" size="32"/>
+		<font name="font_s" filename="pb.ttf" size="34"/>
 		<font name="font_xl" filename="pb.ttf" size="75"/>
 		<font name="font_xxl" filename="pb.ttf" size="100"/>
 		<font name="fixed" filename="pb.ttf" size="35"/>
-		<font name="font_pb" filename="pb.ttf" size="48"/>
-		<font name="font_pb_small" filename="pb.ttf" size="50"/>
-		<font name="font_pb_tools" filename="pb.ttf" size="45"/>
-		<font name="keylabel" filename="pb.ttf" size="60"/>
-		<font name="keylabel-small" filename="pb.ttf" size="42"/>
-		<font name="keylabel-longpress" filename="pb.ttf" size="28"/>
+		<font name="font_pb" filename="pb.ttf" size="50"/>
+		<font name="font_pb_small" filename="pb.ttf" size="52"/>
+		<font name="font_pb_tools" filename="pb.ttf" size="47"/>
+		<font name="keylabel" filename="pb.ttf" size="64"/>
+		<font name="keylabel-small" filename="pb.ttf" size="46"/>
+		<font name="keylabel-longpress" filename="pb.ttf" size="32"/>
 		<image name="logo" filename="logo" retainaspect="1"/>
 		<image name="splashlogo" filename="splashlogo" retainaspect="1"/>
 		<image name="splashteamwin" filename="splashteamwin" retainaspect="1"/>
