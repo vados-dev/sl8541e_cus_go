@@ -104,9 +104,9 @@ ro.support.auto.roam=disabled
 ro.hwui.use_offline_shader=1
 
 # Display
-ro.sf.lcd_density=320
-ro.sf.lcd_width=54
-ro.sf.lcd_height=96
+#ro.sf.lcd_density=320
+#ro.sf.lcd_width=54
+#ro.sf.lcd_height=96
 
 # Orig
 # FRP property for pst device
