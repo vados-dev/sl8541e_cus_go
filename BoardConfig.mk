@@ -8,7 +8,7 @@
 DEVICE_PATH := device/sprd/sl8541e_cus_go
 
 # PBRP specific build flags
-PB_DISABLE_DEFAULT_DM_VERITY := true
+#PB_DISABLE_DEFAULT_DM_VERITY := true
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -38,9 +38,9 @@ TARGET_NO_BOOTLOADER := true
 # Display
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 DEVICE_RESOLUTION := 800x1280
-TW_IGNORE_MAJOR_AXIS_0 := true
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TARGET_SCREEN_DENSITY := 320
+#TW_IGNORE_MAJOR_AXIS_0 := true
+#RECOVERY_GRAPHICS_USE_LINELENGTH := true
+#TARGET_SCREEN_DENSITY := 320
 # Touchscreen based on landscape screen but TWRP displays portraitly
 # This option makes touchscreen portrait 
 RECOVERY_TOUCHSCREEN_SWAP_XY:= true
