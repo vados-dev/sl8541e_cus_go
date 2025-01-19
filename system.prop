@@ -32,14 +32,23 @@ dalvik.vm.image-dex2oat-Xms=64m
 dalvik.vm.image-dex2oat-Xmx=64m
 dalvik.vm.dex2oat-Xms=64m
 dalvik.vm.dex2oat-Xmx=512m
+<<<<<<< Updated upstream
 ro.dalvik.vm.native.bridge=0
+=======
+>>>>>>> Stashed changes
 dalvik.vm.usejit=true
 dalvik.vm.usejitprofiles=true
 dalvik.vm.dexopt.secondary=true
 dalvik.vm.appimageformat=lz4
+<<<<<<< Updated upstream
 pm.dexopt.first-boot=quicken
 pm.dexopt.boot=verify
 pm.dexopt.install=quicken
+=======
+pm.dexopt.first-boot=extract
+pm.dexopt.boot=extract
+pm.dexopt.install=speed-profile
+>>>>>>> Stashed changes
 pm.dexopt.bg-dexopt=speed-profile
 pm.dexopt.ab-ota=speed-profile
 pm.dexopt.inactive=verify
@@ -211,10 +220,15 @@ ro.config.ringtone=omni_ringtone1.ogg,omni_ringtone1.ogg
 ro.config.notification_sound=omni_notification1.ogg
 ro.config.alarm_alert=omni_alarm1.ogg
 ro.services.whitelist.packagelist=com.google.android.gms
+<<<<<<< Updated upstream
 ro.modversion=OmniROM-16.1.0-20240803-HSL67E_G-HOMEMADE
 ro.omni.version=16.1.0-20240803-HSL67E_G-HOMEMADE
 ro.vndk.version=28
 ro.vndk.lite=true
 ro.zygote=zygote32
+=======
+ro.vndk.version=28
+ro.vndk.lite=true
+>>>>>>> Stashed changes
 ro.logd.size.stats=64K
 log.tag.stats_log=I
