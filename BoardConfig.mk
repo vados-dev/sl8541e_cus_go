@@ -18,7 +18,7 @@ TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_VARIANT := generic #cortex-a53
+TARGET_CPU_VARIANT := cortex-a53
 TARGET_CPU_VARIANT_RUNTIME := generic
 #TARGET_CPU_SMP := true
 
@@ -50,7 +50,7 @@ RECOVERY_TOUCHSCREEN_FLIP_X:= true
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8
-#BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x05400000
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -91,10 +91,11 @@ TARGET_BOARD_PLATFORM := sp9832e
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 #BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
 # Crypto
-#TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO := true
 #TW_INCLUDE_CRYPTO_FBE := true
 #TW_INCLUDE_FBE_METADATA_DECRYPT := true
 #BOARD_USES_METADATA_PARTITION := true
@@ -109,9 +110,6 @@ TARGET_USERIMAGES_USE_F2FS := true
 # system.prop
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 
-# Security patch level
-VENDOR_SECURITY_PATCH := 2021-08-01
-
 # Verified Boot
 #BOARD_AVB_ENABLE := true
 #BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
@@ -119,6 +117,9 @@ VENDOR_SECURITY_PATCH := 2021-08-01
 #BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
 #BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
 #BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
+
+# Security patch level
+VENDOR_SECURITY_PATCH := 2021-08-01
 
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
@@ -129,33 +130,34 @@ PLATFORM_VERSION := 16.1.0
 DEVICE_SCREEN_WIDTH := 320
 DEVICE_SCREEN_HEIGHT := 1280
 
+TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
+HAVE_SELINUX := true
+RECOVERY_SDCARD_ON_DATA := true
+
+# TWRP Configuration
 # TWRP specific build flags by Depesh
 TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness"
-TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
-#HAVE_SELINUX := true
-RECOVERY_SDCARD_ON_DATA := true
-#TW_NO_LEGACY_PROPS := true
-# TWRP Configuration
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
+TW_DEFAULT_LANGUAGE := ru
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
-# ToyBox (disables busybox?)
+#TW_NO_LEGACY_PROPS := true
 TW_USE_TOOLBOX := true
-# Not For sprd! - add an option in reboot menu to reboot into Download Mode
-#TW_HAS_DOWNLOAD_MODE := true
 # some devices don't have a temp sensor, disable in such case to stop spamming recovery.log
 #TW_NO_CPU_TEMP := true
 # system won't be unmounted,
-#TW_NEVER_UNMOUNT_SYSTEM := true
+TW_NEVER_UNMOUNT_SYSTEM := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 #TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
+TW_NO_SCREEN_BLANK := true
+BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_SUPPRESS_SECURE_ERASE := true
+TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
+
+# Exludes
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
 TW_EXCLUDE_DEFAULT_USB_INIT := true
-TW_NO_SCREEN_BLANK := true
-BOARD_SUPPRESS_SECURE_ERASE := true
-TW_DEFAULT_LANGUAGE := ru
-TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 
 #PIE
 #PLATFORM_SDK_VERSION := 28
