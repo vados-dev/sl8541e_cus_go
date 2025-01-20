@@ -68,6 +68,8 @@ subsystem sound
 # these should not be world writable
 /dev/diag                 0660   radio      radio
 /dev/diag_arm9            0660   radio      radio
+/dev/android_adb          0660   adb        adb
+/dev/android_adb_enable   0660   adb        adb
 /dev/ttyMSM0              0600   bluetooth  bluetooth
 /dev/uhid                 0660   uhid       uhid
 /dev/uinput               0660   system     bluetooth
@@ -77,6 +79,7 @@ subsystem sound
 /dev/graphics/*           0660   root       graphics
 /dev/msm_hw3dm            0660   system     graphics
 /dev/input/*              0660   root       input
+/dev/da380*		  0660   root       input
 /dev/eac                  0660   root       audio
 /dev/cam                  0660   root       camera
 /dev/pmem                 0660   system     graphics
@@ -131,6 +134,10 @@ subsystem sound
 /sys/devices/virtual/usb_composite/*   enable      0664  root   system
 /sys/devices/system/cpu/cpu*   cpufreq/scaling_max_freq   0664  system system
 /sys/devices/system/cpu/cpu*   cpufreq/scaling_min_freq   0664  system system
+/sys/devices/system/cpu/cpu*   cpufreq/scaling_governor   0664  system system
 
 # DVB API device nodes
 /dev/dvb*                 0660   root       system
+
+# Mali node
+/dev/mali*                0666    system graphics

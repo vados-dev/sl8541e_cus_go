@@ -11,14 +11,13 @@
 /dev/fm                 0660     media       media
 /dev/ttyM0              0660     bluetooth   net_bt_admin
 /dev/ttyM1              0660     bluetooth   net_bt_admin
-/dev/trusty-ipc-dev0    0660     system      system
 /dev/sttybt0            0660     bluetooth   net_bt_admin
 /dev/ttyBT0             0660     bluetooth   net_bt_admin
-
 /dev/trusty-ipc-dev0    0660     system      system
 /dev/stty_lte*          0666     radio       system
 /dev/slog_lte           0660     system      system
 /dev/slog_pm            0660     system      system
+/dev/sctl_pm            0660     system      system
 /dev/sdiag_lte          0660     system      system
 /dev/spipe_lte*         0660     system      system
 /dev/spipe_lte5         0660     radio      system
@@ -39,16 +38,23 @@
 
 /dev/block/mmcblk1p*    0660     system      system
 /dev/AKM099XX           0660     system      system
+/dev/da380 		        0660     system      system
 /dev/block/mmcblk0rpmb  0660     system      system
+
+/dev/mc34xx             0660     system      system
 
 /dev/vser               0660     system      system
 /dev/ttyGS*             0666     system      system
 
 /dev/ion                0666     system      graphics
 /dev/gsp                0660     system      graphics
-
+/dev/sprd_gsp         	0660     system      graphics
 /dev/mali0              0666     system      graphics
-/dev/sprd_jpg           0660     system      camera
+/dev/sprd_dma_copy      0660     system      camera
+/dev/sprd_scale         0660     system      camera
+/dev/sprd_rotation      0660     system      camera
+/dev/sprd_dcam          0660     system      camera
+/dev/sprd_jpg           0666     system      camera
 /dev/sprd_jpg1          0660     system      camera
 /dev/sprd_vsp           0660     system      camera
 /dev/sprd_vpp           0660     system      camera
@@ -60,7 +66,7 @@
 /dev/sprd_cpp           0660     system      camera
 /dev/video0        	0666     media       media
 /dev/map_user           0660     system      system
-
+/dev/power_ctl	    0660     system      system
 /sys/devices/system/cpu/cpu* /cpufreq/interactive/boost 0660 media system
 /sys/devices/system/cpu/cpu* /cpufreq/interactive/boostpulse 0660 system system
 /sys/devices/system/cpu/cpu* /cpufreq/interactive/boostpulse_duration 0660 system system
@@ -72,20 +78,24 @@
 /sys/devices/system/cpu/cpu* /cpufreq/interactive/min_sample_time 0660 system system
 /sys/devices/system/cpu/cpu* /cpufreq/interactive/io_is_busy 0660 system system
 
+/dev/input/event*       0660     system      input
 /sys/devices/virtual/input/input*   enable      0660  system   input
+/sys/devices/virtual/input/input*   poll_delay  0660  system   input
 /sys/devices/virtual/input/input*   delay      0660  system   input
 /sys/devices/virtual/input/input*   chip_info      0660  system   input
 
-/sys/devices/platform/soc/soc:ap-apb/70700000.i2c/i2c-2/2-006a/input/input* /accel/enable      0660  system   input
-/sys/devices/platform/soc/soc:ap-apb/70700000.i2c/i2c-2/2-006a/input/input* /accel/polling_rate      0660  system   input
-/sys/devices/platform/soc/soc:ap-apb/70700000.i2c/i2c-2/2-006a/input/input* /gyro/enable      0660  system   input
-/sys/devices/platform/soc/soc:ap-apb/70700000.i2c/i2c-2/2-006a/input/input* /gyro/polling_rate      0660  system   input
+/sys/devices/virtual/input/input*   acc_delay      0660  system   input
+/sys/devices/virtual/input/input*   acc_enable      0660  system   input
+/sys/devices/virtual/input/input* gyro_enable 0660 system input
+/sys/devices/virtual/input/input* gyro_delay 0660 system input
 
 /dev/ltr_558als      0660  system   input
-/sys/class/xr-gsensor/device/gsensor      0660  system   input
-/sys/class/xr-gsensor/device/delay_acc      0660  system   input
-/sys/class/xr-pls/device/als      0660  system   input
-/sys/class/xr-pls/device/proximity      0660  system   input
-
+/sys/class/xr-gsensor/device   gsensor      0660  system   input
+/sys/class/xr-gsensor/device   delay_acc      0660  system   input
+/sys/class/xr-pls/device   als      0660  system   input
+/sys/class/xr-pls/device   proximity      0660  system   input
+/sys/class/input/input*   enable      0660  system   input
+/sys/class/input/input*   poll_delay      0660  system   input
+/sys/class/input/input*   enable      0660  system   input
 #modify permission for ttyS1
 /dev/ttyS1	0777	media_rw	media_rw
