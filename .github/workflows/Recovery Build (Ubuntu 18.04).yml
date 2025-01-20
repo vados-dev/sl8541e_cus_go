@@ -15,7 +15,7 @@ on:
       DEVICE_TREE_URL:
         description: 'DEVICE_TREE_URL'
         required: true
-        default: 'https://github.com/vados-dev/sl8541e_cus_go.git'
+        default: 'https://github.com/vados-dev/sl8541e_cus_go'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
