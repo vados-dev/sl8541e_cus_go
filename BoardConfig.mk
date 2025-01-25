@@ -37,9 +37,9 @@ TARGET_NO_BOOTLOADER := true
 
 # Display
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-DEVICE_RESOLUTION := 800x1280
-#TW_IGNORE_MAJOR_AXIS_0 := true
-#RECOVERY_GRAPHICS_USE_LINELENGTH := true
+DEVICE_RESOLUTION := 1280x320
+TW_IGNORE_MAJOR_AXIS_0 := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
 #TARGET_SCREEN_DENSITY := 320
 # Touchscreen based on landscape screen but TWRP displays portraitly
 # This option makes touchscreen portrait 
@@ -127,8 +127,8 @@ VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 
 # Resolution
-DEVICE_SCREEN_WIDTH := 320
-DEVICE_SCREEN_HEIGHT := 1280
+DEVICE_SCREEN_WIDTH := 1280
+DEVICE_SCREEN_HEIGHT := 320
 
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
 HAVE_SELINUX := true
@@ -174,8 +174,6 @@ TW_INTERNAL_STORAGE_PATH := "/data/media"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-
-TW_DEVICE_VERSION=$(shell date '+%Y%m%d') by for Vivo Y81 1808
 
 # Show build time on the splash screen
 TW_DEVICE_VERSION=$(shell date '+%Y%m%d') by vados-dev
