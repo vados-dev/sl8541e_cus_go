@@ -3,14 +3,6 @@
 # USB configuration common for all android devices
 #
 
-on post-fs-data
-    chown system system /sys/class/android_usb/android0/f_mass_storage/lun/file
-    chmod 0660 /sys/class/android_usb/android0/f_mass_storage/lun/file
-    chown system system /sys/class/android_usb/android0/f_rndis/ethaddr
-    chmod 0660 /sys/class/android_usb/android0/f_rndis/ethaddr
-    mkdir /data/misc/adb 02750 system shell
-    mkdir /data/adb 0700 root root
-
 # adbd is controlled via property triggers in init.<platform>.usb.rc
 service adbd /system/bin/adbd --root_seclabel=u:r:su:s0
     class core
@@ -23,6 +15,19 @@ on property:ro.kernel.qemu=1
     start adbd
 
 on init
+    setprop sys.usb.configfs 1
+    setprop sys.usb.ffs.aio_compat 1
+    setprop vendor.usb.controller "musb-hdrc"
+    setprop vendor.usb.acm_cnt 0
+    setprop vendor.usb.acm_port0 ""
+    setprop vendor.usb.acm_port1 ""
+    setprop vendor.usb.acm_enable 0
+    setprop otg.enabled 0
+
+on property:ro.boot.usbcontroller=*
+    setprop sys.usb.controller ${ro.boot.usbcontroller}
+
+on fs
     # Create mount-point for ConfigFS USB gadgets
     mkdir /config
     # Add standard gadget entries
@@ -65,6 +70,14 @@ on init
     mkdir /config/usb_gadget/g1/functions/gser.gs7 0770 shell shell
 
     setprop sys.usb.mode normal
+
+on post-fs-data
+    chown system system /sys/class/android_usb/android0/f_mass_storage/lun/file
+    chmod 0660 /sys/class/android_usb/android0/f_mass_storage/lun/file
+    chown system system /sys/class/android_usb/android0/f_rndis/ethaddr
+    chmod 0660 /sys/class/android_usb/android0/f_rndis/ethaddr
+    mkdir /data/misc/adb 02750 system shell
+    mkdir /data/adb 0700 root root
 
 on boot
     setprop sys.usb.configfs 1
