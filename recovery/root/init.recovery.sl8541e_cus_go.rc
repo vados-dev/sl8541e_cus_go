@@ -1,6 +1,23 @@
 import /init.recovery.usb.rc
 import /init.recovery.usb.configfs.rc
 
+service healthd /system/bin/healthd -r
+    critical
+    seclabel u:r:healthd:s0
+
+on init
+# Apply strict SELinux checking of PROT_EXEC on mmap/mprotect calls.
+    write /sys/fs/selinux/checkreqprot 0
+    start healthd
+    chown system system /sys/bus/iio/devices/trigger0/name
+    chown system system /sys/bus/iio/devices/iio:device1/buffer
+    chown system system /sys/bus/iio/devices/iio:device1/buffer/length
+    chown system system /sys/bus/iio/devices/iio:device1/buffer/enable
+    chown system system /sys/bus/iio/devices/iio:device1/trigger/current_trigger
+    chmod 660 /sys/bus/iio/devices/trigger0/name
+    chmod 660 /sys/bus/iio/devices/iio:device1/buffer/length
+    chmod 660 /sys/bus/iio/devices/iio:device1/buffer/enable
+    chmod 660 /sys/bus/iio/devices/iio:device1/trigger/current_trigger
 
 on post-fs
 
