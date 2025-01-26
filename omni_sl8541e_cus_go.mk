@@ -29,7 +29,7 @@ PRODUCT_MODEL := D41
 PRODUCT_MANUFACTURER := sprd
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-#    ro.treble.enabled=true \
+/*    ro.treble.enabled=true \ */
     persist.sys.usb.config=mtp \
     persist.service.adb.enable=1 \
     persist.service.debuggable=1 \
