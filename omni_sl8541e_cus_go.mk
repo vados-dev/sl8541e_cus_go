@@ -29,13 +29,13 @@ PRODUCT_MODEL := D41
 PRODUCT_MANUFACTURER := sprd
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.treble.enabled=true \
+#    ro.treble.enabled=true \
     persist.sys.usb.config=mtp \
     persist.service.adb.enable=1 \
     persist.service.debuggable=1 \
-    ro.secure=1 \
+    ro.secure=0 \
     ro.adb.secure=0 \
-    ro.allow.mock.location=0
+    ro.allow.mock.location=1
 
 #PRODUCT_GMS_CLIENTID_BASE := android-sprd
 
