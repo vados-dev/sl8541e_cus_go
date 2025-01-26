@@ -36,6 +36,13 @@
 /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/gpsgl       0660     system      root
 /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/gpsbd       0660     system      root
 
+#add by fangli for fcttest start
+/dev/snd                0666   system     audio
+/dev/snd/pcm*           0666   system     audio
+/dev/snd/c*             0666   system     audio
+/dev/snd/timer          0666   system     audio
+#add by fangli for fcttest end
+
 /dev/block/mmcblk1p*    0660     system      system
 /dev/AKM099XX           0660     system      system
 /dev/da380 		        0660     system      system
@@ -66,7 +73,7 @@
 /dev/sprd_cpp           0660     system      camera
 /dev/video0        	0666     media       media
 /dev/map_user           0660     system      system
-/dev/power_ctl	    0660     system      system
+
 /sys/devices/system/cpu/cpu* /cpufreq/interactive/boost 0660 media system
 /sys/devices/system/cpu/cpu* /cpufreq/interactive/boostpulse 0660 system system
 /sys/devices/system/cpu/cpu* /cpufreq/interactive/boostpulse_duration 0660 system system
@@ -91,6 +98,11 @@
 /sys/devices/virtual/input/input* gyro_delay 0660 system input
 
 /dev/ltr_558als      0660  system   input
+/dev/mxc400x      0660  system   input
+# fangli add for sensor 20200313 start 
+/dev/sc7a20_acc		0660     system      input
+# fangli add for sensor 20200313 end 
+
 /sys/class/xr-gsensor/device   gsensor      0660  system   input
 /sys/class/xr-gsensor/device   delay_acc      0660  system   input
 /sys/class/xr-pls/device   als      0660  system   input
@@ -100,3 +112,5 @@
 /sys/class/input/input*   enable      0660  system   input
 #modify permission for ttyS1
 /dev/ttyS1	0777	media_rw	media_rw
+
+/dev/rtc*           0660     system      system
