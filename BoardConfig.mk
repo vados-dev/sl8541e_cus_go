@@ -162,7 +162,7 @@ TW_USE_TOOLBOX := true
 #TW_NO_CPU_TEMP := true
 # system won't be unmounted,
 TW_NEVER_UNMOUNT_SYSTEM := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 #TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
 #TW_NO_SCREEN_BLANK := true
 BOARD_HAS_NO_SELECT_BUTTON := true
