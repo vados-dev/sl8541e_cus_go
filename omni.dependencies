@@ -1,8 +1,8 @@
 [
-  {
-    "remote": "vados-dev",
-    "repository": "vendor_utils",
-    "target_path": "tmp",
-    "revision": "pb-dev"
-  }
+#  {
+#    "remote": "vados-dev",
+#    "repository": "vendor_utils",
+#    "target_path": "tmp",
+#    "revision": "pb-dev"
+#  }
 ]
