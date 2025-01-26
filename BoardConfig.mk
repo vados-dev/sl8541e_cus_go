@@ -18,8 +18,8 @@ TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_VARIANT := generic #cortex-a53
-TARGET_CPU_VARIANT_RUNTIME := generic
+TARGET_CPU_VARIANT := generic 
+TARGET_CPU_VARIANT_RUNTIME := cortex-a53
 TARGET_CPU_SMP := true
 
 # ?
@@ -87,6 +87,11 @@ TARGET_COPY_OUT_VENDOR := vendor
 
 # Platform
 TARGET_BOARD_PLATFORM := sp9832e
+#TARGET_BOARD_PLATFORM_GPU := mali-t820
+
+# Enable CPUSets
+ENABLE_CPUSETS := true
+ENABLE_SCHEDBOOST := true
 
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -157,11 +162,12 @@ TW_USE_TOOLBOX := true
 #TW_NO_CPU_TEMP := true
 # system won't be unmounted,
 TW_NEVER_UNMOUNT_SYSTEM := true
-#TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 #TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
 #TW_NO_SCREEN_BLANK := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_SUPPRESS_SECURE_ERASE := true
+BOARD_USES_SPRD_HARDWARE := true
 TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 #TW_FORCE_USE_BUSYBOX := true
 TW_USE_NEW_MINADBD := true
@@ -192,7 +198,7 @@ TW_INCLUDE_FUSE_NTFS := true
 TARGET_USES_MKE2FS := true
 
 # Storage
-TW_INTERNAL_STORAGE_PATH := "/data/media"
+TW_INTERNAL_STORAGE_PATH := "/data/media/0"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
