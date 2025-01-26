@@ -144,6 +144,7 @@ HAVE_SELINUX := true
 RECOVERY_SDCARD_ON_DATA := true
 
 # TWRP Configuration
+#RECOVERY_VARIANT := twrp
 # TWRP specific build flags by Depesh
 TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
