@@ -199,4 +199,3 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 
 # Show build time on the splash screen
 TW_DEVICE_VERSION := $(shell date '+%Y%m%d')" by vados-dev"
-MAINTAINER := "Vados @AmsterNL"
