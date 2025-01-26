@@ -139,13 +139,15 @@ PLATFORM_VERSION := 16.1.0
 DEVICE_SCREEN_WIDTH := 1280
 DEVICE_SCREEN_HEIGHT := 320
 
-TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
+#TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
 HAVE_SELINUX := true
 RECOVERY_SDCARD_ON_DATA := true
 
 # TWRP Configuration
 # TWRP specific build flags by Depesh
 TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness"
+TW_MAX_BRIGHTNESS := 255
+TW_DEFAULT_BRIGHTNESS := 200
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
 TW_DEFAULT_LANGUAGE := ru
