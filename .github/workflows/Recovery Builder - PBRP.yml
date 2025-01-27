@@ -119,7 +119,7 @@ jobs:
         cd android-recovery
         git config --global user.name "vados-dev"
         git config --global user.email "vados@vados.ru"
-        repo init --depth=1 -u https://github.com/vados-dev/manifest_pb.git -b ${{ inputs.MANIFEST_BRANCH }}
+        repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb.git -b ${{ inputs.MANIFEST_BRANCH }}
         sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
         sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
         sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
