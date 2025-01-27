@@ -48,7 +48,7 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 # This option makes touchscreen portrait 
 RECOVERY_TOUCHSCREEN_SWAP_XY:= true
 # This option flips the value of touch x-axis
-RECOVERY_TOUCHSCREEN_FLIP_X:= true
+#RECOVERY_TOUCHSCREEN_FLIP_X:= true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
@@ -154,7 +154,7 @@ DEVICE_SCREEN_WIDTH := 1280
 DEVICE_SCREEN_HEIGHT := 320
 
 #TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
-HAVE_SELINUX := true
+#HAVE_SELINUX := true
 RECOVERY_SDCARD_ON_DATA := true
 
 # TWRP Configuration
@@ -164,8 +164,9 @@ TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backl
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 200
 TW_THEME := portrait_hdpi
-TW_EXTRA_LANGUAGES := true
+#TW_EXTRA_LANGUAGES := true
 TW_DEFAULT_LANGUAGE := ru
+#TW_EXCLUDE_APEX := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_NO_LEGACY_PROPS := true
@@ -176,8 +177,7 @@ TW_USE_TOOLBOX := true
 TW_NEVER_UNMOUNT_SYSTEM := true
 #TW_NO_SCREEN_BLANK := true
 #TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
-#TW_FORCE_USE_BUSYBOX := true
-TW_USE_NEW_MINADBD := true
+TW_FORCE_USE_BUSYBOX := true
 
 # Libresetprop & resetprop
 #TW_INCLUDE_LIBRESETPROP := true
