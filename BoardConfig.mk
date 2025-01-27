@@ -12,6 +12,8 @@ DEVICE_PATH := device/sprd/sl8541e_cus_go
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
 # Architecture
 TARGET_ARCH := arm
@@ -29,7 +31,7 @@ ENABLE_SCHEDBOOST := true
 TARGET_USES_64_BIT_BINDER := true
 
 # APEX
-OVERRIDE_TARGET_FLATTEN_APEX := true
+#OVERRIDE_TARGET_FLATTEN_APEX := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := sl8541e_cus_32b
@@ -39,8 +41,8 @@ TARGET_NO_BOOTLOADER := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 # Old option:
 #DEVICE_RESOLUTION := 1280x320
-TW_IGNORE_MAJOR_AXIS_0 := true
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
+#TW_IGNORE_MAJOR_AXIS_0 := true
+#RECOVERY_GRAPHICS_USE_LINELENGTH := true
 #TARGET_SCREEN_DENSITY := 320
 # Touchscreen based on landscape screen but TWRP displays portraitly
 # This option makes touchscreen portrait 
@@ -89,6 +91,14 @@ TARGET_COPY_OUT_VENDOR := vendor
 TARGET_BOARD_PLATFORM := sp9832e
 #TARGET_BOARD_PLATFORM_GPU := mali-t820
 
+# MTP
+TW_HAS_MTP := true
+TW_MTP_DEVICE := /dev/mtp_usb
+
+BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_SUPPRESS_SECURE_ERASE := true
+BOARD_USES_SPRD_HARDWARE := true
+
 # Enable CPUSets
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
@@ -96,6 +106,8 @@ ENABLE_SCHEDBOOST := true
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
+#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -156,30 +168,25 @@ TW_EXTRA_LANGUAGES := true
 TW_DEFAULT_LANGUAGE := ru
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
-#TW_NO_LEGACY_PROPS := true
+TW_NO_LEGACY_PROPS := true
 TW_USE_TOOLBOX := true
 # some devices don't have a temp sensor, disable in such case to stop spamming recovery.log
 #TW_NO_CPU_TEMP := true
 # system won't be unmounted,
 TW_NEVER_UNMOUNT_SYSTEM := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
-#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
 #TW_NO_SCREEN_BLANK := true
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_SUPPRESS_SECURE_ERASE := true
-BOARD_USES_SPRD_HARDWARE := true
-TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
+#TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 #TW_FORCE_USE_BUSYBOX := true
 TW_USE_NEW_MINADBD := true
 
 # Libresetprop & resetprop
-TW_INCLUDE_LIBRESETPROP := true
-TW_INCLUDE_RESETPROP := true
+#TW_INCLUDE_LIBRESETPROP := true
+#TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
 
 # Exludes
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
-TW_EXCLUDE_DEFAULT_USB_INIT := true
+#TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 #PIE
 #PLATFORM_SDK_VERSION := 28
@@ -198,10 +205,10 @@ TW_INCLUDE_FUSE_NTFS := true
 TARGET_USES_MKE2FS := true
 
 # Storage
-TW_INTERNAL_STORAGE_PATH := "/data/media/0"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_INTERNAL_STORAGE_PATH := "/data/media/0"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 
 # Show build time on the splash screen
 TW_DEVICE_VERSION := $(shell date '+%Y%m%d')" by vados-dev"
