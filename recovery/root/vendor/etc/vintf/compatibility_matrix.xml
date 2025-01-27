@@ -59,10 +59,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <vendor-ndk>
-        <version>27</version>
-    </vendor-ndk>
-    <system-sdk>
-        <version>27</version>
-    </system-sdk>
+    <vndk>
+        <version>0.0.0</version>
+    </vndk>
 </compatibility-matrix>
