@@ -41,14 +41,14 @@ TARGET_NO_BOOTLOADER := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 # Old option:
 #DEVICE_RESOLUTION := 1280x320
-#TW_IGNORE_MAJOR_AXIS_0 := true
-#RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TW_IGNORE_MAJOR_AXIS_0 := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TARGET_SCREEN_DENSITY := 320
 # Touchscreen based on landscape screen but TWRP displays portraitly
 # This option makes touchscreen portrait 
 RECOVERY_TOUCHSCREEN_SWAP_XY:= true
 # This option flips the value of touch x-axis
-#RECOVERY_TOUCHSCREEN_FLIP_X:= true
+RECOVERY_TOUCHSCREEN_FLIP_X:= true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
