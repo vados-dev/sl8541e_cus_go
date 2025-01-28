@@ -1,6 +1,51 @@
 import /init.recovery.usb.rc
 #import /init.recovery.usb.configfs.rc
 
+#add for board init.rc for recovery mode
+on post-fs
+
+service gnss_download /system/bin/gnss_download
+    class cali
+    user system
+    group system
+    oneshot
+
+on factorytest
+
+on cali
+    mkdir /data/gnss/ 0777 system system
+    mkdir /data/gnss/bin/ 0777 system system
+    mkdir /data/gnss/supl/ 0777 system system
+    mkdir /data/gnss/config/ 0777 system system
+    mkdir /data/gnss/lte/ 0777 system system
+    chmod 666 /data/gnss/bin/gnssmodem.bin
+    chmod 666 /data/gnss/config/config.xml
+    chmod 660 /data/gnss/supl/supl.xml
+    chmod 660 /data/gnss/supl/spirentroot.cer
+    chmod 666 /data/gnss/lte/ext.eph
+    chmod 666 /data/gnss/lte/jpleph.405
+    chmod 666 /data/gnss/gnss.log
+    chmod 666 /data/gnss/nmea.log
+    chmod 666 /productinfo/tsx.dat
+    chmod 666 /productinfo/txdata.txt
+on factorytest
+    mkdir /data/gnss/ 0777 system system
+    mkdir /data/gnss/bin/ 0777 system system
+    mkdir /data/gnss/supl/ 0777 system system
+    mkdir /data/gnss/config/ 0777 system system
+    mkdir /data/gnss/lte/ 0777 system system
+    chmod 666 /data/gnss/bin/gnssmodem.bin
+    chmod 666 /data/gnss/config/config.xml
+    chmod 660 /data/gnss/supl/supl.xml
+    chmod 660 /data/gnss/supl/spirentroot.cer
+    chmod 666 /data/gnss/lte/ext.eph
+    chmod 666 /data/gnss/lte/jpleph.405
+    chmod 666 /data/gnss/gnss.log
+    chmod 666 /data/gnss/nmea.log
+    chmod 666 /productinfo/tsx.dat
+    chmod 666 /productinfo/txdata.txt
+
+
 service healthd /system/bin/healthd -r
     critical
     seclabel u:r:healthd:s0
@@ -512,7 +557,6 @@ on fs
     chmod 666 /dev/adf-interface0.0
     chmod 666 /dev/adf-overlay-engine0.0
 
-on post-fs
     # make the selinux kernel policy world-readable
     chmod 0444 /sys/fs/selinux/policy
 
@@ -524,19 +568,9 @@ on post-fs
     mkdir /productinfo/wcn 0755 root root
     chmod 0666 /dev/mali0
     chown system system /dev/mali0
-#    mount rootfs rootfs /system ro remount
-    chmod 0755 /sys/kernel/debug/tracing
-	chmod 0666 /dev/null
-	chown root root /dev/null
 
     # Support audio
     mkdir /data/local/media 0770 audioserver system
-
-service gnss_download /system/bin/gnss_download
-    class cali
-    user system
-    group system
-    oneshot
 
 on post-fs-data
     # We chown/chmod /data again so because mount is run as root + defaults
@@ -601,38 +635,3 @@ on post-fs-data
 
 on charger
     load_persist_props
-
-on factorytest
-
-on cali
-    mkdir /data/gnss/ 0777 system system
-    mkdir /data/gnss/bin/ 0777 system system
-    mkdir /data/gnss/supl/ 0777 system system
-    mkdir /data/gnss/config/ 0777 system system
-    mkdir /data/gnss/lte/ 0777 system system
-    chmod 666 /data/gnss/bin/gnssmodem.bin
-    chmod 666 /data/gnss/config/config.xml
-    chmod 660 /data/gnss/supl/supl.xml
-    chmod 660 /data/gnss/supl/spirentroot.cer
-    chmod 666 /data/gnss/lte/ext.eph
-    chmod 666 /data/gnss/lte/jpleph.405
-    chmod 666 /data/gnss/gnss.log
-    chmod 666 /data/gnss/nmea.log
-    chmod 666 /productinfo/tsx.dat
-    chmod 666 /productinfo/txdata.txt
-on factorytest
-    mkdir /data/gnss/ 0777 system system
-    mkdir /data/gnss/bin/ 0777 system system
-    mkdir /data/gnss/supl/ 0777 system system
-    mkdir /data/gnss/config/ 0777 system system
-    mkdir /data/gnss/lte/ 0777 system system
-    chmod 666 /data/gnss/bin/gnssmodem.bin
-    chmod 666 /data/gnss/config/config.xml
-    chmod 660 /data/gnss/supl/supl.xml
-    chmod 660 /data/gnss/supl/spirentroot.cer
-    chmod 666 /data/gnss/lte/ext.eph
-    chmod 666 /data/gnss/lte/jpleph.405
-    chmod 666 /data/gnss/gnss.log
-    chmod 666 /data/gnss/nmea.log
-    chmod 666 /productinfo/tsx.dat
-    chmod 666 /productinfo/txdata.txt
