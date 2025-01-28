@@ -21,7 +21,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic 
-TARGET_CPU_VARIANT_RUNTIME := generic
+TARGET_CPU_VARIANT_RUNTIME := cortex-a53
 TARGET_CPU_SMP := true
 
 # ?
@@ -43,7 +43,7 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 #DEVICE_RESOLUTION := 1280x320
 #TW_IGNORE_MAJOR_AXIS_0 := true
 #RECOVERY_GRAPHICS_USE_LINELENGTH := true
-#TARGET_SCREEN_DENSITY := 320
+TARGET_SCREEN_DENSITY := 320
 # Touchscreen based on landscape screen but TWRP displays portraitly
 # This option makes touchscreen portrait 
 RECOVERY_TOUCHSCREEN_SWAP_XY:= true
@@ -88,8 +88,8 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
 
 # Platform
-TARGET_BOARD_PLATFORM := sp9832e
-#TARGET_BOARD_PLATFORM_GPU := mali-t820
+TARGET_BOARD_PLATFORM := sс9832e
+TARGET_BOARD_PLATFORM_GPU := mali-t820
 
 # MTP
 TW_HAS_MTP := true
@@ -109,7 +109,7 @@ TARGET_USERIMAGES_USE_F2FS := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 #TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_HAS_LARGE_FILESYSTEM := true
 
 # Fuse
@@ -121,7 +121,7 @@ TW_INCLUDE_FUSE_NTFS := true
 
 
 # Crypto
-TW_INCLUDE_CRYPTO := true
+#TW_INCLUDE_CRYPTO := true
 #TW_INCLUDE_CRYPTO_FBE := true
 #TW_INCLUDE_FBE_METADATA_DECRYPT := true
 #BOARD_USES_METADATA_PARTITION := true
@@ -150,8 +150,8 @@ VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 
 # Resolution
-DEVICE_SCREEN_WIDTH := 1280
-DEVICE_SCREEN_HEIGHT := 320
+DEVICE_SCREEN_WIDTH := 320
+DEVICE_SCREEN_HEIGHT := 1280
 
 #TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
 #HAVE_SELINUX := true
@@ -164,9 +164,9 @@ TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backl
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 200
 TW_THEME := portrait_hdpi
-#TW_EXTRA_LANGUAGES := true
+#TW_EXTRA_LANGUAGES := false
 TW_DEFAULT_LANGUAGE := ru
-#TW_EXCLUDE_APEX := true
+TW_EXCLUDE_APEX := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_NO_LEGACY_PROPS := true
@@ -174,19 +174,20 @@ TW_USE_TOOLBOX := true
 # some devices don't have a temp sensor, disable in such case to stop spamming recovery.log
 #TW_NO_CPU_TEMP := true
 # system won't be unmounted,
-TW_NEVER_UNMOUNT_SYSTEM := true
-#TW_NO_SCREEN_BLANK := true
-#TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
-TW_FORCE_USE_BUSYBOX := true
+#TW_NEVER_UNMOUNT_SYSTEM := true
+TW_NO_SCREEN_BLANK := true
+TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
+TW_INCLUDE_FASTBOOTD := true
+#TW_FORCE_USE_BUSYBOX := true
 
 # Libresetprop & resetprop
 #TW_INCLUDE_LIBRESETPROP := true
-#TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
 
 # Exludes
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
-#TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 #PIE
 #PLATFORM_SDK_VERSION := 28
