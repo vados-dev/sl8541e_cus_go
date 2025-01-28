@@ -5,12 +5,6 @@ import /init.recovery.cali.rc
 #add for board init.rc for recovery mode
 on post-fs
 
-service gnss_download /system/bin/gnss_download
-    class cali
-    user system
-    group system
-    oneshot
-
 on factorytest
 
 on cali
@@ -51,27 +45,11 @@ service healthd /system/bin/healthd -r
     critical
     seclabel u:r:healthd:s0
 
-service modem_ctl-cali /vendor/bin/modem_control
-    class cali
-    user root
-    group system radio shell
-    oneshot
-
 service modem_ctl-ft /vendor/bin/modem_control
     class factorytest
     user root
     group system radio shell
     oneshot
-
-service logd-cali /system/bin/logd
-    class cali
-    socket logd stream 0666 logd logd
-    socket logdr seqpacket 0666 logd logd
-    socket logdw dgram 0222 logd logd
-    file /proc/kmsg r
-    file /dev/kmsg w
-    user logd
-    seclabel u:r:logd:s0
 
 service p2p_supplicant /vendor/bin/hw/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -123,36 +101,10 @@ service iprenew_p2p /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service wcnd-cali /vendor/bin/connmgr -R
-    class cali
-    user root
-    group root system shell wifi inet bluetooth
-    seclabel u:r:wcnd:s0
-
-service wcnd_eng-cali /vendor/bin/connmgr -G
-    class cali
-    user root
-    group root system shell wifi inet bluetooth
-    disabled
-    oneshot
-    seclabel u:r:wcnd:s0
-
-service console-cali /system/bin/sh
-    console
-    class cali
-    user root
-    group root
-    seclabel u:r:shell:s0
-
 service vendor.mlogservice /vendor/bin/mlogservice
     class main
     user shell
     group system root
-
-service engpcclient /vendor/bin/engpc
-    class cali
-    user root
-    group root sdcard_rw system radio shell net_bt_admin input audio
 
 service gpsd /vendor/bin/gpsd
     class core
