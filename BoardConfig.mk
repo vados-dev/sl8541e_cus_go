@@ -15,6 +15,10 @@ ALLOW_MISSING_DEPENDENCIES := true
 #BUILD_BROKEN_DUP_RULES := true
 #BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
+# FOCKING BINDER
+TARGET_USES_64_BIT_BINDER := true
+#TARGET_SUPPORTS_32_BIT_APPS := true
+
 # Architecture
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
@@ -162,13 +166,13 @@ DEVICE_SCREEN_HEIGHT := 1280
 # TWRP specific build flags by Depesh
 TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
-TW_MAX_BRIGHTNESS := 255
-TW_DEFAULT_BRIGHTNESS := 200
+TW_MAX_BRIGHTNESS := 125
+TW_DEFAULT_BRIGHTNESS := 95
 TW_THEME := portrait_hdpi
 #TW_EXTRA_LANGUAGES := false
 TW_DEFAULT_LANGUAGE := ru
 #TW_EXCLUDE_APEX := true
-TW_SCREEN_BLANK_ON_BOOT := true
+TW_SCREEN_BLANK_ON_BOOT := false
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_NO_LEGACY_PROPS := true
 TW_USE_TOOLBOX := true
