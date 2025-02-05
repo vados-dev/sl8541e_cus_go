@@ -113,7 +113,7 @@ ENABLE_SCHEDBOOST := true
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
+#TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 #TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -184,16 +184,13 @@ TW_INCLUDE_FASTBOOTD := true
 TW_FORCE_USE_BUSYBOX := true
 
 # Libresetprop & resetprop
-#TW_INCLUDE_LIBRESETPROP := true
+TW_INCLUDE_LIBRESETPROP := true
 TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
 
 # Exludes
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
 TW_EXCLUDE_DEFAULT_USB_INIT := true
-
-#PIE
-#PLATFORM_SDK_VERSION := 28
 
 # Debug
 TARGET_USES_LOGD := true
@@ -209,6 +206,7 @@ TW_INCLUDE_FUSE_NTFS := true
 TARGET_USES_MKE2FS := true
 
 # Storage
+TW_NO_USB_STORAGE := false
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_INTERNAL_STORAGE_PATH := "/data/media/0"
