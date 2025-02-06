@@ -40,7 +40,7 @@
 /prodnv_image       emmc     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/prodnv            flags=display="Prodnv image";backup=1;flashimg=1;
 #
 #SD cards
-/external_sd	      vfat	   /dev/block/platform/soc/soc:ap-ahb/20300000.sdio/mmcblk1p1			            flags=fsflags=utf8;display="Micro SDcard";storage;wipeingui;removable;backup=0
+/storage/sdcard0    vfat     /dev/block/platform/soc/soc:ap-ahb/20300000.sdio/mmcblk1p1                 flags=fsflags=utf8;display="Micro SDcard";storage;wipeingui;removable;backup=0
 #/external_sd	       vfat	    /dev/block/mmcblk1p1	/dev/block/mmcblk1		                               flags=fsflags=utf8;display="External SDcard";storage;removable;backup=0;fsflags=utf8
 
 # Examples
