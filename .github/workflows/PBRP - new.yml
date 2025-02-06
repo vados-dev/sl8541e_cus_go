@@ -7,7 +7,7 @@ on:
       MANIFEST_BRANCH:
         description: 'PBRP Manifest Branch'
         required: true
-        default: 'android-12.1'
+        default: 'android-9-0'
         type: choice
         options:
         - android-14.0
@@ -21,15 +21,15 @@ on:
       DEVICE_TREE:
         description: 'Custom Recovery Tree URL'
         required: true
-        default: 'https://github.com/enter_username/repo_name'
+        default: 'https://github.com/vados-dev/sl8541e_cus_go'
       DEVICE_TREE_BRANCH:
         description: 'Device Tree Branch (optional)'
         required: false
-        default: ''
+        default: 'android-9.0'
       BUILD_TARGET:
         description: 'Build Target (use "pbrp" for Android 11+)'
         required: true
-        default: 'recovery'
+        default: 'pbrp'
         type: choice
         options:
         - pbrp
