@@ -133,8 +133,8 @@ TW_INCLUDE_FUSE_NTFS := true
 # Crypto
 #TW_INCLUDE_CRYPTO := true
 #TW_INCLUDE_CRYPTO_FBE := true
-#TW_INCLUDE_FBE_METADATA_DECRYPT := true
-#BOARD_USES_METADATA_PARTITION := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+BOARD_USES_METADATA_PARTITION := true
 
 # Encryption by Depesh
 TARGET_HW_DISK_ENCRYPTION := true
@@ -169,28 +169,28 @@ TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/bac
 TW_MAX_BRIGHTNESS := 125
 TW_DEFAULT_BRIGHTNESS := 95
 TW_THEME := portrait_hdpi
-#TW_EXTRA_LANGUAGES := false
+TW_EXTRA_LANGUAGES := false
 TW_DEFAULT_LANGUAGE := ru
 #TW_EXCLUDE_APEX := true
 TW_SCREEN_BLANK_ON_BOOT := false
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_NO_LEGACY_PROPS := true
-TW_USE_TOOLBOX := true
+#TW_USE_TOOLBOX := true
 HAVE_SELINUX := true
-RECOVERY_SDCARD_ON_DATA := true
+#RECOVERY_SDCARD_ON_DATA := true
 # some devices don't have a temp sensor, disable in such case to stop spamming recovery.log
 #TW_NO_CPU_TEMP := true
 # system won't be unmounted,
 #TW_NEVER_UNMOUNT_SYSTEM := true
 TW_NO_SCREEN_BLANK := true
-TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
-TW_INCLUDE_FASTBOOTD := true
+#TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
+#TW_INCLUDE_FASTBOOTD := true
 TW_FORCE_USE_BUSYBOX := true
 
 # Libresetprop & resetprop
-TW_INCLUDE_LIBRESETPROP := true
-TW_INCLUDE_RESETPROP := true
-TW_INCLUDE_REPACKTOOLS := true
+#TW_INCLUDE_LIBRESETPROP := true
+#TW_INCLUDE_RESETPROP := true
+#TW_INCLUDE_REPACKTOOLS := true
 
 # Exludes
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
@@ -211,16 +211,12 @@ TARGET_USES_MKE2FS := true
 
 # Storage
 TW_NO_USB_STORAGE := false
-TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-TW_INTERNAL_STORAGE_PATH := "/data/media/0"
+TW_EXTERNAL_STORAGE_PATH := "/storage/sdcard0"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "storage/sdcard0"
+TW_INTERNAL_STORAGE_PATH := "/data"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
-
-
-# Show build time on the splash screen
-TW_DEVICE_VERSION := $(shell date '+%Y%m%d')" by vados-dev"
