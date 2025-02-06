@@ -50,7 +50,7 @@ ro.build.date.utc=1734537025
 ro.build.type=eng
 ro.build.user=vados
 ro.build.host=local086.vados.ru
-ro.build.tags=dev-keys
+ro.build.tags=release-keys
 # ro.build.product is obsolete; use ro.product.device
 ro.build.product=D41
 ro.build.version.min_supported_target_sdk=17
