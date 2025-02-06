@@ -1,5 +1,5 @@
 
-name: PitchBlack Recovery Project Builder
+name: PBRP Builder New
 
 on:
   workflow_dispatch:
