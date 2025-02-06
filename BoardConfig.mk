@@ -99,7 +99,7 @@ BOARD_KERNEL_SEPARATED_DT :=
 endif
 
 # Platform
-TARGET_BOARD_PLATFORM := sс9832e
+TARGET_BOARD_PLATFORM := sc9832e
 TARGET_BOARD_PLATFORM_GPU := mali-t820
 
 # MTP
@@ -187,13 +187,10 @@ TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 #TW_INCLUDE_FASTBOOTD := true
 TW_FORCE_USE_BUSYBOX := true
 
-# Include Screenshot Support
-TW_INCLUDE_FB2PNG := true
-
 # Libresetprop & resetprop
-#TW_INCLUDE_LIBRESETPROP := true
-#TW_INCLUDE_RESETPROP := true
-#TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_LIBRESETPROP := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_REPACKTOOLS := true
 
 # Exludes
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
@@ -218,6 +215,10 @@ TW_EXTERNAL_STORAGE_PATH := "/storage/sdcard0"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "storage/sdcard0"
 TW_INTERNAL_STORAGE_PATH := "/data"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+ self.image_info = self.aik_manager.unpackimg(image)
+
+# Security patch level
+VENDOR_SECURITY_PATCH := 2021-08-01
 
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
