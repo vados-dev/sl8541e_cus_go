@@ -187,6 +187,9 @@ TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 #TW_INCLUDE_FASTBOOTD := true
 TW_FORCE_USE_BUSYBOX := true
 
+# Include Screenshot Support
+TW_INCLUDE_FB2PNG := true
+
 # Libresetprop & resetprop
 #TW_INCLUDE_LIBRESETPROP := true
 #TW_INCLUDE_RESETPROP := true
@@ -220,3 +223,6 @@ TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
+
+# Show build time on the splash screen
+TW_DEVICE_VERSION=$(shell date '+%Y%m%d') by vados-dev
