@@ -141,8 +141,8 @@ TARGET_HW_DISK_ENCRYPTION := true
 TW_CRYPTO_FS_TYPE := "f2fs"
 TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/userdata"
 TW_CRYPTO_MNT_POINT := "/data"
-TW_CRYPTO_FS_OPTIONS := "noatime,nosuid,nodev,discard,inline_xattr,inline_data=ordered"
-
+TW_CRYPTO_FS_OPTIONS := "noatime,nosuid,nodev,discard,inline_xattr,inline_data wait"
+#f2fs noatime,nosuid,nodev,discard,inline_xattr,inline_data=ordered,
 # system.prop
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 
