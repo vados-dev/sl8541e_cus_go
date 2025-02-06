@@ -211,10 +211,10 @@ TARGET_USES_MKE2FS := true
 
 # Storage
 TW_NO_USB_STORAGE := false
-TW_EXTERNAL_STORAGE_PATH := "/storage/sdcard0"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "storage/sdcard0"
-TW_INTERNAL_STORAGE_PATH := "/data"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+#TW_EXTERNAL_STORAGE_PATH := "/storage/sdcard0"
+#TW_EXTERNAL_STORAGE_MOUNT_POINT := "storage/sdcard0"
+#TW_INTERNAL_STORAGE_PATH := "/data"
+#TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
  self.image_info = self.aik_manager.unpackimg(image)
 
 # Security patch level
