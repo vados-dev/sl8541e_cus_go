@@ -29,7 +29,7 @@ on:
       BUILD_TARGET:
         description: 'Build Target (use "pbrp" for Android 11+)'
         required: true
-        default: 'twrp'
+        default: 'pbrp'
         type: choice
         options:
         - pbrp
