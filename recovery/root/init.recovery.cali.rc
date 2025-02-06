@@ -6,12 +6,6 @@ service gnss_download /vendor/bin/gnss_download
     group system
     oneshot
 
-#service rpmbserver /vendor/bin/rpmbserver -r /dev/block/mmcblk0rpmb
-#    class cali
-#    socket rpmbserver stream 0666 rpmbserver rpmbserver
-#    group system
-#    seclabel u:r:tee:s0
-
 service modem_ctl-cali /vendor/bin/modem_control
     class cali
     user root
@@ -190,6 +184,40 @@ on property:ro.bootmode=cali
 on cali
     mkdir /cache/ylog 0777
     start ylog_force_startup
+
+    mkdir /data/gnss/ 0777 system system
+    mkdir /data/gnss/bin/ 0777 system system
+    mkdir /data/gnss/supl/ 0777 system system
+    mkdir /data/gnss/config/ 0777 system system
+    mkdir /data/gnss/lte/ 0777 system system
+    chmod 666 /data/gnss/bin/gnssmodem.bin
+    chmod 666 /data/gnss/config/config.xml
+    chmod 660 /data/gnss/supl/supl.xml
+    chmod 660 /data/gnss/supl/spirentroot.cer
+    chmod 666 /data/gnss/lte/ext.eph
+    chmod 666 /data/gnss/lte/jpleph.405
+    chmod 666 /data/gnss/gnss.log
+    chmod 666 /data/gnss/nmea.log
+    chmod 666 /productinfo/tsx.dat
+    chmod 666 /productinfo/txdata.txt
+
+on factorytest
+    mkdir /data/gnss/ 0777 system system
+    mkdir /data/gnss/bin/ 0777 system system
+    mkdir /data/gnss/supl/ 0777 system system
+    mkdir /data/gnss/config/ 0777 system system
+    mkdir /data/gnss/lte/ 0777 system system
+    chmod 666 /data/gnss/bin/gnssmodem.bin
+    chmod 666 /data/gnss/config/config.xml
+    chmod 660 /data/gnss/supl/supl.xml
+    chmod 660 /data/gnss/supl/spirentroot.cer
+    chmod 666 /data/gnss/lte/ext.eph
+    chmod 666 /data/gnss/lte/jpleph.405
+    chmod 666 /data/gnss/gnss.log
+    chmod 666 /data/gnss/nmea.log
+    chmod 666 /productinfo/tsx.dat
+    chmod 666 /productinfo/txdata.txt
+
 
 on property:ro.bootmode=cali
     mkdir /cache/ylog 0777
