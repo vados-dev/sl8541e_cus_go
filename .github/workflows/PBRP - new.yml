@@ -36,7 +36,6 @@ on:
         - recovery
         - boot
         - vendorboot
-        - twrp
       LDCHECK_PATH:
         description: 'Path for dependency check (optional)'
         required: false
