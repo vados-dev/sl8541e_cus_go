@@ -67,6 +67,13 @@ jobs:
     permissions:
       contents: write
     steps:
+    - name: Cleanup Pre Workspace 
+      if: always()
+      run: |
+        cd ${{ github.workspace }}
+        rm -rf android-recovery
+        df -h
+        
     - name: Check Out
       uses: actions/checkout@v4
 
@@ -174,6 +181,13 @@ jobs:
       run: |
         sudo apt-get install python2 python-is-python2
 
+    - name: Fixed Missing Fonts
+      run: |
+        cd android-recovery
+        mkdir external/noto-fonts/other && cd external/noto-fonts/other
+        wget https://github.com/cd-Crypton/custom-recovery-extras/raw/main/missing-font.zip
+        unzip -o missing-font.zip
+
     - name: Building PitchBlack
       run: |
         cd android-recovery
@@ -209,6 +223,7 @@ jobs:
           Build: ${{ inputs.MANIFEST_BRANCH }}
           Device: [Device Tree/Branch](${{ inputs.DEVICE_TREE }}/tree/${{ inputs.DEVICE_TREE_BRANCH }})
           Commit: Most recent [commit](${{ inputs.DEVICE_TREE }}/commit/${{ env.COMMIT_ID }}) during building.
+        prerelease: true
 
     - name: Run LDCheck
       if: inputs.LDCHECK == 'true'
@@ -220,3 +235,10 @@ jobs:
         python3 ldcheck -p system/lib64:vendor/lib64:system/lib:vendor/lib -d ${{ inputs.LDCHECKPATH }}
         echo "Done checking missing dependencies. Review, and reconfigure your tree."
       continue-on-error: true
+    
+    - name: Cleanup Workspace
+      if: always()
+      run: |
+        cd ${{ github.workspace }}
+        rm -rf android-recovery
+        df -h
