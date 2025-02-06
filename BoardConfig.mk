@@ -15,10 +15,6 @@ ALLOW_MISSING_DEPENDENCIES := true
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
-# FOCKING BINDER
-#TARGET_USES_64_BIT_BINDER := true
-#TARGET_SUPPORTS_32_BIT_APPS := true
-
 # Architecture
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
@@ -32,7 +28,9 @@ TARGET_CPU_SMP := true
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
+# FOCKING BINDER
 TARGET_USES_64_BIT_BINDER := true
+TARGET_SUPPORTS_32_BIT_APPS := true
 
 # APEX
 OVERRIDE_TARGET_FLATTEN_APEX := true
@@ -174,10 +172,10 @@ TW_DEFAULT_LANGUAGE := ru
 TW_EXCLUDE_APEX := true
 TW_SCREEN_BLANK_ON_BOOT := false
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_NO_LEGACY_PROPS := true
+#TW_NO_LEGACY_PROPS := true
 #TW_USE_TOOLBOX := true
 HAVE_SELINUX := false
-#RECOVERY_SDCARD_ON_DATA := true
+RECOVERY_SDCARD_ON_DATA := true
 # some devices don't have a temp sensor, disable in such case to stop spamming recovery.log
 #TW_NO_CPU_TEMP := true
 # system won't be unmounted,
@@ -215,7 +213,6 @@ TW_NO_USB_STORAGE := false
 #TW_EXTERNAL_STORAGE_MOUNT_POINT := "storage/sdcard0"
 #TW_INTERNAL_STORAGE_PATH := "/data"
 #TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
- self.image_info = self.aik_manager.unpackimg(image)
 
 # Security patch level
 VENDOR_SECURITY_PATCH := 2021-08-01
