@@ -118,14 +118,6 @@ service path_wrapper /sbin/path_wrapper
     seclabel u:r:path_wrapper:s0
     oneshot
 
-# COUNT server
-service count /system/xbin/count
-    class main
-    socket countserver stream 0777 system system
-    user root
-    group root
-    oneshot
-
 service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
     class main
     disabled
