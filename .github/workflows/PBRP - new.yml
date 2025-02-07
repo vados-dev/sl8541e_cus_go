@@ -44,13 +44,13 @@ on:
 jobs:
   build:
     name: Build PBRP by ${{ github.actor }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     if: github.event.repository.owner.id == github.event.sender.id
     env:
-      DEBIAN_FRONTEND: noninteractive
+      GITHUB_TOKEN: ${{ secrets.amster }}
     permissions:
       contents: write
-      
+
     steps:
     - name: Initial Setup
       run: |
