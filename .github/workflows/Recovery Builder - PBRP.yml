@@ -173,13 +173,6 @@ jobs:
       run: |
         sudo apt-get install python2 python-is-python2
 
-    - name: Fixed Missing Fonts
-      run: |
-        cd android-recovery
-        mkdir external/noto-fonts/other && cd external/noto-fonts/other
-        wget https://github.com/cd-Crypton/custom-recovery-extras/raw/main/missing-font.zip
-        unzip -o missing-font.zip
-
     - name: Building PitchBlack
       run: |
         cd android-recovery
