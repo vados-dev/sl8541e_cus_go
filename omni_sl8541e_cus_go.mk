@@ -6,7 +6,7 @@
 #
 
 # Release name
-PRODUCT_RELEASE_NAME := sl8541e_cus_go
+PRODUCT_RELEASE_NAME := FX Eplutus D41
 
 # Inherit from those products. Most specific first.
 #$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
@@ -27,7 +27,6 @@ PRODUCT_NAME := omni_sl8541e_cus_go
 PRODUCT_BRAND := sprd
 PRODUCT_MODEL := D41
 PRODUCT_MANUFACTURER := sprd
-PRODUCT_RELEASE_NAME := FX Eplutus D41
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.service.adb.enable=1 \
