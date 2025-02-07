@@ -24,7 +24,7 @@ $(call inherit-product, vendor/pb/config/common.mk)
 
 PRODUCT_DEVICE := sl8541e_cus_go
 PRODUCT_NAME := omni_sl8541e_cus_go
-PRODUCT_BRAND := FX
+PRODUCT_BRAND := sprd
 PRODUCT_MODEL := D41
 PRODUCT_MANUFACTURER := sprd
 PRODUCT_RELEASE_NAME := FX Eplutus D41
