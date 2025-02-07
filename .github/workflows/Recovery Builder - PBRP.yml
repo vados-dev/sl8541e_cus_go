@@ -52,11 +52,10 @@ on:
         required: true
         default: 'true'
         type: boolean
-#      LDCHECKPATH:
-#        description: 'Path of blobs to check' # Use it know what kind of dependencies your missing for decryption blobs.
-#        required: true
-#        default: 'vendor/bin/mcDriverDaemon'
-
+      LDCHECKPATH:
+        description: 'Path of blobs to check' # Use it know what kind of dependencies your missing for decryption blobs.
+        required: true
+        default: 'vendor/bin/mcDriverDaemon'
 jobs:
   build:
     name: Build PBRP by ${{ github.actor }}
@@ -67,12 +66,6 @@ jobs:
     permissions:
       contents: write
     steps:
-    - name: Cleanup Pre Workspace 
-      run: |
-        cd ${{ github.workspace }}
-        rm -rf android-recovery
-        df -h
-        
     - name: Check Out
       uses: actions/checkout@v4
 
