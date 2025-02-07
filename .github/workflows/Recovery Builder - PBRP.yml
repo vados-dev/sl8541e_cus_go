@@ -54,8 +54,9 @@ on:
         type: boolean
       LDCHECKPATH:
         description: 'Path of blobs to check' # Use it know what kind of dependencies your missing for decryption blobs.
-        required: true
+        required: false
         default: 'vendor/bin/mcDriverDaemon'
+        
 jobs:
   build:
     name: Build PBRP by ${{ github.actor }}
@@ -63,6 +64,7 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     env:
       GITHUB_TOKEN: ${{ secrets.amster }}
+      LC_ALL: "C.UTF-8"
     permissions:
       contents: write
     steps:
@@ -83,7 +85,7 @@ jobs:
     - name: Set Swap Space
       uses: pierotofy/set-swap-space@master
       with:
-        swap-size-gb: 24
+        swap-size-gb: 12
 
     - name: Check Manifest Branch
       run: |
@@ -118,7 +120,7 @@ jobs:
         cd android-recovery
         git config --global user.name "vados-dev"
         git config --global user.email "vados@vados.ru"
-        repo init --depth=1 -u https://github.com/vados-dev/manifest_pb.git -b ${{ inputs.MANIFEST_BRANCH }}
+        repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb.git -b ${{ inputs.MANIFEST_BRANCH }}
         sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
         sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
         sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
