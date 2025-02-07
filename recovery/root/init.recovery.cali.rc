@@ -6,6 +6,12 @@ service gnss_download /vendor/bin/gnss_download
     group system
     oneshot
 
+#service rpmbserver /vendor/bin/rpmbserver -r /dev/block/mmcblk0rpmb
+#    class cali
+#    socket rpmbserver stream 0666 rpmbserver rpmbserver
+#    group system
+#    seclabel u:r:tee:s0
+
 service modem_ctl-cali /vendor/bin/modem_control
     class cali
     user root
@@ -217,6 +223,7 @@ on factorytest
     chmod 666 /data/gnss/nmea.log
     chmod 666 /productinfo/tsx.dat
     chmod 666 /productinfo/txdata.txt
+
 
 
 on property:ro.bootmode=cali
