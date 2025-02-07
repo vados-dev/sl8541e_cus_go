@@ -16,7 +16,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 #$(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Inherit from sl8541e_cus_go device
-#$(call inherit-product, device/sprd/sl8541e_cus_go/device.mk)
+$(call inherit-product, device/sprd/sl8541e_cus_go/device.mk)
 
 # Inherit some common Omni stuff.
 #$(call inherit-product, vendor/omni/config/common.mk)
@@ -24,9 +24,10 @@ $(call inherit-product, vendor/pb/config/common.mk)
 
 PRODUCT_DEVICE := sl8541e_cus_go
 PRODUCT_NAME := omni_sl8541e_cus_go
-PRODUCT_BRAND := sprd
+PRODUCT_BRAND := FX
 PRODUCT_MODEL := D41
 PRODUCT_MANUFACTURER := sprd
+PRODUCT_RELEASE_NAME := FX Eplutus D41
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.service.adb.enable=1 \
@@ -39,7 +40,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_GMS_CLIENTID_BASE := android-sprd
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.security_patch=2099-12-31
+    ro.vendor.build.security_patch=2018-09-05
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="sp9832e_1h10_native-user 8.1.0 OPM2.171019.012 52215 release-keys"
