@@ -90,7 +90,8 @@ jobs:
 
     - name: Upload to Release
       if: success()
-      uses: softprops/action-gh-release@v2
+      #uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@master
       with:
         files: |
           android-recovery/out/target/product/${{ env.DEVICE_NAME }}/${{ env.BUILD_TARGET_NAME }}.img
@@ -98,6 +99,7 @@ jobs:
           android-recovery/out/target/product/${{ env.DEVICE_NAME }}/ramdisk-recovery.*
           #${{ env.OUTPUT_DIR }}/*.img
           #${{ env.OUTPUT_DIR }}/PBRP*.zip
+          
         name: Unofficial PBRP for ${{ env.DEVICE_NAME }} - ${{ env.BUILD_DATE }}
         #name: PBRP for ${{ inputs.DEVICE_NAME }} - ${{ env.BUILD_DATE }}
         tag_name: ${{ github.run_id }}
