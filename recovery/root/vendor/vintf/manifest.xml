@@ -1,11 +1,3 @@
-<!--
-    Input:
-        manifest_sunwave.xml
-        manifest_gnss.xml
-        manifest_main.xml
-        manifest_drm_widevine.xml
-        manifest_network.xml
--->
 <manifest version="1.0" type="device">
     <hal format="hidl">
         <name>android.hardware.audio</name>
