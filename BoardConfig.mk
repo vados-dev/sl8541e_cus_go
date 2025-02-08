@@ -128,8 +128,8 @@ TW_INCLUDE_FUSE_EXFAT := true
 # NTFS Support
 TW_INCLUDE_FUSE_NTFS := true
 
-# Security patch level
-VENDOR_SECURITY_PATCH := 2018-09-05
+#!!! Security patch level ORIG !!!
+#VENDOR_SECURITY_PATCH := 2018-09-05
 
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
