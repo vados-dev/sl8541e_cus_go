@@ -144,6 +144,7 @@ BOARD_USES_METADATA_PARTITION := true
 
 # Encryption by Depesh
 TARGET_HW_DISK_ENCRYPTION := true
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
 TW_CRYPTO_FS_TYPE := "f2fs"
 TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/userdata"
 TW_CRYPTO_MNT_POINT := "/data"
