@@ -100,14 +100,6 @@ BOARD_USES_SPRD_HARDWARE := true
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
-# Recovery
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
-#TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
-#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
-#BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-BOARD_HAS_LARGE_FILESYSTEM := true
-
 # Fuse
 TW_INCLUDE_NTFS_3G    := true
 # exFAT FS Support
@@ -137,7 +129,13 @@ PLATFORM_VERSION := 16.1.0
 #TW_CRYPTO_MNT_POINT := "/data"
 #TW_CRYPTO_FS_OPTIONS := "noatime,nosuid,nodev,discard,inline_xattr,inline_data=ordered"
 
-
+# Recovery
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+#TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/recovery.fstab
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
+#BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+BOARD_HAS_LARGE_FILESYSTEM := true
 #TARGET_RECOVERY_INITRC := $(DEVICE_PATH)/ramdisk/recovery/init.recovery.rc
 # system.prop
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
