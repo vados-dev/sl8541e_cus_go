@@ -1,10 +1,6 @@
 <!--
     Input:
-        compatibility_matrix.legacy.xml
-        compatibility_matrix.1.xml
-        compatibility_matrix.2.xml
-        compatibility_matrix.3.xml
-        compatibility_matrix.device.xml
+        compatibility_matrix.xml
 -->
 <compatibility-matrix version="1.0" type="framework">
     <hal format="hidl" optional="false">
