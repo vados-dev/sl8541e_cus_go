@@ -43,7 +43,7 @@ on:
 
 jobs:
   build:
-    name: Build PBRP by ${{ github.actor }}
+    name: Build PBRP (new) by ${{ github.actor }}
     runs-on: ubuntu-20.04
     if: github.event.repository.owner.id == github.event.sender.id
     env:
