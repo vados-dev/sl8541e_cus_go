@@ -60,19 +60,6 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 # Workaround for error copying vendor files to recovery ramdisk
 TARGET_COPY_OUT_VENDOR := vendor
 
-# Display
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-# Old option:
-DEVICE_RESOLUTION := 1280x320
-TW_IGNORE_MAJOR_AXIS_0 := true
-#RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TARGET_SCREEN_DENSITY := 128
-# Touchscreen based on landscape screen but TWRP displays portraitly
-# This option makes touchscreen portrait 
-RECOVERY_TOUCHSCREEN_SWAP_XY:= true
-# This option flips the value of touch x-axis
-RECOVERY_TOUCHSCREEN_FLIP_X:= true
-
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8
@@ -151,7 +138,7 @@ PLATFORM_VERSION := 16.1.0
 #TW_CRYPTO_FS_OPTIONS := "noatime,nosuid,nodev,discard,inline_xattr,inline_data=ordered"
 
 
-#TARGET_RECOVERY_INITRC := $(DEVICE_PATH)/ramdisk/recovery/init.rc
+#TARGET_RECOVERY_INITRC := $(DEVICE_PATH)/ramdisk/recovery/init.recovery.rc
 # system.prop
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 
@@ -168,6 +155,19 @@ BOARD_AVB_RECOVERY_ALGORITHM := $(BOARD_AVB_ALGORITHM)
 BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX := $(BOARD_AVB_ROLLBACK_INDEX)
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 2
+
+# Display
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+# Old option:
+#DEVICE_RESOLUTION := 1280x320
+TW_IGNORE_MAJOR_AXIS_0 := true
+#RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TARGET_SCREEN_DENSITY := 128
+# Touchscreen based on landscape screen but TWRP displays portraitly
+# This option makes touchscreen portrait 
+RECOVERY_TOUCHSCREEN_SWAP_XY:= true
+# This option flips the value of touch x-axis
+RECOVERY_TOUCHSCREEN_FLIP_X:= true
 
 # Resolution
 DEVICE_SCREEN_WIDTH := 320
@@ -190,15 +190,13 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 #TW_USE_TOOLBOX := true
 HAVE_SELINUX := true
 RECOVERY_SDCARD_ON_DATA := true
-# some devices don't have a temp sensor, disable in such case to stop spamming recovery.log
-#TW_NO_CPU_TEMP := true
 # system won't be unmounted,
 TW_NEVER_UNMOUNT_SYSTEM := true
-TW_NO_SCREEN_BLANK := true
+TW_NO_SCREEN_BLANK := false
 TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 #TW_INCLUDE_FASTBOOTD := true
 TW_FORCE_USE_BUSYBOX := true
-#TW_CUSTOM_POWER_BUTTON := 107
+TW_CUSTOM_POWER_BUTTON := 116
 #TW_FORCE_CPUINFO_FOR_DEVICE_ID := true
 
 # Libresetprop & resetprop
@@ -208,7 +206,7 @@ TW_FORCE_USE_BUSYBOX := true
 
 # Exludes
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
-TW_EXCLUDE_DEFAULT_USB_INIT := true
+#TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # Debug
 TARGET_USES_LOGD := true
