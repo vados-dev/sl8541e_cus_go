@@ -99,7 +99,7 @@ jobs:
           #${{ env.OUTPUT_DIR }}/*.img
           #${{ env.OUTPUT_DIR }}/PBRP*.zip
         name: Unofficial PBRP for ${{ env.DEVICE_NAME }} - ${{ env.BUILD_DATE }}
-#        name: PBRP for ${{ inputs.DEVICE_NAME }} - ${{ env.BUILD_DATE }}
+        #name: PBRP for ${{ inputs.DEVICE_NAME }} - ${{ env.BUILD_DATE }}
         tag_name: ${{ github.run_id }}
         body: |
           ## Build Information
@@ -108,8 +108,8 @@ jobs:
           - **Build Type:** ${{ inputs.BUILD_TARGET }}
           - **Device:** [Device Tree/Branch](${{ inputs.DEVICE_TREE }}/tree/${{ inputs.DEVICE_TREE_BRANCH }})
           - **Commit:** Most recent [commit](${{ inputs.DEVICE_TREE }}/commit/${{ env.COMMIT_ID }}) during building.
-#          - **Branch:** ${{ inputs.MANIFEST_BRANCH }}
-#          - **Device:** ${{ inputs.DEVICE_NAME }}
+          #- **Branch:** ${{ inputs.MANIFEST_BRANCH }}
+          #- **Device:** ${{ inputs.DEVICE_NAME }}
           
           ## Source Information
           - **Device Tree:** [${{ inputs.DEVICE_TREE }}](${{ inputs.DEVICE_TREE }}/tree/${{ inputs.DEVICE_TREE_BRANCH }})
