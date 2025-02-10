@@ -50,7 +50,7 @@ on:
       LDCHECK:
         description: 'Use LDCHECK'
         required: true
-        default: 'true'
+        default: '0'
         type: boolean
       LDCHECKPATH:
         description: 'Path of blobs to check' # Use it know what kind of dependencies your missing for decryption blobs.
