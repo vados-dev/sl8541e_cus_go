@@ -668,7 +668,7 @@ ro.sf.swrotation=90
 ro.product.brand=FX
 persist.sys.camera.back.facing=0
 persist.support.back_camera_1080p=true
-ro.se.txz.wakeup=??
+ro.se.txz.wakeup=小智
 ro.se.speech.wakeup.pinyin=xiao zhi
 ro.product.model=D41
 #decide the postion of navigationbar. 0:bottom  1:left  2:right
