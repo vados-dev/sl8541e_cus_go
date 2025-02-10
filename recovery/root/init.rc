@@ -23,7 +23,7 @@ on early-init
     mkdir /acct/uid
 
     start ueventd
-    start healthd
+#    start healthd
 
 service set_permissive /sbin/permissive.sh
     oneshot
@@ -32,6 +32,7 @@ service set_permissive /sbin/permissive.sh
 on init
     export PATH /sbin:/system/bin:/vendor/bin
     export LD_LIBRARY_PATH /sbin
+
     export ANDROID_ROOT /system
     export ANDROID_DATA /data
     export EXTERNAL_STORAGE /sdcard
@@ -89,15 +90,6 @@ on init
     # checker programs.
     mkdir /dev/fscklogs 0770 root system
 
-    # pstore/ramoops previous console log
-    mount pstore pstore /sys/fs/pstore
-    chown system log /sys/fs/pstore/console-ramoops
-    chmod 0440 /sys/fs/pstore/console-ramoops
-    chown system log /sys/fs/pstore/console-ramoops-0
-    chmod 0440 /sys/fs/pstore/console-ramoops-0
-    chown system log /sys/fs/pstore/pmsg-ramoops-0
-    chmod 0440 /sys/fs/pstore/pmsg-ramoops-0
-
     # enable armv8_deprecated instruction hooks
     write /proc/sys/abi/swp 1
 
@@ -113,6 +105,16 @@ on init
     # This allows the ledtrig-transient properties to be created here so
     # that they can be chown'd to system:system later on boot
     write /sys/class/leds/vibrator/trigger "transient"
+
+on fs
+    # pstore/ramoops previous console log
+    mount pstore pstore /sys/fs/pstore
+    chown system log /sys/fs/pstore/console-ramoops
+    chmod 0440 /sys/fs/pstore/console-ramoops
+    chown system log /sys/fs/pstore/console-ramoops-0
+    chmod 0440 /sys/fs/pstore/console-ramoops-0
+    chown system log /sys/fs/pstore/pmsg-ramoops-0
+    chmod 0440 /sys/fs/pstore/pmsg-ramoops-0
 
 on post-fs
     load_system_props
