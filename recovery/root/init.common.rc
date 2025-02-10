@@ -1,6 +1,6 @@
 import /init.${ro.hardware}.usb.rc
 #import init.ram.rc
-#import init.storage.rc
+import init.storage.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug

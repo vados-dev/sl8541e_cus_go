@@ -89,6 +89,7 @@ endif
 # modify for AR navigation dynamic FPS    
     chmod 777 /sys/devices/virtual/misc/sprd_image/AR_navi_ctl    
     chmod 666 /sys/devices/virtual/QN8027/QN8027/speaker_en
+
 on boot
 
 # block I/O vm.dirty parameters
