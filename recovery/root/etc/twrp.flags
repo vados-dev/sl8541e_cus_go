@@ -25,7 +25,7 @@
 /boot               emmc      /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/boot             flags=display="Boot";backup=1;flashimg=1;
 /recovery           emmc      /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/recovery         flags=display="Recovery";backup=1;flashimg=1;
 /persist            emmc      /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/persist          flags=display="Persist";
-#/persist_image      emmc      /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/persist          flags=display="Persist image";backup=1;flashimg=1;
+/persist_image      emmc      /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/persist          flags=display="Persist image";backup=1;flashimg=1;
 /logo               emmc      /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/logo             flags=display=logo;backup=1;flashimg=1
 /fbootlogo          emmc      /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/fbootlogo        flags=display=fbootlogo;backup=1;flashimg=1
 /system             ext4      /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/system           flags=display=system;backup=1;flashimg=1
@@ -34,11 +34,10 @@
 /vendor             ext4      /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/vendor           flags=display=vendor;backup=1;flashimg=1
 /vendor_image       emmc      /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/vendor           flags=display="Vendor image";backup=1;flashimg=1;
 /data               f2fs      /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/userdata         flags=encryptable=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/miscdata;
-/cache               ext4    /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/cache             flags=display=cache;backup=1;flashimg=1
-/productinfo         ext4     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/prodnv            flags=display="Productinfo";backup=1;
-/productinfo_image   emmc     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/prodnv            flags=display="Productinfo image";backup=1;flashimg=1;
-#
-#SD cards
+/cache               ext4     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/cache            flags=display=cache;backup=1;flashimg=1
+/productinfo         ext4     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/prodnv           flags=display="Productinfo";backup=1;
+/productinfo_image   emmc     /dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/prodnv           flags=display="Productinfo image";backup=1;flashimg=1;
+
 /storage/sdcard0    vfat     /dev/block/platform/soc/soc:ap-ahb/20300000.sdio/mmcblk1p1                 flags=fsflags=utf8;display="Micro SDcard";storage;wipeingui;removable;backup=0
 #/external_sd	       vfat	    /dev/block/mmcblk1p1	/dev/block/mmcblk1		                               flags=fsflags=utf8;display="External SDcard";storage;removable;backup=0;fsflags=utf8
 
