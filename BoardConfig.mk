@@ -132,11 +132,11 @@ PLATFORM_VERSION := 16.1.0
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/prebuilt/recovery.fstab
+#TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 #TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 BOARD_HAS_LARGE_FILESYSTEM := true
-#TARGET_RECOVERY_INITRC := $(DEVICE_PATH)/ramdisk/recovery/init.recovery.rc
+TARGET_RECOVERY_INITRC := $(DEVICE_PATH)/recovery/root/etc/init.rc
 # system.prop
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 
