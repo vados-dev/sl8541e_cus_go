@@ -222,10 +222,10 @@ TARGET_USES_MKE2FS := true
 # Storage
 TW_NO_USB_STORAGE := false
 TW_DEFAULT_EXTERNAL_STORAGE := true
-TW_EXTERNAL_STORAGE_PATH := "/mnt/sdcard0"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-TW_INTERNAL_STORAGE_PATH := "/data"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+#TW_EXTERNAL_STORAGE_PATH := "/sdcard"
+#TW_EXTERNAL_STORAGE_MOUNT_POINT := "data"
+#TW_INTERNAL_STORAGE_PATH := "/data"
+#TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 
 # Show build time on the splash screen
 TW_DEVICE_VERSION=$(shell date '+%Y%m%d') by vados-dev
