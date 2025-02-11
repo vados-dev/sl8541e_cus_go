@@ -10,6 +10,8 @@ DEVICE_PATH := device/sprd/sl8541e_cus_go
 # PBRP specific build flags
 #PB_DISABLE_DEFAULT_DM_VERITY := true
 
+LC_ALL=C
+
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
 #BUILD_BROKEN_DUP_RULES := true
@@ -21,7 +23,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic
-TARGET_CPU_VARIANT_RUNTIME := generic
+TARGET_CPU_VARIANT_RUNTIME := cortex-a53
 
 TARGET_CPU_SMP := true
 
@@ -95,7 +97,8 @@ TW_MTP_DEVICE := /dev/mtp_usb
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_SUPPRESS_SECURE_ERASE := true
 BOARD_USES_SPRD_HARDWARE := true
-BOARD_SEPOLICY_VERS := 27
+
+#BOARD_SEPOLICY_VERS := 27
 
 # Enable CPUSets
 ENABLE_CPUSETS := true
