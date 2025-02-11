@@ -54,7 +54,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.amster }}
       LC_ALL: "C.UTF-8"
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: false
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     permissions:
       contents: write
     steps:
