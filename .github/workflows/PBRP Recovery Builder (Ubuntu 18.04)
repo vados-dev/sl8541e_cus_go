@@ -7,7 +7,7 @@ on:
       MANIFEST_URL:
         description: 'MANIFEST_URL (if want to use SSH keys, use git@github.com:XXXXX)'
         required: true
-        default: 'https://github.com/vados-dev/platform_manifest_pb'
+        default: 'https://github.com/PitchBlackRecoveryProject/manifest_pb'
       MANIFEST_BRANCH:
         description: 'MANIFEST_BRANCH'
         required: true
@@ -177,7 +177,7 @@ jobs:
         if [ ${{ inputs.MANIFEST_BRANCH }} == twrp-5.1 ]; then patch -p1 < ../patches/partition.cpp.patch; fi
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
-        lunch ${{ github.event.inputs.MAKEFILE_NAME }}-eng && make clean && make recoveryimage -j$(nproc --all)
+        lunch ${{ github.event.inputs.MAKEFILE_NAME }}-eng && make clean && make pbrp -j$(nproc --all)
       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
 
     - name: Upload to Release
