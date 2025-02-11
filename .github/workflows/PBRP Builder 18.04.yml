@@ -1,6 +1,5 @@
 name: PBRP Builder 18.04
-permissions:
-  contents: write
+
 on:
   workflow_dispatch:
     inputs:
@@ -46,18 +45,21 @@ on:
 
 jobs:
   build:
-    if: github.event.repository.owner.id == github.event.sender.id
     runs-on: ubuntu-20.04
+    if: github.event.repository.owner.id == github.event.sender.id    
     container:
       image: ghcr.io/catthehacker/ubuntu:runner-18.04
       volumes:
         - /:/host_root
     env:
+      GITHUB_TOKEN: ${{ secrets.amster }}
       LC_ALL: "C.UTF-8"
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: false
+    permissions:
+      contents: write
     steps:
     - name: Display Run Parameters
-      run: |
+      run:  |
         echo "::group::User Environment Variables"
         echo "Manifest URL: ${{ github.event.inputs.MANIFEST_URL }}"
         echo "Manifest Branch: ${{ github.event.inputs.MANIFEST_BRANCH }}"
@@ -70,7 +72,7 @@ jobs:
         echo "::endgroup::"
 
     - name: Prepare the environment
-      run: |
+      run:  |
         sudo apt update
         sudo apt install libc6
         sudo apt -y upgrade
@@ -193,5 +195,4 @@ jobs:
           Manifest: ${{ github.event.inputs.MANIFEST_BRANCH }}
           Device: ${{ github.event.inputs.DEVICE_NAME }}
           Device tree & Branch: ${{ github.event.inputs.DEVICE_TREE_URL }} - ${{ github.event.inputs.DEVICE_TREE_BRANCH }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.amster }}
+          
