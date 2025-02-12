@@ -40,7 +40,7 @@ on:
       BUILD_TARGET:
         description: 'Specify your Build Target (choose "pbrp" instead of "recovery" for Android 11 or above)' # Pick among boot, recovery and vendor_boot
         required: true
-        default: 'adbd pbrp'
+        default: 'pbrp'
         type: choice
         options:
         - pbrp
@@ -176,13 +176,20 @@ jobs:
       if: env.CHECK_LEGACY_BRANCH == 'true'
       run: |
         sudo apt-get install python2 python-is-python2
+    
+    - name: Validate JSON files
+      run: |
+        for file in $(find . -name "*.json"); do
+        echo "Validating $file"
+        cat $file | jq empty
+        done
 
     - name: Building PitchBlack
       run: |
         cd android-recovery
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
-        lunch ${{ env.DEVICE_MAKEFILE }}-eng && mka adbd ${{ inputs.BUILD_TARGET }}
+        lunch ${{ env.DEVICE_MAKEFILE }}-eng && mka ${{ inputs.BUILD_TARGET }}
 
     - name: Check Build Makefile
       run: |
