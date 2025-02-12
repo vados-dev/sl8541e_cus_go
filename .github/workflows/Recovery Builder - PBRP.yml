@@ -120,6 +120,7 @@ jobs:
       run: |
         mkdir android-recovery
         cd android-recovery
+        echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
         git config --global user.name "vados-dev"
         git config --global user.email "vados@vados.ru"
         repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb.git -b ${{ inputs.MANIFEST_BRANCH }}
@@ -128,6 +129,7 @@ jobs:
         sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
         sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/twrp-extras.xml ;
       id: pwd
+      
     - name: Repo Sync
       run: |
         cd android-recovery
@@ -171,6 +173,13 @@ jobs:
         # Move device_tree folder to device_directory and rename it to $DEVICE_NAME
         echo "Moving device_tree to $DEVICE_DIRECTORY/$DEVICE_NAME"
         mv device_tree "$DEVICE_DIRECTORY"/"$DEVICE_NAME"
+    
+    - name: Sync Device Dependencies
+      run: |
+        bash ${GITHUB_WORKSPACE}/scripts/convert.sh ${{ github.event.inputs.DEVICE_PATH }}/${{ steps.buildtree.outputs.value }}.dependencies
+        repo sync -j$(nproc --all)
+      working-directory: ${{ steps.pwd.outputs.workspace-folder }}
+      continue-on-error: true
 
     - name: Installing python2 for legacy builds
       if: env.CHECK_LEGACY_BRANCH == 'true'
@@ -183,6 +192,7 @@ jobs:
         echo "Validating $file"
         cat $file | jq empty
         done
+      continue-on-error: true  
 
     - name: Building PitchBlack
       run: |

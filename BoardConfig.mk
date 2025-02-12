@@ -208,8 +208,8 @@ TW_CUSTOM_POWER_BUTTON := 116
 
 # Libresetprop & resetprop
 #TW_INCLUDE_LIBRESETPROP := true
-#TW_INCLUDE_RESETPROP := true
-#TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_REPACKTOOLS := true
 
 # Exludes
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
