@@ -40,12 +40,10 @@ on:
       BUILD_TARGET:
         description: 'Specify your Build Target (choose "pbrp" instead of "recovery" for Android 11 or above)' # Pick among boot, recovery and vendor_boot
         required: true
-        default: 'pbrp'
+        default: 'recovery'
         type: choice
         options:
         - pbrp
-        - adbd pbrp
-        - init
         - boot
         - recovery
         - vendorboot
@@ -61,25 +59,47 @@ on:
         
 jobs:
   build:
-    name: Build PBRP by ${{ github.actor }}
-    runs-on: ubuntu-20.04
     if: github.event.repository.owner.id == github.event.sender.id
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/catthehacker/ubuntu:runner-18.04
+      volumes:
+         - /:/host_root
     env:
-      GITHUB_TOKEN: ${{ secrets.amster }}
       LC_ALL: "C.UTF-8"
-    permissions:
-      contents: write
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+      GITHUB_TOKEN: ${{ secrets.amster }}
+
     steps:
+    - name: Prepare the environment
+      run: |
+       sudo apt update
+       sudo apt install libc6
+       sudo apt -y upgrade
+       sudo apt install -yq aptitude bc bison build-essential curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python bash tmux
+
+    - name: Upgrade GLIBC to 2.28
+      run: |
+        sudo sed -i '$a deb http://security.debian.org/debian-security buster/updates main' /etc/apt/sources.list
+        sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 112695A0E562B32A 54404762BBB6E853
+        sudo apt update
+        sudo apt install libc6 -y
+        sudo sed -i '$d' /etc/apt/sources.list
+        
     - name: Check Out
       uses: actions/checkout@v4
 
     - name: Display Inputs
       run: |
         echo "Displaying variables/inputs."
+        echo "Manifest URL: ${{ github.event.inputs.MANIFEST_URL }}"
         echo "Manifest Branch: ${{ inputs.MANIFEST_BRANCH }}"
         echo "Device Tree: ${{ inputs.DEVICE_TREE }}"
         echo "Device Branch: ${{ inputs.DEVICE_TREE_BRANCH }}"
-        echo "Build Target: ${{ inputs.BUILD_TARGET }}"
+        echo "Device Path: ${{ github.event.inputs.DEVICE_PATH }}"
+        echo "Device Name: ${{ github.event.inputs.DEVICE_NAME }}"
+        echo "Makefile Name: ${{ github.event.inputs.MAKEFILE_NAME }}"
+        echo "Build Target: ${{ inputs.BUILD_TARGET }}.img"
 
     - name: Cleanup
       uses: rokibhasansagar/slimhub_actions@main
@@ -129,7 +149,7 @@ jobs:
         sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
         sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/twrp-extras.xml ;
       id: pwd
-      
+
     - name: Repo Sync
       run: |
         cd android-recovery
@@ -173,31 +193,20 @@ jobs:
         # Move device_tree folder to device_directory and rename it to $DEVICE_NAME
         echo "Moving device_tree to $DEVICE_DIRECTORY/$DEVICE_NAME"
         mv device_tree "$DEVICE_DIRECTORY"/"$DEVICE_NAME"
-    
-    - name: Sync Device Dependencies
-      run: |
-        bash ${GITHUB_WORKSPACE}/scripts/convert.sh ${{ github.event.inputs.DEVICE_PATH }}/${{ steps.buildtree.outputs.value }}.dependencies
-        repo sync -j$(nproc --all)
-      working-directory: ${{ steps.pwd.outputs.workspace-folder }}
-      continue-on-error: true
 
     - name: Installing python2 for legacy builds
       if: env.CHECK_LEGACY_BRANCH == 'true'
       run: |
         sudo apt-get install python2 python-is-python2
-    
-    - name: Validate JSON files
-      run: |
-        for file in $(find . -name "*.json"); do
-        echo "Validating $file"
-        cat $file | jq empty
-        done
-      continue-on-error: true  
+        sudo rm -f /usr/bin/python /usr/bin/python3.6 /usr/bin/python3.6m /usr/local/bin/python
+        sudo ln -sf /usr/bin/python2.7 /usr/bin/python
+      continue-on-error: true
 
     - name: Building PitchBlack
       run: |
         cd android-recovery
         source build/envsetup.sh
+        export LC_ALL=C
         export ALLOW_MISSING_DEPENDENCIES=true
         lunch ${{ env.DEVICE_MAKEFILE }}-eng && mka ${{ inputs.BUILD_TARGET }}
 
