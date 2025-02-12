@@ -180,7 +180,7 @@ DEVICE_SCREEN_WIDTH := 1280
 DEVICE_SCREEN_HEIGHT := 320
 
 # TWRP Configuration
-#RECOVERY_VARIANT := twrp
+RECOVERY_VARIANT := twrp
 # TWRP specific build flags by Depesh
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.gs6/lun.%d/file
 TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness"
