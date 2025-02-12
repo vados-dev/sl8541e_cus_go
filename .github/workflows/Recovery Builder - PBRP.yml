@@ -1,5 +1,6 @@
 name: Recovery Builder - PBRP
-
+permissions:
+  contents: write
 on:
   workflow_dispatch:
     inputs:
@@ -66,7 +67,6 @@ jobs:
       volumes:
          - /:/host_root
     env:
-      LC_ALL: "C.UTF-8"
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
       GITHUB_TOKEN: ${{ secrets.amster }}
 
