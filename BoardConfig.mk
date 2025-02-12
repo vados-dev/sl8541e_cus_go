@@ -64,7 +64,7 @@ TARGET_COPY_OUT_VENDOR := vendor
 
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8
+BOARD_KERNEL_CMDLINE :=  console=ttyS1,115200n8 androidboot.configfs=true lcd_id=ID770703 lcd_base=99aee000 lcd_size=1280x320
 #BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x05400000
@@ -134,7 +134,8 @@ VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 
 # Crypto
-#TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO := true
+TW_CRYPTO_USE_SYSTEM_VOLD := true
 #TW_INCLUDE_CRYPTO_FBE := true
 #TW_INCLUDE_FBE_METADATA_DECRYPT := true
 #BOARD_USES_METADATA_PARTITION := true
@@ -142,7 +143,7 @@ PLATFORM_VERSION := 16.1.0
 # Encryption by Depesh
 #TARGET_HW_DISK_ENCRYPTION := true
 #TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
-#TW_CRYPTO_FS_TYPE := "f2fs"
+TW_CRYPTO_FS_TYPE := "f2fs"
 #TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/userdata"
 #TW_CRYPTO_MNT_POINT := "/data"
 #TW_CRYPTO_FS_OPTIONS := "noatime,nosuid,nodev,discard,inline_xattr,inline_data=ordered"
@@ -181,6 +182,7 @@ DEVICE_SCREEN_HEIGHT := 320
 # TWRP Configuration
 #RECOVERY_VARIANT := twrp
 # TWRP specific build flags by Depesh
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.gs6/lun.%d/file
 TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
 TW_MAX_BRIGHTNESS := 125
