@@ -17,3 +17,9 @@
 #
 
 LOCAL_PATH := device/sprd/sl8541e_cus_go
+
+PRODUCT_COPY_FILES := \
+    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+
+PRODUCT_PACKAGES += \
+    sf_trusty.elf
