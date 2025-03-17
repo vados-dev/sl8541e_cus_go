@@ -1,6 +1,6 @@
 import /init.recovery.${ro.hardware}.usb.rc
-import init.recovery.ram.rc
-import init.recovery.storage.rc
+import /init.recovery.ram.rc
+import /init.recovery.storage.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
