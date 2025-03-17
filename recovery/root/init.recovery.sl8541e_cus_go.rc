@@ -1,4 +1,4 @@
-import /init.common.rc
+import /init.recovery.common.rc
 import /init.recovery.usb.configfs.rc
 import /init.recovery.cali.rc
 							
@@ -84,14 +84,13 @@ endif
     chmod 777 /dev/ttyS1	
     
     chmod 666 /sys/class/backlight/sprd_backlight/brightness
-	chmod 666 /sys/class/backlight/sprd_backlight/bl_power
+    chmod 666 /sys/class/backlight/sprd_backlight/bl_power
     
 # modify for AR navigation dynamic FPS    
     chmod 777 /sys/devices/virtual/misc/sprd_image/AR_navi_ctl    
     chmod 666 /sys/devices/virtual/QN8027/QN8027/speaker_en
 
 on boot
-
 # block I/O vm.dirty parameters
     write /proc/sys/vm/dirty_background_bytes 4194304
     write /proc/sys/vm/dirty_bytes  52428800
