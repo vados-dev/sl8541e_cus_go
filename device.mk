@@ -27,4 +27,4 @@ PRODUCT_PACKAGES += \
     sf_trusty.elf
 
 # Inherit vendor
-$(call inherit-product, vendor/sprd/sp9832e_1h10_go/sp9832e_1h10_go-vendor.mk)
+#$(call inherit-product, vendor/sprd/sp9832e_1h10_go/sp9832e_1h10_go-vendor.mk)
