@@ -62,7 +62,7 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 
 # Workaround for error copying vendor files to recovery ramdisk
-#TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_VENDOR := vendor
 
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
