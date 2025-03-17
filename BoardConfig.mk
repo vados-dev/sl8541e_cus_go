@@ -93,7 +93,7 @@ endif
 
 # Platform
 TARGET_BOARD_PLATFORM := sp9832e
-TARGET_BOARD_PLATFORM_GPU := mali-t820
+TARGET_BOARD_PLATFORM_GPU := mali-midgard
 
 # MTP
 TW_HAS_MTP := true
@@ -243,11 +243,10 @@ TW_INCLUDE_FUSE_EXFAT := true
 # Storage
 TW_NO_USB_STORAGE := true
 TW_DEFAULT_EXTERNAL_STORAGE := true
-TW_DEFAULT_EXTERNAL_STORAGE := true
-TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-TW_INTERNAL_STORAGE_PATH := "/data/media"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "/data"
+#TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+#TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+#TW_INTERNAL_STORAGE_PATH := "/data/media"
+#TW_INTERNAL_STORAGE_MOUNT_POINT := "/data"
 
 # Show build time on the splash screen
 TW_DEVICE_VERSION=$(shell date '+%Y%m%d') by vados-dev
