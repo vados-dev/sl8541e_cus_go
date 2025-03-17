@@ -3,10 +3,11 @@ import /init.recovery.common.rc
 import /init.recovery.${ro.hardware}.rc
 import /init.recovery.mksh.rc
 import /init.recovery.nano.rc
-import /init.recovery.usb.rc
+import /vendor/etc/init/hw/init.${ro.hardware}.rc
 import /init.recovery.service.rc
 import /init.recovery.vold_decrypt.rc
 import /init.recovery.cali.rc
+import /init.recovery.zygote32.rc
 
 on early-init
     # Set init and its forked children's oom_adj.
