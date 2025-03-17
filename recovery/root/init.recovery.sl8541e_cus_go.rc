@@ -1,5 +1,4 @@
 import /init.recovery.common.rc
-import /init.recovery.usb.configfs.rc
 import /init.recovery.cali.rc
 							
 on init
