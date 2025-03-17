@@ -22,4 +22,9 @@ PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
 PRODUCT_PACKAGES += \
+    zram.sh \
+    ueventd.qcom.rc \
     sf_trusty.elf
+
+# Inherit vendor
+$(call inherit-product, vendor/sprd/sp9832e_1h10_go/sp9832e_1h10_go-vendor.mk)
