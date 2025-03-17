@@ -1,14 +1,21 @@
 # Crypt
 ro.hardware.keystore=sprdtrusty
 sys.usb.controller=musb-hdrc.0.auto
-ro.build.system_root_image=true
+ro.crypto.volume.filenames_mode=aes-256-cts
+ro.crypto.metadata.enabled=true
+ro.crypto.support_metadata_encrypt=true
+ro.crypto.uses_fs_ioc_add_encryption_key=true
+ro.crypto.volume.metadata.method=dm-default-key
+ro.crypto.dm_default_key.options_format.version=2
+ro.crypto.volume.options=::v2
+#ro.build.system_root_image=true
 ro.keybox.id.value=SPRD
 #ro.crypto.fde_algorithm=adiantum
 #ro.crypto.fde_sector_size=4096
 #ro.crypto.volume.contents_mode=adiantum
 #ro.crypto.volume.filenames_mode=adiantum
-ro.boot.vbmeta.avb_version=1.0
-ro.boot.avb_version=1.0
+#ro.boot.vbmeta.avb_version=1.0
+#ro.boot.avb_version=1.0
 #####
 ro.secure=1
 ro.adb.secure=0
