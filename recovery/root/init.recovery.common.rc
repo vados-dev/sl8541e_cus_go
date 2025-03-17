@@ -1,6 +1,6 @@
-import /init.${ro.hardware}.usb.rc
-#import init.ram.rc
-import init.storage.rc
+import /init.recovery.${ro.hardware}.usb.rc
+import init.recovery.ram.rc
+import init.recovery.storage.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -42,7 +42,7 @@ on property:vold.decrypt=trigger_restart_framework
 on fs
     ubiattach 0 ubipac
     # exec /sbin/resize2fs -ef /fstab.${ro.hardware}
- #   mount_all /fstab.${ro.hardware}
+    mount_all /fstab.${ro.hardware}
     #start path_wrapper
     mount pstore pstore /sys/fs/pstore
     setprop ro.crypto.fuse_sdcard true
@@ -66,10 +66,10 @@ on post-fs
     mkdir /productinfo/wcn 0755 root root
     chmod 0666 /dev/mali0
     chown system system /dev/mali0
-#    mount rootfs rootfs /system ro remount
+    mount rootfs rootfs /system rw remount
     chmod 0755 /sys/kernel/debug/tracing
-	chmod 0666 /dev/null
-	chown root root /dev/null
+    chmod 0666 /dev/null
+    chown root root /dev/null
 
 on post-fs-data
     mkdir /data/local/englog 0777
@@ -116,7 +116,7 @@ on post-fs-data
     mkdir /data/misc/hprofs 0777
 
 #    start aprd
-	write /sys/bus/platform/devices/breathing_led/leds/green/trigger timer
+    write /sys/bus/platform/devices/breathing_led/leds/green/trigger timer
     chmod 0777 /sys/devices/platform/qc_gpio/qc_wake_lock
     chmod 0777 /sys/devices/platform/qc_gpio/qc_wake_unlock
     chmod 0777 /sys/devices/platform/qc_gpio/qc_power_state
@@ -126,34 +126,34 @@ on post-fs-data
     chmod 0777 /sys/class/input/input1/threshold
     chmod 0777 /sys/class/input/input1/int2_enable
     chmod 0777 /sys/devices/platform/gpio_keys/powkey_vibration_time
-	chmod 0777 /sys/devices/platform/qc_gpio/app_wake_lock
+    chmod 0777 /sys/devices/platform/qc_gpio/app_wake_lock
     chmod 0777 /sys/devices/platform/qc_gpio/usb_mode_switch
     chmod 0777 /sys/devices/platform/qc_gpio/QC_gpio134
-	chmod 0777 /sys/devices/platform/qc_gpio/usb_en
-	chmod 0777 /sys/devices/platform/qc_gpio/key_alert
-	chmod 0666 /sys/devices/platform/qc_gpio/booting_status
-	chmod 0666 /sys/devices/platform/qc_gpio/force_poweroff
-	chmod 0666 /sys/devices/platform/qc_gpio/soft_wdg_ctrl
-	chmod 0666 /sys/devices/platform/qc_gpio/feed_soft_wdg
-	chmod 0666 /sys/devices/platform/qc_gpio/feed_soft_wdg_timeout_max
-	chmod 0666 /sys/bus/platform/devices/breathing_led/leds/green/
-	
+    chmod 0777 /sys/devices/platform/qc_gpio/usb_en
+    chmod 0777 /sys/devices/platform/qc_gpio/key_alert
+    chmod 0666 /sys/devices/platform/qc_gpio/booting_status
+    chmod 0666 /sys/devices/platform/qc_gpio/force_poweroff
+    chmod 0666 /sys/devices/platform/qc_gpio/soft_wdg_ctrl
+    chmod 0666 /sys/devices/platform/qc_gpio/feed_soft_wdg
+    chmod 0666 /sys/devices/platform/qc_gpio/feed_soft_wdg_timeout_max
+    chmod 0666 /sys/bus/platform/devices/breathing_led/leds/green/
+
 # leds root
-	chmod 0777 /sys/class/leds/red_bl/brightness
+    chmod 0777 /sys/class/leds/red_bl/brightness
     chmod 0777 /sys/class/leds/red_bl/high_time
     chmod 0777 /sys/class/leds/red_bl/low_time
     chmod 0777 /sys/class/leds/red_bl/rising_time
     chmod 0777 /sys/class/leds/red_bl/falling_time
     chmod 0777 /sys/class/leds/red_bl/on_off
-	
-	chmod 0777 /sys/class/leds/green_bl/brightness
+
+    chmod 0777 /sys/class/leds/green_bl/brightness
     chmod 0777 /sys/class/leds/green_bl/high_time
     chmod 0777 /sys/class/leds/green_bl/low_time
     chmod 0777 /sys/class/leds/green_bl/rising_time
     chmod 0777 /sys/class/leds/green_bl/falling_time
     chmod 0777 /sys/class/leds/green_bl/on_off
-	
-	chmod 0777 /sys/class/leds/blue_bl/brightness
+
+    chmod 0777 /sys/class/leds/blue_bl/brightness
     chmod 0777 /sys/class/leds/blue_bl/high_time
     chmod 0777 /sys/class/leds/blue_bl/low_time
     chmod 0777 /sys/class/leds/blue_bl/rising_time
