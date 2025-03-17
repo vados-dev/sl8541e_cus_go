@@ -10,7 +10,7 @@ DEVICE_PATH := device/sprd/sl8541e_cus_go
 # PBRP specific build flags
 #PB_DISABLE_DEFAULT_DM_VERITY := true
 
-#LC_ALL=C
+LC_ALL=C
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -24,6 +24,8 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic
 TARGET_CPU_VARIANT_RUNTIME := cortex-a53
+
+PRODUCT_ENFORCE_VINTF_MANIFEST := true
 
 TARGET_CPU_SMP := true
 
@@ -57,15 +59,18 @@ BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 
 # Workaround for error copying vendor files to recovery ramdisk
-TARGET_COPY_OUT_VENDOR := vendor
+#TARGET_COPY_OUT_VENDOR := vendor
 
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8
-#BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += androidboot.usbconfigfs=true
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += androidboot.hardware=sl8541e_cus_go
+BOARD_KERNEL_CMDLINE += buildvariant=eng
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x05400000
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -96,7 +101,7 @@ TW_MTP_DEVICE := /dev/mtp_usb
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_SUPPRESS_SECURE_ERASE := true
-BOARD_USES_SPRD_HARDWARE := true
+#BOARD_USES_SPRD_HARDWARE := true
 
 #BOARD_SEPOLICY_VERS := 27
 
@@ -104,18 +109,11 @@ BOARD_USES_SPRD_HARDWARE := true
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
-# Fuse
-TW_INCLUDE_NTFS_3G    := true
-# exFAT FS Support
-TW_INCLUDE_FUSE_EXFAT := true
-# NTFS Support
-TW_INCLUDE_FUSE_NTFS := true
-
 #!!! Security patch level ORIG !!!
 #VENDOR_SECURITY_PATCH := 2018-09-05
 
 #!!! Security patch level TWRPDGEN !!!
-VENDOR_SECURITY_PATCH := 2021-08-01
+#VENDOR_SECURITY_PATCH := 2021-08-01
 
 # Android Verified Boot
 BOARD_AVB_ENABLE := true
@@ -125,7 +123,8 @@ BOARD_AVB_RECOVERY_KEY_PATH := $(BOARD_AVB_KEY_PATH)
 BOARD_AVB_ALGORITHM := SHA256_RSA4096
 BOARD_AVB_RECOVERY_ALGORITHM := $(BOARD_AVB_ALGORITHM)
 BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_RECOVERY_ROLLBACK_INDEX := $(BOARD_AVB_ROLLBACK_INDEX)
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1 
+#$(BOARD_AVB_ROLLBACK_INDEX)
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 2
 
 # Hack: prevent anti rollback
@@ -133,11 +132,18 @@ PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 
+BOARD_ROOT_EXTRA_FOLDERS += system
+BOARD_ROOT_EXTRA_FOLDERS += productinfo
+
 # Crypto
-#TW_INCLUDE_CRYPTO := true
-#TW_INCLUDE_CRYPTO_FBE := true
-#TW_INCLUDE_FBE_METADATA_DECRYPT := true
-#BOARD_USES_METADATA_PARTITION := true
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+BOARD_USES_METADATA_PARTITION := true
+
+TW_CRYPTO_USE_SYSTEM_VOLD :=  true
+# qseecomd keymaster-3-0-qti
+TW_CRYPTO_SYSTEM_VOLD_MOUNT := vendor
 
 # Encryption by Depesh
 #TARGET_HW_DISK_ENCRYPTION := true
@@ -150,13 +156,15 @@ PLATFORM_VERSION := 16.1.0
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
+TARGET_USES_MKE2FS := true
+#TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 #TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 BOARD_HAS_LARGE_FILESYSTEM := true
-#TARGET_RECOVERY_INITRC := $(DEVICE_PATH)/recovery/root/etc/init.rc
+TARGET_RECOVERY_INITRC := $(DEVICE_PATH)/recovery/root/etc/init.rc
 # system.prop
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.gs6/lun.%d/file
 
 # See here : https://github.com/omnirom/android_b...ndroid.mk#L435
 #TARGET_RECOVERY_DEVICE_MODULES := true
@@ -177,11 +185,16 @@ RECOVERY_TOUCHSCREEN_FLIP_X:= true
 # Resolution
 DEVICE_SCREEN_WIDTH := 1280
 DEVICE_SCREEN_HEIGHT := 320
+TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness"
+TW_MAX_BRIGHTNESS := 125
+TW_DEFAULT_BRIGHTNESS := 95
+
+TW_HAS_MTP := true
+TW_MTP_DEVICE := /dev/mtp_usb
 
 # TWRP Configuration
 #RECOVERY_VARIANT := twrp
 # TWRP specific build flags by Depesh
-TW_BRIGHTNESS_PATH := "/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/platform/sprd_backlight/backlight/sprd_backlight/brightness\"
 TW_MAX_BRIGHTNESS := 125
 TW_DEFAULT_BRIGHTNESS := 95
@@ -191,18 +204,21 @@ TW_DEFAULT_LANGUAGE := ru
 TW_EXCLUDE_APEX := true
 TW_SCREEN_BLANK_ON_BOOT := false
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_NO_LEGACY_PROPS := true
-#TW_USE_TOOLBOX := true
+#TW_NO_LEGACY_PROPS := true
+TW_USE_TOOLBOX := true
 HAVE_SELINUX := false
 RECOVERY_SDCARD_ON_DATA := true
+BOARD_HAS_NO_REAL_SDCARD := true
 # system won't be unmounted,
 TW_NEVER_UNMOUNT_SYSTEM := true
 TW_NO_SCREEN_BLANK := false
 TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 #TW_INCLUDE_FASTBOOTD := true
-TW_FORCE_USE_BUSYBOX := true
+#TW_FORCE_USE_BUSYBOX := true
+TW_NO_FASTBOOT_BOOT := true
 TW_CUSTOM_POWER_BUTTON := 116
 #TW_FORCE_CPUINFO_FOR_DEVICE_ID := true
+TW_LOAD_VENDOR_FIRMWARE := "/vendor/firmware/sf_trusty.elf"
 
 # Libresetprop & resetprop
 #TW_INCLUDE_LIBRESETPROP := true
@@ -211,28 +227,27 @@ TW_CUSTOM_POWER_BUTTON := 116
 
 # Exludes
 # don't include default init.recovery.usb.rc, provide your own or use needed defines inside init.recovery.$DEVICE.rc
-#TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # Debug
 TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
 
 # Fuse
-TW_INCLUDE_NTFS_3G    := true
+#TW_INCLUDE_NTFS_3G    := true
 # exFAT FS Support
 TW_INCLUDE_FUSE_EXFAT := true
 # NTFS Support
-TW_INCLUDE_FUSE_NTFS := true
-# Use MKE2FS NTFS_3G to create ext4 images
-TARGET_USES_MKE2FS := true
+#TW_INCLUDE_FUSE_NTFS := true
 
 # Storage
-TW_NO_USB_STORAGE := false
+TW_NO_USB_STORAGE := true
 TW_DEFAULT_EXTERNAL_STORAGE := true
-#TW_EXTERNAL_STORAGE_PATH := "/sdcard"
-#TW_EXTERNAL_STORAGE_MOUNT_POINT := "data"
-#TW_INTERNAL_STORAGE_PATH := "/data"
-#TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_INTERNAL_STORAGE_PATH := "/data/media"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "/data"
 
 # Show build time on the splash screen
 TW_DEVICE_VERSION=$(shell date '+%Y%m%d') by vados-dev
