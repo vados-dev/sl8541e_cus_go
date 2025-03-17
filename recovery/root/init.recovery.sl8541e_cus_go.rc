@@ -1,3 +1,5 @@
+import /init.recovery.usb.rc
+
 on init
     start healthd
 
@@ -58,10 +60,6 @@ on post-fs-data
 
     insmod /lib/modules/sprdbt_tty.ko
     insmod /lib/modules/sprd_fm.ko
-
-ifeq ($(strip $(NEED_MAPGOO_FIREWALL)),true) 
-    mkdir /system/bin/firewall_script 0770 system system
-endif
 
 #modify permission for fm sys file
     chmod 666 /sys/class/QN8027/QN8027/power_state
