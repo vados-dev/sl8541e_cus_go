@@ -1,7 +1,96 @@
+#import /init.recovery.usb.configfs.rc
 import /init.recovery.usb.rc
 
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    install_keyring
+
+# One shot invocation to deal with encrypted volume.
+on defaultcrypto
+    exec - root -- /system/bin/vdc --wait cryptfs mountdefaultencrypted
+    # vold will set vold.decrypt to trigger_restart_framework (default
+    # encryption) or trigger_restart_min_framework (other encryption)
+
+# One shot invocation to encrypt unencrypted volumes
+on encrypt
+    onrestart restart zygote
+    exec - root -- /system/bin/vdc --wait cryptfs enablecrypto inplace default noui
+    # vold will set vold.decrypt to trigger_restart_framework (default
+    # encryption)
+
+service gatekeeperd /system/bin/gatekeeperd /data/misc/gatekeeper
+    class late_start
+    user root
+    setenv PATH /system/bin
+    setenv LD_LIBRARY_PATH /system/lib
+#    writepid /dev/cpuset/system-background/tasks
+    seclabel u:r:recovery:s0
+
+service keystore_auth /sbin/keystore_auth
+    oneshot
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+# keystore is started and stopped on demand by TWRP
+service keystore /system/bin/keystore /data/misc/keystore
+    user root
+    group keystore drmrpc readproc root system
+    setenv PATH /system/bin
+    setenv LD_LIBRARY_PATH /system/lib
+    disabled
+    seclabel u:r:recovery:s0
+
+service hwservicemanager /system/bin/hwservicemanager
+    user root
+    setenv PATH /system/bin
+    setenv LD_LIBRARY_PATH /system/lib
+    disabled
+    group root readproc
+    onrestart setprop hwservicemanager.ready false
+    onrestart class_restart hal
+    onrestart class_restart early_hal
+    shutdown critical
+    seclabel u:r:recovery:s0
+
+service servicemanager /system/bin/servicemanager
+    class core animation
+    user root
+    group root system readproc
+    setenv PATH /system/bin
+    setenv LD_LIBRARY_PATH /system/lib
+    critical
+    onrestart restart healthd
+    onrestart restart zygote
+    onrestart restart surfaceflinger
+    onrestart restart inputflinger
+    onrestart restart drm
+    onrestart restart keystore
+    onrestart restart gatekeeperd
+    shutdown critical
+    disabled
+    seclabel u:r:recovery:s0
+
+service modulesdriver /sbin/modulesdriver.sh
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service prepdecrypt /sbin/prepdecrypt.sh
+    oneshot
+    disabled
+    user root
+    seclabel u:r:recovery:s0
+ 
 on init
-    start healthd
+    export ANDROID_ASSETS /system/app
+    export ANDROID_STORAGE /storage
+    export ASEC_MOUNTPOINT /mnt/asec
+    export BOOTCLASSPATH /system/framework/core-oj.jar:/system/framework/core-libart.jar:/system/framework/conscrypt.jar:/system/framework/okhttp.jar:/system/framework/bouncycastle.jar:/system/framework/apache-xml.jar:/system/framework/legacy-test.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/system/framework/org.apache.http.legacy.boot.jar:/system/framework/android.hidl.base-V1.0-java.jar:/system/framework/android.hidl.manager-V1.0-java.jar:/system/framework/radio_interactor_common.jar
+    export SYSTEMSERVERCLASSPATH /system/framework/services.jar:/system/framework/ethernet-service.jar:/system/framework/wifi-service.jar:/system/framework/com.android.location.provider.jar
+    export ANDROID_PRINTF_LOG time
 
     chown system root /proc/cpwcn/wdtirq	
     chmod 766 /proc/cpwcn/wdtirq
@@ -10,6 +99,39 @@ on fs
     mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
     mkdir /data/misc/bluetooth 0770 system system
     
+    mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
+    mkdir /data/misc/bluetooth 0770 system system
+    copy /system/etc/bluetooth/bt_stack.conf /data/misc/bluedroid/bt_stack.conf
+    chown bluetooth system /data/misc/bluedroid/bt_stack.conf
+    chmod 0640 /data/misc/bluedroid/bt_stack.conf
+
+    chmod 666 /sys/module/shub_core/parameters/gryo_firms
+    chmod 666 /sys/module/shub_core/parameters/acc_firms
+    chmod 666 /sys/module/shub_core/parameters/mag_firms
+    chmod 666 /sys/module/shub_core/parameters/pressure_firms
+    chmod 666 /sys/module/shub_core/parameters/light_firms
+    chmod 666 /sys/module/shub_core/parameters/prox_firms
+    chmod 666 /sys/module/firmware_class/parameters/path
+    chmod 666 /sys/module/shub_core/parameters/sensor_fusion_mode
+
+    # Ylog dir on /data partition
+    mkdir /data/vendor 0751 root root
+    mkdir /data/vendor/local 0751 root root
+
+    # slogmodem config dir
+    mkdir /data/vendor/ylog 0770 shell system
+    mkdir /data/vendor/local/slogmodem 0770 shell system
+    mkdir /data/vendor/local/mlogservice 0770 shell system
+    mkdir /mnt/vendor/sensorhub 0777 system root
+    mkdir /mnt/vendor/productinfo 0771 system root
+    mkdir /mnt/vendor/productinfo/sensor_calibration_data 0770 system root
+    mkdir /data/vendor/local/otpdata 0777 system root
+
+on post-fs
+    start modulesdriver
+    mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
+    mkdir /data/misc/bluetooth 0770 system system
+
     mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
     mkdir /data/misc/bluetooth 0770 system system
     copy /system/etc/bluetooth/bt_stack.conf /data/misc/bluedroid/bt_stack.conf
@@ -85,7 +207,7 @@ on post-fs-data
     chmod 666 /sys/devices/virtual/QN8027/QN8027/speaker_en
 
 on boot
-# block I/O vm.dirty parameters
+    # block I/O vm.dirty parameters
     write /proc/sys/vm/dirty_background_bytes 4194304
     write /proc/sys/vm/dirty_bytes  52428800
     cp /system/app/.vechileMatics.properties  /mnt/sdcard
