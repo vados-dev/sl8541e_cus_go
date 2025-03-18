@@ -167,6 +167,7 @@ on init
     mkdir /storage/sdcard1
     mkdir /storage/sdcard0
 #@}
+
     chown root shell /tmp
     chmod 0775 /tmp
     # Symlink to keep legacy apps working in multi-user world
@@ -349,7 +350,7 @@ on late-init
     # Load properties from /system/ + /factory after fs mount. Place
     # this in another action so that the load will be scheduled after the prior
     # issued fs triggers have completed.
-    trigger load_system_props_action
+    #trigger load_system_props_action
 
     # Now we can start zygote for devices with file based encryption
     trigger zygote-start
@@ -364,7 +365,7 @@ on late-init
     trigger boot
 
 on post-fs
-    #load_system_props
+    load_system_props
     # start essential services
     start logd
     start servicemanager
@@ -711,43 +712,14 @@ on boot
     chown root radio /proc/cmdline
     class_start hal
     class_start default
+    # Start standard binderized HAL daemons
     class_start core
-
-on nonencrypted
-    class_start main
-    class_start late_start
 
 on property:sys.init_log_level=*
     loglevel ${sys.init_log_level}
 
 on charger
     class_start charger
-
-on property:vold.decrypt=trigger_reset_main
-    class_reset main
-
-on property:vold.decrypt=trigger_load_persist_props
-    load_persist_props
-    start logd
-    start logd-reinit
-
-on property:vold.decrypt=trigger_post_fs_data
-    trigger post-fs-data
-
-on property:vold.decrypt=trigger_restart_min_framework
-    # A/B update verifier that marks a successful boot.
-    exec_start update_verifier
-    class_start main
-
-on property:vold.decrypt=trigger_restart_framework
-    # A/B update verifier that marks a successful boot.
-    exec_start update_verifier
-    class_start main
-    class_start late_start
-
-on property:vold.decrypt=trigger_shutdown_framework
-    class_reset late_start
-    class_reset main
 
 on property:sys.boot_completed=1
     bootchart stop
@@ -814,6 +786,8 @@ on adb_enable
     setprop sys.usb.config adb,vser,gser
 # @}
 
+#SPRD:use adb when debug version @{
+#@orig
 # Always start adbd on userdebug and eng builds
 on property:ro.debuggable=1
     write /sys/module/smsg/parameters/debug_enable 1
@@ -827,17 +801,6 @@ on property:service.adb.root=1
     write /sys/class/android_usb/android0/enable 0
     restart adbd
     write /sys/class/android_usb/android0/enable 1
-
-service flash_recovery /system/bin/xxxxx
-    class main
-    oneshot
-
-service mapgoosh /system/bin/sh /system/bin/mgfirewallt_init.sh
-    class main
-    user root
-    group root
-    restart    
-    seclabel u:r:shell:s
 
 # Always start adbd on non-cali mode
 on property:sys.usb.configfs=1 && property:sys.usb.ffs.ready=1 && property:sys.usb.config=adb,vser,gser
