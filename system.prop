@@ -11,6 +11,17 @@ ro.crypto.dm_default_key.options_format.version=2
 ro.crypto.volume.options=::v2
 #ro.build.system_root_image=true
 #####
+#####
+ro.sf.lcd_density=320
+#ro.sf.lcd_width=54
+#ro.sf.lcd_height=96
+ro.product.hardware=sl8541e_1h10_go
+ro.frp.pst=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/persist
+#####
+#Enable sdcardfs feature
+ro.sys.sdcardfs=true
+persist.sys.sdcardfs=force_on
+persist.nolosingframe.support=true
 ro.vendor.product.partitionpath=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/
 ro.product.partitionpath=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/
 ro.modem.l.dev=/proc/cptl/
@@ -37,20 +48,14 @@ ro.modem.l.count=1
 ro.secure=1
 ro.adb.secure=0
 ro.debuggable=1
-persist.sys.usb.config=mtp,adb
+persist.sys.usb.config=adb,vser,gser
 persist.service.adb.enable=1
-#ro.treble.enabled=true
-# enable tcp adb
-service.adb.tcp.port=5555
 ro.treble.enabled=true
 persist.sys.timezone = Europe/Moscow
 persist.service.adb.enable=1
 persist.service.debuggable=1
 persist.sys.root_access=1	
 ro.zygote=zygote32
-ro.bootimage.build.date=2023年 12月 26日 星期二 15:30:23 CST
-ro.bootimage.build.date.utc=1703575823
-ro.bootimage.build.fingerprint=SPRD/sp9832e_1h10_native/sp9832e_1h10:8.1.0/OPM2.171019.012/52215:user/release-keys
 #####
 dalvik.vm.image-dex2oat-Xms=64m
 dalvik.vm.image-dex2oat-Xmx=64m
@@ -68,63 +73,6 @@ pm.dexopt.bg-dexopt=speed-profile
 pm.dexopt.ab-ota=speed-profile
 pm.dexopt.inactive=verify
 pm.dexopt.shared=speed
-sys.usb.controller=musb-hdrc.0.auto
-#####
-ro.build.id=OPM2.171019.012
-ro.build.display.id=eplutus_D41_M5_936_Media_Sleep_2023122615
-ro.build.version.incremental=52215
-ro.build.version.sdk=27
-ro.build.version.preview_sdk=0
-ro.build.version.codename=REL
-ro.build.version.all_codenames=REL
-ro.build.version.release=8.1.0
-ro.build.version.security_patch=2018-09-05
-ro.build.date=2023年 12月 26日 星期二 15:30:23 CST
-ro.build.date.utc=1703575823
-ro.build.type=eng
-ro.build.user=wming
-ro.build.host=qh117-PowerEdge-R720xd
-ro.build.tags=release-keys
-ro.build.flavor=sl8541e_cus_gofu_osea-user
-ro.product.name=sl8541e_cus_gofu_osea
-ro.product.device=sl8541e_cus_go
-#####
-ro.product.cpu.abi=armeabi-v7a
-ro.product.cpu.abi2=armeabi
-ro.product.cpu.abilist=armeabi-v7a,armeabi
-ro.product.cpu.abilist32=armeabi-v7a,armeabi
-ro.product.cpu.abilist64=
-ro.product.manufacturer=sprd
-ro.product.locale=en-US
-#####
-# ro.build.product is obsolete; use ro.product.device
-ro.build.product=sl8541e_cus_go
-# Do not try to parse description, fingerprint, or thumbprint
-ro.build.description=sp9832e_1h10_native-user 8.1.0 OPM2.171019.012 52215 release-keys
-ro.build.fingerprint=SPRD/sp9832e_1h10_native/sp9832e_1h10:8.1.0/OPM2.171019.012/52215:user/release-keys
-ro.build.characteristics=default
-#####
-#ro.sf.lcd_density=320
-#ro.sf.lcd_width=54
-#ro.sf.lcd_height=96
-ro.product.hardware=sl8541e_1h10_go
-# Set Opengl ES Version
-#ro.opengles.version=196609
-# FRP property for pst device
-ro.frp.pst=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/persist
-#####
-#Enable sdcardfs feature
-ro.sys.sdcardfs=true
-persist.sys.sdcardfs=force_on
-#enable hdr+normal pic mode
-persist.sys.cam.normalhdr=true
-#sbs blur enable
-persist.sys.cam.sr.enable=false
-#enable imageblending
-persist.sys.blending.enable=false
-#fase thumb enable
-persist.sys.cam.fast.thumb=false
-persist.nolosingframe.support=true
 #####
 ro.radio.flavor=oversea
 ril.sim.phone_ex.start=true
@@ -134,9 +82,6 @@ dalvik.vm.isa.arm.variant=generic
 dalvik.vm.isa.arm.features=default
 dalvik.vm.systemservercompilerfilter=speed
 dalvik.vm.stack-trace-dir=/data/anr
-ro.vendor.build.date=2023年 12月 26日 星期二 15:30:23 CST
-ro.vendor.build.date.utc=1703575823
-ro.vendor.build.fingerprint=SPRD/sp9832e_1h10_native/sp9832e_1h10:8.1.0/OPM2.171019.012/52215:user/release-keys
 #####
 ro.product.board=sl8541e_cus_32b
 ro.board.platform=sp9832e
@@ -146,31 +91,14 @@ ro.vendor.product.brand=SPRD
 ro.vendor.product.name=sl8541e_cus_gofu_osea
 ro.vendor.product.device=sl8541e_cus_go
 #####
-persist.msms.phone_count=1
-persist.radio.multisim.config=ssss
 ro.storage.flash_type=2
 sys.internal.emulated=1
 persist.storage.type=2
 ro.storage.install2internal=0
 drm.service.enabled=true
-ro.treble.enabled=true
 ro.product.first_api_level=26
 ro.vendor.vndk.version=1
 persist.sys.sprd.wcnreset=1
-persist.sys.apr.enabled=0
-persist.sys.apr.timechanged=180
-persist.sys.apr.rlchanged=800
-persist.sys.apr.lifetime=0
-persist.sys.apr.reload=0
-persist.sys.apr.reportlevel=2
-persist.sys.apr.exceptionnode=0
-persist.sys.start_udpdatastall=0
-persist.sys.cam.sfv.alter=true
-ro.sys.pwctl.ultrasaving=1
-persist.sys.bsservice.enable=1
-persist.sys.apr.intervaltime=1
-persist.sys.apr.testgroup=CSSLAB
-persist.sys.apr.autoupload=1
 persist.sys.heartbeat.enable=1
 persist.sys.power.touch=1
 ro.lovelyfonts_support=1
@@ -192,9 +120,6 @@ persist.sys.support.vt=true
 ro.control_privapp_permissions=log
 ro.opa.eligible_device=true
 ro.setupwizard.mode=OPTIONAL
-ro.lmk.medium=700
-ro.lmk.downgrade_pressure=60
-ro.lmk.critical=210
 persist.support.fingerprint=true
 persist.sprd.fp.lockapp=true
 persist.sprd.fp.launchapp=true
@@ -203,7 +128,6 @@ ro.ifaa.support=true
 ro.ifaa.testmode.off=false
 ro.ifaa.device.vendor=0x08
 ro.lmk.critical_upgrade=true
-ro.lmk.upgrade_pressure=40
 pm.dexopt.downgrade_after_inactive_days=10
 pm.dexopt.shared=quicken
 dalvik.vm.heapgrowthlimit=128m
@@ -214,10 +138,7 @@ ro.se.copy_map_src=mnt/sdcard/0/Sygic
 ro.se.copy_map_aim=mnt/extsd/Sygic
 persist.sys.iscanInstall=true
 persist.sys.isDefault_imei=true
-ro.product.brand=FX
-ro.product.model=D41
 persist.sys.support.system_sleep_new=true
-persist.sys.state.system_sleep=false
 ro.product.locale.language=ru
 persist.sys.language=ru
 persist.sys.country=RU
