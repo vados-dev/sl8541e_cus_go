@@ -12,8 +12,8 @@ on early-init
     write /proc/sys/kernel/core_pattern /dev/null
 
     #set logd property
-    setprop logd.klogd false
-    setprop logd.kernel false
+    setprop logd.klogd true
+    setprop logd.kernel true
     mkdir /dev/socket/ylog 0755 system system
     mkdir /dev/socket/ylog_lite 0755 system system
     mkdir /vendor/etc/seccomp_policy 0777 media system
@@ -25,24 +25,16 @@ on init
     export USBDISK_STORAGE /storage/usbdisk
     symlink /storage/self/primary /mnt/sdcard
     # @}
-
 # SPRD: add for OTG usb disk @{
     mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
     mkdir /storage/usbdisk 0700 system system
     symlink /storage/usbdisk /mnt/usbdisk
 # @}
 
-on nonencrypted
-    setprop vold.realdata.mount ok
-
-on property:vold.decrypt=trigger_restart_framework
-    #set encrypt completed property
-    setprop vold.realdata.mount ok
-
 on fs
     ubiattach 0 ubipac
     # exec /sbin/resize2fs -ef /fstab.${ro.hardware}
-    mount_all /fstab.${ro.hardware}
+    #mount_all /fstab.${ro.hardware}
     #start path_wrapper
     mount pstore pstore /sys/fs/pstore
     setprop ro.crypto.fuse_sdcard true
@@ -340,10 +332,10 @@ on boot
 
 #for thermal
     chown system system /sys/class/thermal/thermal_zone0/trip_point_0_temp
-	chown system system /sys/class/thermal/thermal_zone0/trip_point_1_temp
-	chown system system /sys/class/power_supply/battery/chg_cool_state
-	chown system system /sys/class/power_supply/battery/adjust_cur_min
-	chown system system /sys/class/power_supply/battery/input_current_limit
+    chown system system /sys/class/thermal/thermal_zone0/trip_point_1_temp
+    chown system system /sys/class/power_supply/battery/chg_cool_state
+    chown system system /sys/class/power_supply/battery/adjust_cur_min
+    chown system system /sys/class/power_supply/battery/input_current_limit
     chown system system /sys/class/thermal/cooling_device0/min_core_num
     chown system system /sys/class/thermal/cooling_device0/min_freq
 
@@ -356,11 +348,10 @@ on boot
     chown cameraserver system /sys/devices/virtual/misc/sprd_sensor/camera_sensor_name
     chmod 660 /sys/devices/virtual/misc/sprd_sensor/camera_sensor_name
 
-
 # chown for engineermode
-   chown system system /sys/class/power_supply/battery/stop_charge
-   chmod 0664 /sys/class/power_supply/battery/stop_charge
-   chmod 0666 /sys/class/power_supply/sprdfgu/cc_test_cmd
+    chown system system /sys/class/power_supply/battery/stop_charge
+    chmod 0664 /sys/class/power_supply/battery/stop_charge
+    chmod 0666 /sys/class/power_supply/sprdfgu/cc_test_cmd
 
     chown media system /sys/kernel/hmp/boost
     chown system system /sys/kernel/hmp/boostpulse
@@ -405,25 +396,26 @@ on property:ro.debuggable=1
      write /proc/sys/fs/suid_dumpable 1
 
 on property:persist.sys.eng.reset=0
-    write /sys/class/misc/sprd_7sreset/hard_mode 0
+     write /sys/class/misc/sprd_7sreset/hard_mode 0
 
 on property:persist.sys.eng.reset=1
-    write /sys/class/misc/sprd_7sreset/hard_mode 1
+     write /sys/class/misc/sprd_7sreset/hard_mode 1
 
 # Start the ylog daemon
 on property:persist.ylog.enabled=1
-    start ylog
+     start ylog
 
 on property:persist.ylog_lite.enabled=1
-    start ylog_lite
+     start ylog_lite
 # Stop the ylog daemon
 on property:persist.ylog.enabled=0
-    stop ylog
+     stop ylog
 
 on property:persist.ylog_lite.enabled=0
-    stop ylog_lite
+     stop ylog_lite
+
 on charger
-    load_persist_props
+     load_persist_props
 
 on property:persist.sys.hotspot.net.enabled=true
     iptables -A FORWARD -i seth_lte0 -j REJECT
@@ -675,12 +667,12 @@ service qccmd /system/bin/sh /system/bin/qccmd.sh
     oneshot
     seclabel u:r:qccmd:s0
 
-// service tf_renaming /system/bin/sh /system/bin/tf_renaming.sh
-    // class main
-    // user root
-    // group root
-    // oneshot
-    // seclabel u:r:tf_renaming:s0
+#service tf_renaming /system/bin/sh /system/bin/tf_renaming.sh
+    # class main
+    # user root
+    # group root
+    # oneshot
+    # seclabel u:r:tf_renaming:s0
 	
 service set_work /system/bin/wifi_route.sh
     disabled
