@@ -23,8 +23,11 @@ $(call inherit-product, vendor/pb/config/common.mk)
 # Inherit from sl8541e_cus_go device
 $(call inherit-product, device/sprd/sl8541e_cus_go/device.mk)
 
+# Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
+$(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+
 #Treble Support
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/treble_common.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/treble_common.mk)
 
 PRODUCT_DEVICE := sl8541e_cus_go
 PRODUCT_NAME := omni_sl8541e_cus_go
@@ -32,10 +35,10 @@ PRODUCT_BRAND := sprd
 PRODUCT_MODEL := D41
 PRODUCT_MANUFACTURER := sprd
 
-PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
-    ro.product.device \
-    ro.product.name \
-    ro.build.product
+#PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
+#    ro.product.device \
+#    ro.product.name \
+#    ro.build.product
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.service.adb.enable=1 \
