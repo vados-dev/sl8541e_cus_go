@@ -230,7 +230,7 @@ TW_NO_SCREEN_BLANK := false
 TW_NO_FASTBOOT_BOOT := true
 TW_CUSTOM_POWER_BUTTON := 116
 #TW_FORCE_CPUINFO_FOR_DEVICE_ID := true
-TW_LOAD_VENDOR_FIRMWARE := "sf_trusty.elf"
+TW_LOAD_VENDOR_FIRMWARE := "/firmware/sf_trusty.elf"
 
 # Libresetprop & resetprop
 #TW_INCLUDE_LIBRESETPROP := true
