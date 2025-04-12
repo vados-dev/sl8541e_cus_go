@@ -352,8 +352,8 @@ TW_NO_FASTBOOT_BOOT := true
 TW_CUSTOM_POWER_BUTTON := 116
 #TW_FORCE_CPUINFO_FOR_DEVICE_ID := true
 #build sign ta file
-PRODUCT_PACKAGES += \
-    sf_trusty.elf
+#PRODUCT_PACKAGES += \
+#    sf_trusty.elf
 TW_LOAD_VENDOR_FIRMWARE := "sf_trusty.elf"
 TW_NO_HAPTICS := true
 TW_OVERRIDE_SYSTEM_PROPS := "ro.build.fingerprint"
