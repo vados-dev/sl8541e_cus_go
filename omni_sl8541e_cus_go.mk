@@ -31,7 +31,7 @@ $(call inherit-product, device/sprd/sl8541e_cus_go/device.mk)
 #$(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 #Treble Support
-$(call inherit-product, $(SRC_TARGET_DIR)/product/treble_common.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/treble_common.mk)
 # Split selinux policy
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
