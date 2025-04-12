@@ -7,7 +7,7 @@ on:
       MANIFEST_BRANCH:
         description: 'PBRP Manifest Branch'
         required: true
-        default: 'android-9-0'
+        default: 'android-10.0'
         type: choice
         options:
         - android-14.0
@@ -25,13 +25,14 @@ on:
       DEVICE_TREE_BRANCH:
         description: 'Device Tree Branch (optional)'
         required: false
-        default: 'android-9.0'
+        default: 'android-10.0'
       BUILD_TARGET:
         description: 'Build Target (use "pbrp" for Android 11+)'
         required: true
-        default: 'pbrp'
+        default: 'adbd pbrp'
         type: choice
         options:
+        - adbd pbrp
         - pbrp
         - recovery
         - boot
