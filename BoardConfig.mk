@@ -63,7 +63,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic
-TARGET_CPU_VARIANT_RUNTIME := cortex-a53
+TARGET_CPU_VARIANT_RUNTIME := generic
 else
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -78,7 +78,7 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
 endif
 
-TARGET_CPU_CORTEX_A53 := true
+#TARGET_CPU_CORTEX_A53 := true
 
 #chipram tool for arm64
 #TOOLCHAIN_64 := true
@@ -93,7 +93,7 @@ ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
 #ARCH_ARM_HAVE_VFP := true
-#ARCH_ARM_HAVE_NEON := true
+ARCH_ARM_HAVE_NEON := true
 #ARCH_ARM_HAVE_TLS_REGISTER := true
 
 # HIDL
