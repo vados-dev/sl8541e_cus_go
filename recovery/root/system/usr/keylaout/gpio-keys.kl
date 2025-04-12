@@ -1,0 +1,16 @@
+key 114     VOLUME_DOWN     WAKE
+key 115     VOLUME_UP       WAKE
+key 116     POWER           WAKE
+key 212     CAMERA          WAKE
+key 0x210   FOCUS           WAKE
+key 172     HOME
+key 582     VOICE_ASSIST
+key 585		KEYIN0
+key 586		KEYIN1
+key 555		KEY_ALERT
+
+
+# chelizi key map
+key 600 CHELIZI_LEFT
+key 601 CHELIZI_CENTER
+key 602 CHELIZI_RIGHT

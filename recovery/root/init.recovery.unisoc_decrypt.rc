@@ -1,0 +1,165 @@
+
+on property:sprd.storageproxyd.enabled=1
+    mkdir /data/sprd_ss 0770 system system
+    start vendor.rpmbproxyd
+    start vendor.storagensproxyd
+
+service vendor.rpmbproxyd /vendor/bin/sprdstorageproxyd -f rpmb -d /dev/trusty-ipc-dev0 -p /data/sprd_ss -r /dev/block/mmcblk0rpmb
+    class core
+    group system
+    setenv PATH /vendor/bin
+    setenv LD_LIBRARY_PATH /vendor/lib
+    seclabel u:r:tee:s0
+
+service vendor.storagensproxyd /vendor/bin/sprdstorageproxyd -f ns -d /dev/trusty-ipc-dev0 -p /data/sprd_ss -r /dev/block/mmcblk0rpmb
+    class late_start
+    group system
+    setenv PATH /vendor/bin
+    setenv LD_LIBRARY_PATH /vendor/lib
+    seclabel u:r:tee:s0
+
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    install_keyring
+
+# One shot invocation to deal with encrypted volume.
+on defaultcrypto
+    exec - root -- /system/bin/vdc --wait cryptfs mountdefaultencrypted
+    # vold will set vold.decrypt to trigger_restart_framework (default
+    # encryption) or trigger_restart_min_framework (other encryption)
+
+# One shot invocation to encrypt unencrypted volumes
+on encrypt
+    onrestart restart zygote
+    exec - root -- /system/bin/vdc --wait cryptfs enablecrypto inplace default noui
+    # vold will set vold.decrypt to trigger_restart_framework (default
+    # encryption)
+
+service vendor.keymaster-3-0 /vendor/bin/hw/android.hardware.keymaster@3.0-service
+    class early_hal
+    user root
+    group root system drmrpc
+    setenv PATH /vendor/bin:/vendor/bin/hw
+    setenv LD_LIBRARY_PATH /vendor/lib:/vendor/lib/hw
+    seclabel u:r:recovery:s0
+
+service vendor.gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+    class hal
+    user root
+    group root system
+    setenv PATH /vendor/bin:/vendor/bin/hw
+    setenv LD_LIBRARY_PATH /vendor/lib:/vendor/lib/hw
+    seclabel u:r:recovery:s0
+
+service gatekeeperd /system/bin/gatekeeperd /data/misc/gatekeeper
+    class late_start
+    user root
+    setenv PATH /system/bin
+    setenv LD_LIBRARY_PATH /system/lib
+#    writepid /dev/cpuset/system-background/tasks
+    seclabel u:r:recovery:s0
+
+service keystore_auth /sbin/keystore_auth
+    oneshot
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+# keystore is started and stopped on demand by TWRP
+service keystore /system/bin/keystore /data/misc/keystore
+    user root
+    group keystore drmrpc readproc root system
+    setenv PATH /system/bin
+    setenv LD_LIBRARY_PATH /system/lib
+    disabled
+    seclabel u:r:recovery:s0
+
+service hwservicemanager /system/bin/hwservicemanager
+    user root
+    setenv PATH /system/bin
+    setenv LD_LIBRARY_PATH /system/lib
+    disabled
+    group root readproc
+    onrestart setprop hwservicemanager.ready false
+    onrestart class_restart hal
+    onrestart class_restart early_hal
+    shutdown critical
+    seclabel u:r:recovery:s0
+
+service servicemanager /system/bin/servicemanager
+    class core animation
+    user root
+    group root system readproc
+    setenv PATH /system/bin
+    setenv LD_LIBRARY_PATH /system/lib
+    critical
+    onrestart restart healthd
+    onrestart restart zygote
+    onrestart restart surfaceflinger
+    onrestart restart inputflinger
+    onrestart restart drm
+    onrestart restart keystore
+    onrestart restart gatekeeperd
+    shutdown critical
+    disabled
+    seclabel u:r:recovery:s0
+
+service vold /system/bin/vold \
+        --blkid_context=u:r:blkid:s0 --blkid_untrusted_context=u:r:blkid_untrusted:s0 \
+        --fsck_context=u:r:fsck:s0 --fsck_untrusted_context=u:r:fsck_untrusted:s0
+    class core
+    socket vold stream 0660 root mount
+    socket cryptd stream 0660 root mount
+    ioprio be 2
+    writepid /dev/cpuset/foreground/tasks
+    shutdown critical
+
+service modulesdriver /sbin/modulesdriver.sh
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service prepdecrypt /sbin/prepdecrypt.sh
+    oneshot
+    disabled
+    user root
+    seclabel u:r:recovery:s0
+
+on property:ro.hardware=sl8541e_cus_go
+    start device_check
+
+service device_check /sbin/device_check.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+service chargeled /sbin/chargeled
+    disabled
+    seclabel u:r:healthd:s0
+
+on property:hwservicemanager.ready=true
+    start vendor.gatekeeper-1-0
+    start vendor.keymaster-3-1
+    setprop sprd.storageproxyd.enabled 1
+ 
+on property:ro.crypto.state=unsupported
+    stop vendor.keymaster-3-1
+    stop vendor.gatekeeper-1-0
+    stop servicemanager
+    stop hwservicemanager
+
+on property:ro.crypto.state=unencrypted
+    stop vendor.keymaster-3-1
+    stop vendor.gatekeeper-1-0
+    stop servicemanager
+    stop hwservicemanager
+
+on property:twrp.decrypt.done=true
+    stop vendor.keymaster-3-1
+    stop vendor.gatekeeper-1-0
+    stop servicemanager
+    stop hwservicemanager

@@ -1,3 +1,10 @@
+<!--
+    Input:
+        manifest.xml
+        manifest.xml
+        manifest_gnss.xml
+        manifest_custom.xml
+-->
 <manifest version="1.0" type="device">
     <hal format="hidl">
         <name>android.hardware.audio</name>

@@ -1,3 +1,11 @@
+<!--
+    Input:
+        compatibility_matrix.legacy.xml
+        compatibility_matrix.1.xml
+        compatibility_matrix.2.xml
+        compatibility_matrix.3.xml
+        compatibility_matrix.device.xml
+-->
 <compatibility-matrix version="1.0" type="framework">
     <hal format="hidl" optional="false">
         <name>android.hardware.audio</name>
@@ -95,16 +103,28 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl" optional="false">
+    <hal format="hidl" optional="true">
         <name>android.hardware.drm</name>
         <version>1.0</version>
         <interface>
             <name>ICryptoFactory</name>
-            <instance>default</instance>
+            <regex-instance>.*</regex-instance>
         </interface>
         <interface>
             <name>IDrmFactory</name>
-            <instance>default</instance>
+            <regex-instance>.*</regex-instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="false">
+        <name>android.hardware.drm</name>
+        <version>1.1</version>
+        <interface>
+            <name>ICryptoFactory</name>
+            <regex-instance>.*</regex-instance>
+        </interface>
+        <interface>
+            <name>IDrmFactory</name>
+            <regex-instance>.*</regex-instance>
         </interface>
     </hal>
     <hal format="hidl" optional="true">
@@ -157,7 +177,7 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>android.hardware.health</name>
-        <version>1.0</version>
+        <version>2.0</version>
         <interface>
             <name>IHealth</name>
             <instance>default</instance>
@@ -170,9 +190,18 @@
     <hal format="hidl" optional="false">
         <name>android.hardware.keymaster</name>
         <version>3.0</version>
+        <version>4.0</version>
         <interface>
             <name>IKeymasterDevice</name>
             <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>android.hardware.keymaster</name>
+        <version>4.0</version>
+        <interface>
+            <name>IKeymasterDevice</name>
+            <instance>strongbox</instance>
         </interface>
     </hal>
     <hal format="hidl" optional="true">
@@ -1014,6 +1043,30 @@
         </config>
     </kernel>
     <kernel version="4.4.0">
+        <conditions>
+            <config>
+                <key>CONFIG_ARM64</key>
+                <value type="tristate">y</value>
+            </config>
+        </conditions>
+        <config>
+            <key>CONFIG_ARMV8_DEPRECATED</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CP15_BARRIER_EMULATION</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SETEND_EMULATION</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SWP_EMULATION</key>
+            <value type="tristate">y</value>
+        </config>
+    </kernel>
+    <kernel version="4.4.0">
         <config>
             <key>CONFIG_ANDROID</key>
             <value type="tristate">y</value>
@@ -1664,6 +1717,1196 @@
         </config>
     </kernel>
     <kernel version="4.4.0">
+        <conditions>
+            <config>
+                <key>CONFIG_ARM64</key>
+                <value type="tristate">y</value>
+            </config>
+        </conditions>
+        <config>
+            <key>CONFIG_ARMV8_DEPRECATED</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CP15_BARRIER_EMULATION</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SETEND_EMULATION</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SWP_EMULATION</key>
+            <value type="tristate">y</value>
+        </config>
+    </kernel>
+    <kernel version="4.4.83">
+        <config>
+            <key>CONFIG_ADVISE_SYSCALLS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_AIO</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_ANDROID</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_ANDROID_BINDER_DEVICES</key>
+            <value type="string">binder,hwbinder,vndbinder</value>
+        </config>
+        <config>
+            <key>CONFIG_ANDROID_BINDER_IPC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_ANDROID_BINDER_IPC_32BIT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_ASHMEM</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_AUDIT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_BLK_DEV_INITRD</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_BLOCK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CGROUPS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CGROUP_CPUACCT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CGROUP_FREEZER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PARTITION_ADVANCED</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_MSDOS_PARTITION</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_EFI_PARTITION</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_MMU</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_ARCH_MULTIPLATFORM</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_ARCH_SPRD</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SOC_SHARKLE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_USE_OF</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_AUTO_ZRELADDR</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_BINFMT_ELF</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_BINFMT_SCRIPT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CUS_GPIO</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_BOOT_FAIL_WIPE_DATA</key>
+            <value type="tristate">n</value>
+        </config>
+        <config>
+            <key>CONFIG_CGROUP_SCHED</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SPRD_CPU_HOTPLUG_GOV</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_TRUSTY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_TRUSTY_FIQ</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_TRUSTY_FIQ_ARM</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_TRUSTY_LOG</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_TRUSTY_VIRTIO</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_TRUSTY_VIRTIO_IPC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_ARM_PSCI_FW</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_DCACHE_WORD_ACCESS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_EXT4_FS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_EXT4_FS_SECURITY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_EXT4_RESERVE_SPACE_FILTER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_JBD2</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_FS_MBCACHE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_F2FS_FS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_F2FS_STAT_FS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_F2FS_FS_XATTR</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_F2FS_FS_SECURITY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_F2FS_FS_ENCRYPTION</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_F2FS_RESERVE_SPACE_FILTER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_FS_POSIX_ACL</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_FILE_LOCKING</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_FS_ENCRYPTION</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_FSNOTIFY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_DNOTIFY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_INOTIFY_USER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_FANOTIFY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_FANOTIFY_ACCESS_PERMISSIONS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_FUSE_FS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CUSE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_KEYS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_ENCRYPTED_KEYS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECURITY_PERF_EVENTS_RESTRICT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECURITY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECURITY_NETWORK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_HAVE_HARDENED_USERCOPY_ALLOCATOR</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_HAVE_ARCH_HARDENED_USERCOPY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_HARDENED_USERCOPY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECURITY_SELINUX</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECURITY_SELINUX_DEVELOP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECURITY_SELINUX_AVC_STATS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_AES</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_CBC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_HEH</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_CTR</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_CTS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_ECB</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_XTS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_GCM</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_CMAC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_HMAC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_XCBC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_CRC32C</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_CRC32</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_MD4</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_MD5</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_SHA1</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_SHA256</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_SHA512</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_ALGAPI</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_ALGAPI2</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_AEAD</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_AEAD2</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_BLKCIPHER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_BLKCIPHER2</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_HASH</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_HASH2</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_RNG</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_RNG2</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_RNG_DEFAULT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_PCOMP2</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_AKCIPHER2</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_MANAGER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_MANAGER2</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_MANAGER_DISABLE_TESTS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_GF128MUL</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_NULL</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_NULL2</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_WORKQUEUE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_CRYPTD</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_AUTHENC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_ABLK_HELPER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_AES</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_ARC4</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_DES</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_TWOFISH</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_TWOFISH_COMMON</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_DEFLATE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_ANSI_CPRNG</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_DRBG_MENU</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_DRBG_HMAC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_DRBG</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_JITTERENTROPY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_HW</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_ARM_CRYPTO</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_SHA1_ARM</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_SHA1_ARM_CE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_SHA2_ARM_CE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_SHA256_ARM</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_AES_ARM_CE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_CRYPTO_GHASH_ARM_CE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_DEFAULT_SECURITY_SELINUX</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_DEVKMEM</key>
+            <value type="tristate">n</value>
+        </config>
+        <config>
+            <key>CONFIG_DEVMEM</key>
+            <value type="tristate">n</value>
+        </config>
+        <config>
+            <key>CONFIG_EMBEDDED</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_EPOLL</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_EVENTFD</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_FHANDLE</key>
+            <value type="tristate">n</value>
+        </config>
+        <config>
+            <key>CONFIG_FUTEX</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_HARDENED_USERCOPY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_HIGH_RES_TIMERS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IKCONFIG</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IKCONFIG_PROC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_INET</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_INET6_ESP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_INET6_IPCOMP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_INET6_XFRM_MODE_TRANSPORT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_INET6_XFRM_MODE_TUNNEL</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_INET_DIAG_DESTROY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_INET_ESP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_INET_LRO</key>
+            <value type="tristate">n</value>
+        </config>
+        <config>
+            <key>CONFIG_INET_XFRM_MODE_TRANSPORT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_INET_XFRM_MODE_TUNNEL</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP6_NF_FILTER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP6_NF_IPTABLES</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP6_NF_MANGLE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP6_NF_MATCH_RPFILTER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP6_NF_RAW</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP6_NF_TARGET_REJECT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IPV6</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IPV6_MIP6</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IPV6_MULTIPLE_TABLES</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IPV6_OPTIMISTIC_DAD</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IPV6_ROUTER_PREF</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IPV6_ROUTE_INFO</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IPV6_VTI</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_ADVANCED_ROUTER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_MULTICAST</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_MULTIPLE_TABLES</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_ARPFILTER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_ARPTABLES</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_ARP_MANGLE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_FILTER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_IPTABLES</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_MANGLE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_MATCH_ECN</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_MATCH_TTL</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_NAT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_RAW</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_SECURITY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_TARGET_MASQUERADE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_TARGET_NETMAP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_TARGET_REDIRECT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_IP_NF_TARGET_REJECT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_MAGIC_SYSRQ</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_MODULES</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_MODULE_UNLOAD</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_MODVERSIONS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NET</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETDEVICES</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_COMMENT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_CONNLIMIT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_CONNMARK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_CONNTRACK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_HASHLIMIT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_HELPER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_IPRANGE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_LENGTH</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_LIMIT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_MAC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_MARK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_PKTTYPE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_POLICY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_QTAGUID</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_QUOTA</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_QUOTA2</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_SOCKET</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_STATE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_STATISTIC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_STRING</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_TIME</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_MATCH_U32</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_TARGET_CLASSIFY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_TARGET_CONNMARK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_TARGET_CONNSECMARK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_TARGET_IDLETIMER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_TARGET_MARK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_TARGET_NFLOG</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_TARGET_NFQUEUE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_TARGET_SECMARK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_TARGET_TCPMSS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_TARGET_TPROXY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NETFILTER_XT_TARGET_TRACE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NET_CLS_ACT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NET_CLS_U32</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NET_EMATCH</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NET_EMATCH_U32</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NET_IPVTI</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NET_KEY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NET_SCHED</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NET_SCH_HTB</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NFSD</key>
+            <value type="tristate">n</value>
+        </config>
+        <config>
+            <key>CONFIG_NFS_FS</key>
+            <value type="tristate">n</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_AMANDA</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_EVENTS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_FTP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_H323</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_IPV4</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_IPV6</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_IRC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_NETBIOS_NS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_PPTP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_SANE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_SECMARK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CONNTRACK_TFTP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CT_NETLINK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CT_PROTO_DCCP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CT_PROTO_SCTP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_CT_PROTO_UDPLITE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NF_NAT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_NO_HZ</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PACKET</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PM_WAKELOCKS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PPP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PPPOLAC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PPPOPNS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PPP_BSDCOMP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PPP_DEFLATE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PPP_MPPE</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PREEMPT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PROC_FS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_PROFILING</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_RTC_CLASS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_RT_GROUP_SCHED</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECCOMP</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECCOMP_FILTER</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECURITY</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECURITY_NETWORK</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECURITY_PERF_EVENTS_RESTRICT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SECURITY_SELINUX</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SHMEM</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SIGNALFD</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_STAGING</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SUSPEND</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SYNC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SYSFS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_SYSVIPC</key>
+            <value type="tristate">n</value>
+        </config>
+        <config>
+            <key>CONFIG_TIMERFD</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_TUN</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_UID_SYS_STATS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_UNIX</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_USB_CONFIGFS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_USB_CONFIGFS_F_ACC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_USB_CONFIGFS_F_AUDIO_SRC</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_USB_CONFIGFS_F_FS</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_USB_CONFIGFS_F_MIDI</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_USB_CONFIGFS_UEVENT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_USB_GADGET</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_USB_SUPPORT</key>
+            <value type="tristate">y</value>
+        </config>
+        <config>
+            <key>CONFIG_USELIB</key>
+            <value type="tristate">n</value>
+        </config>
+        <config>
+            <key>CONFIG_XFRM_USER</key>
+            <value type="tristate">y</value>
+        </config>
+    </kernel>
+    <kernel version="4.4.83">
         <conditions>
             <config>
                 <key>CONFIG_ARM64</key>

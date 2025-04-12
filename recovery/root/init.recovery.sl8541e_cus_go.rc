@@ -1,90 +1,9 @@
 #import /init.recovery.usb.configfs.rc
+import /init.recovery.unisoc_decrypt.rc
 import /init.recovery.usb.rc
 
-on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
-    install_keyring
-
-# One shot invocation to deal with encrypted volume.
-on defaultcrypto
-    exec - root -- /system/bin/vdc --wait cryptfs mountdefaultencrypted
-    # vold will set vold.decrypt to trigger_restart_framework (default
-    # encryption) or trigger_restart_min_framework (other encryption)
-
-# One shot invocation to encrypt unencrypted volumes
-on encrypt
-    onrestart restart zygote
-    exec - root -- /system/bin/vdc --wait cryptfs enablecrypto inplace default noui
-    # vold will set vold.decrypt to trigger_restart_framework (default
-    # encryption)
-
-service gatekeeperd /system/bin/gatekeeperd /data/misc/gatekeeper
-    class late_start
-    user root
-    setenv PATH /system/bin
-    setenv LD_LIBRARY_PATH /system/lib
-#    writepid /dev/cpuset/system-background/tasks
-    seclabel u:r:recovery:s0
-
-service keystore_auth /sbin/keystore_auth
-    oneshot
-    user root
-    group root
-    disabled
-    seclabel u:r:recovery:s0
-
-# keystore is started and stopped on demand by TWRP
-service keystore /system/bin/keystore /data/misc/keystore
-    user root
-    group keystore drmrpc readproc root system
-    setenv PATH /system/bin
-    setenv LD_LIBRARY_PATH /system/lib
-    disabled
-    seclabel u:r:recovery:s0
-
-service hwservicemanager /system/bin/hwservicemanager
-    user root
-    setenv PATH /system/bin
-    setenv LD_LIBRARY_PATH /system/lib
-    disabled
-    group root readproc
-    onrestart setprop hwservicemanager.ready false
-    onrestart class_restart hal
-    onrestart class_restart early_hal
-    shutdown critical
-    seclabel u:r:recovery:s0
-
-service servicemanager /system/bin/servicemanager
-    class core animation
-    user root
-    group root system readproc
-    setenv PATH /system/bin
-    setenv LD_LIBRARY_PATH /system/lib
-    critical
-    onrestart restart healthd
-    onrestart restart zygote
-    onrestart restart surfaceflinger
-    onrestart restart inputflinger
-    onrestart restart drm
-    onrestart restart keystore
-    onrestart restart gatekeeperd
-    shutdown critical
-    disabled
-    seclabel u:r:recovery:s0
-
-service modulesdriver /sbin/modulesdriver.sh
-    oneshot
-    disabled
-    user root
-    group root
-    seclabel u:r:recovery:s0
-
-service prepdecrypt /sbin/prepdecrypt.sh
-    oneshot
-    disabled
-    user root
-    seclabel u:r:recovery:s0
- 
 on init
+    export LD_LIBRARY_PATH /system/lib:/vendor/lib:/vendor/lib/hw:/system/lib/hw
     export ANDROID_ASSETS /system/app
     export ANDROID_STORAGE /storage
     export ASEC_MOUNTPOINT /mnt/asec
@@ -92,13 +11,18 @@ on init
     export SYSTEMSERVERCLASSPATH /system/framework/services.jar:/system/framework/ethernet-service.jar:/system/framework/wifi-service.jar:/system/framework/com.android.location.provider.jar
     export ANDROID_PRINTF_LOG time
 
-    chown system root /proc/cpwcn/wdtirq	
+    mkdir /mnt/vendor/persist
+    mount ext4 /dev/block/platform/soc/soc:ap-ahb/20300000.sdio/by-name/persist /mnt/vendor/persist rw
+
+    start hwservicemanager
+
+    chown system root /proc/cpwcn/wdtirq
     chmod 766 /proc/cpwcn/wdtirq
 
 on fs
     mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
     mkdir /data/misc/bluetooth 0770 system system
-    
+
     mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
     mkdir /data/misc/bluetooth 0770 system system
     copy /system/etc/bluetooth/bt_stack.conf /data/misc/bluedroid/bt_stack.conf
@@ -167,6 +91,8 @@ on post-fs-data
     setprop debug.delaytime.max 1000
     setprop debug.android_watchdog.disable 1
 
+    mkdir /data/sprd_ss 0770 system system
+
 #modify permission for voicetrigger dev
     chown system  audio /dev/rt5512
     chmod 660     /dev/rt5512
@@ -195,13 +121,13 @@ on post-fs-data
 
 #modify permission for qc_gpio
     chmod 666 /dev/qc_gpio
-    
+
 #modify permission for ttyS1
-    chmod 777 /dev/ttyS1	
-    
+    chmod 777 /dev/ttyS1
+
     chmod 666 /sys/class/backlight/sprd_backlight/brightness
     chmod 666 /sys/class/backlight/sprd_backlight/bl_power
-    
+
 # modify for AR navigation dynamic FPS    
     chmod 777 /sys/devices/virtual/misc/sprd_image/AR_navi_ctl    
     chmod 666 /sys/devices/virtual/QN8027/QN8027/speaker_en

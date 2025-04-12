@@ -1,6 +1,7 @@
 <!--
     Input:
         manifest.xml
+        framework_manifest.xml
 -->
 <manifest version="1.0" type="framework">
     <hal format="hidl">
@@ -98,9 +99,4 @@
         <transport></transport>
         <version>1.0</version>
     </hal>
-    <system-sdk>
-        <version>26</version>
-        <version>27</version>
-        <version>28</version>
-    </system-sdk>
 </manifest>

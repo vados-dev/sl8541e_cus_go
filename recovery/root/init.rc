@@ -11,6 +11,7 @@ import /init.recovery.cali.rc
 import /init.recovery.${ro.zygote}.rc
 
 on early-init
+    setprop ro.vndk.version 27
     # Set init and its forked children's oom_adj.
     write /proc/1/oom_score_adj -1000
 
@@ -350,7 +351,7 @@ on late-init
     # Load properties from /system/ + /factory after fs mount. Place
     # this in another action so that the load will be scheduled after the prior
     # issued fs triggers have completed.
-    #trigger load_system_props_action
+    trigger load_system_props_action
 
     # Now we can start zygote for devices with file based encryption
     trigger zygote-start
@@ -365,7 +366,7 @@ on late-init
     trigger boot
 
 on post-fs
-    load_system_props
+    #load_system_props
     # start essential services
     start logd
     start servicemanager
@@ -446,7 +447,7 @@ on post-fs-data
     restorecon /data
 
     # Make sure we have the device encryption key.
-    start sys_vold
+    start vold
     installkey /data
 
     # Start bootcharting as soon as possible after the data partition is
@@ -721,6 +722,32 @@ on property:sys.init_log_level=*
 on charger
     class_start charger
 
+on property:vold.decrypt=trigger_reset_main
+    class_reset main
+
+on property:vold.decrypt=trigger_load_persist_props
+    load_persist_props
+    start logd
+    start logd-reinit
+
+on property:vold.decrypt=trigger_post_fs_data
+    trigger post-fs-data
+
+on property:vold.decrypt=trigger_restart_min_framework
+    # A/B update verifier that marks a successful boot.
+    exec_start update_verifier
+    class_start main
+
+on property:vold.decrypt=trigger_restart_framework
+    # A/B update verifier that marks a successful boot.
+    exec_start update_verifier
+    class_start main
+    class_start late_start
+
+on property:vold.decrypt=trigger_shutdown_framework
+    class_reset late_start
+    class_reset main
+
 on property:sys.boot_completed=1
     bootchart stop
 
@@ -735,6 +762,9 @@ on property:ro.bootmode=recovery
     class_start recovery
     insmod /lib/modules/mali.ko
     trigger adb_enable
+
+on recovery
+    setprop sprd.storageproxyd.enabled 1
 
 service console /sbin/sh
     class default
@@ -771,7 +801,7 @@ service ueventd /sbin/ueventd
     critical
     seclabel u:r:ueventd:s0
 
-service healthd /sbin/healthd
+service healthd /sbin/healthd -r
     class default
     critical
     seclabel u:r:healthd:s0

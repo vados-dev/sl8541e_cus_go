@@ -19,6 +19,45 @@ on early-init
     mkdir /vendor/etc/seccomp_policy 0777 media system
     
 on init
+    chown system system /dev/iio:device1
+    chown system system /sys/bus/iio/devices/trigger0/name
+    chown system system /sys/bus/iio/devices/iio:device1/buffer
+    chown system system /sys/bus/iio/devices/iio:device1/buffer/length
+    chown system system /sys/bus/iio/devices/iio:device1/buffer/enable
+    chown system system /sys/bus/iio/devices/iio:device1/trigger/current_trigger
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/iio/trigger/current_trigger
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/batch
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/logctl
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/calibrator_cmd
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/calibrator_data
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/enable
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/flush
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/iio
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/version
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/op_download
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/mag_cali_flag
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/sensorhub
+    chmod 0660 /dev/AKM099XX
+    chown system system /dev/AKM099XX
+
+    chmod 666 /sys/bus/iio/devices/trigger0/name
+    chmod 666 /sys/bus/iio/devices/iio:device1/buffer/length
+    chmod 666 /sys/bus/iio/devices/iio:device1/buffer/enable
+    chmod 666 /sys/bus/iio/devices/iio:device1/trigger/current_trigger
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/iio/trigger/current_trigger
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/batch
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/logctl
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/calibrator_cmd
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/calibrator_data
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/enable
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/flush
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/iio
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/version
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/op_download
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/mag_cali_flag
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/sensorhub
+    chmod 666 /sys/class/modem/debug-log/channel
+
     # SPRD: add for storage manage @{
     export EMULATED_STORAGE /storage/self/emulated
     export PHYSICAL_STORAGE /storage/sdcard0
@@ -33,8 +72,8 @@ on init
 
 on fs
     ubiattach 0 ubipac
-    # exec /sbin/resize2fs -ef /fstab.${ro.hardware}
-    #mount_all /fstab.${ro.hardware}
+    #exec /sbin/resize2fs -ef /fstab.${ro.hardware}
+    mount_all /fstab.${ro.hardware}
     #start path_wrapper
     mount pstore pstore /sys/fs/pstore
     setprop ro.crypto.fuse_sdcard true
@@ -271,12 +310,6 @@ on boot
     chmod 660 /proc/wcn_gnss/stop
     chmod 660 /proc/wcn_gnss/status
 
-    chown system system /dev/iio:device1
-    chown system system /sys/bus/iio/devices/trigger0/name
-    chown system system /sys/bus/iio/devices/iio:device1/buffer
-    chown system system /sys/bus/iio/devices/iio:device1/buffer/length
-    chown system system /sys/bus/iio/devices/iio:device1/buffer/enable
-    chown system system /sys/bus/iio/devices/iio:device1/trigger/current_trigger
     chown system system /sys/class/sprd_sensorhub/sensor_hub/iio/trigger/current_trigger
     chown system system /sys/class/sprd_sensorhub/sensor_hub/batch
     chown system system /sys/class/sprd_sensorhub/sensor_hub/logctl

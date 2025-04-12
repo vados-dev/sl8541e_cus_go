@@ -1,29 +1,108 @@
-# Crypt
+#####
+### Begin my System.prop
+#####
+ro.secure=1
+# GSI always disables adb authentication
+ro.adb.secure=0
+ro.debuggable=1
+persist.sys.usb.config=adb,vser,gser
+persist.service.adb.enable=1
+persist.sys.timezone = Europe/Moscow
+persist.service.adb.enable=1
+persist.service.debuggable=1
+persist.sys.root_access=1
+ro.zygote=zygote32
+ro.treble.enabled=true
+ro.build.system_root_image=true
+ro.config.low_ram=true
+# GSI always generate dex pre-opt in system image
+ro.cp_system_other_odex=0
+# TODO(b/78105955): disable privapp_permissions checking before the bug solved
+ro.control_privapp_permissions=disable
+#####
+### Crypt
+#####
+ro.vendor.keybox.id.value=SPRD
+ro.vendor.product.partitionpath=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/
+# Oreo:
 ro.keybox.id.value=SPRD
+ro.product.partitionpath=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/
+#
 ro.hardware.keystore=sprdtrusty
 sys.usb.controller=musb-hdrc.0.auto
-ro.crypto.volume.filenames_mode=aes-256-cts
-ro.crypto.metadata.enabled=true
-ro.crypto.support_metadata_encrypt=true
-ro.crypto.uses_fs_ioc_add_encryption_key=true
-ro.crypto.volume.metadata.method=dm-default-key
-ro.crypto.dm_default_key.options_format.version=2
-ro.crypto.volume.options=::v2
-#ro.build.system_root_image=true
+ro.boot.avb_version=1.0
+ro.boot.vbmeta.avb_version=1.0
+#ro.crypto.volume.filenames_mode=aes-256-cts
+#ro.crypto.metadata.enabled=true
+#ro.crypto.support_metadata_encrypt=true
+#ro.crypto.uses_fs_ioc_add_encryption_key=true
+ro.crypto.fs_crypto_blkdev=/dev/block/dm-0
+ro.crypto.fuse_sdcard=true
+#ro.crypto.volume.metadata.method=dm-default-key
+#ro.crypto.dm_default_key.options_format.version=2
+#ro.crypto.volume.options=::v2
 #####
+### Enable sdcardfs feature and Storage
 #####
-ro.sf.lcd_density=320
-#ro.sf.lcd_width=54
-#ro.sf.lcd_height=96
-ro.product.hardware=sl8541e_1h10_go
-ro.frp.pst=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/persist
-#####
-#Enable sdcardfs feature
 ro.sys.sdcardfs=true
 persist.sys.sdcardfs=force_on
-persist.nolosingframe.support=true
+ro.frp.pst=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/persist
+ro.storage.flash_type=2
+sys.internal.emulated=1
+persist.storage.type=2
+ro.storage.install2internal=0
+drm.service.enabled=true
+ro.se.copy_map_src=mnt/sdcard/0/Sygic
+ro.se.copy_map_aim=mnt/extsd/Sygic
+#####
+### Product and Board
+#####
+ro.board.platform=sp9832e
+# ro.product.cpu.abi and ro.product.cpu.abi2 are obsolete,
+# use ro.product.cpu.abilist instead.
+ro.product.cpu.abi=armeabi-v7a
+ro.product.cpu.abi2=armeabi
+ro.product.cpu.abilist=armeabi-v7a,armeabi
+ro.product.cpu.abilist32=armeabi-v7a,armeabi
+ro.product.cpu.abilist64=
+ro.product.manufacturer=sprd
+ro.product.board=sl8541e_cus_32b
+ro.product.hardware=sl8541e_1h10_go
+ro.product.locale.language=ru
+ro.product.region=RU
+persist.sys.language=ru
+persist.sys.country=RU
+ro.product.first_api_level=26
+ro.build.version.release=8.1.0
+ro.build.version.security_patch=2018-09-05
+ro.build.type=eng
+ro.build.id=OPM2.171019.012
+ro.build.version.incremental=52215
+ro.build.version.preview_sdk=0
+ro.build.product=sl8541e_cus_go
+# ro.build.product is obsolete; use ro.product.device
+ro.build.product=sl8541e_cus_go
+# Do not try to parse description, fingerprint, or thumbprint
+ro.build.date=2023å¹´ 12æ 26æ¥ ææäº 15:30:23 CST
+ro.build.date.utc=1703575823
+ro.build.description=sp9832e_1h10_native-user 8.1.0 OPM2.171019.012 52215 release-keys
+ro.build.fingerprint=SPRD/sp9832e_1h10_native/sp9832e_1h10:8.1.0/OPM2.171019.012/52215:user/release-keys
+ro.build.characteristics=default
+# end build properties
+#####
+### Vendor
+#####
+ro.vendor.product.manufacturer=sprd
+ro.vendor.product.model=sl8541e_cus_gofu
+ro.vendor.product.brand=SPRD
+ro.vendor.product.name=sl8541e_cus_gofu_osea
+ro.vendor.product.device=sl8541e_cus_go
 ro.vendor.product.partitionpath=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/
-ro.product.partitionpath=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/
+#####
+### Modem
+#####
+keyguard.no_require_sim=true
+persist.nolosingframe.support=true
 ro.modem.l.dev=/proc/cptl/
 ro.modem.l.tty=/dev/stty_lte
 ro.modem.l.eth=seth_lte
@@ -41,31 +120,11 @@ persist.modem.l.nvp=l_
 persist.modem.l.enable=1
 ro.sp.log=/dev/slog_pm
 ro.radio.modemtype=l
-ro.telephony.default_network=9
-keyguard.no_require_sim=true
 ro.modem.l.count=1
 #####
-ro.secure=1
-ro.adb.secure=0
-ro.debuggable=1
-persist.sys.usb.config=adb,vser,gser
-persist.service.adb.enable=1
-ro.treble.enabled=true
-persist.sys.timezone = Europe/Moscow
-persist.service.adb.enable=1
-persist.service.debuggable=1
-persist.sys.root_access=1	
-ro.zygote=zygote32
+### Dalvik
 #####
-dalvik.vm.image-dex2oat-Xms=64m
-dalvik.vm.image-dex2oat-Xmx=64m
-dalvik.vm.dex2oat-Xms=64m
-dalvik.vm.dex2oat-Xmx=512m
-ro.dalvik.vm.native.bridge=0
-dalvik.vm.usejit=true
-dalvik.vm.usejitprofiles=true
 dalvik.vm.dexopt.secondary=true
-dalvik.vm.appimageformat=lz4
 pm.dexopt.first-boot=quicken
 pm.dexopt.boot=verify
 pm.dexopt.install=quicken
@@ -73,73 +132,28 @@ pm.dexopt.bg-dexopt=speed-profile
 pm.dexopt.ab-ota=speed-profile
 pm.dexopt.inactive=verify
 pm.dexopt.shared=speed
-#####
-ro.radio.flavor=oversea
-ril.sim.phone_ex.start=true
-ro.treble.enabled=true
 persist.sys.dalvik.vm.lib.2=libart.so
 dalvik.vm.isa.arm.variant=generic
 dalvik.vm.isa.arm.features=default
-dalvik.vm.systemservercompilerfilter=speed
 dalvik.vm.stack-trace-dir=/data/anr
 #####
-ro.product.board=sl8541e_cus_32b
-ro.board.platform=sp9832e
-ro.vendor.product.manufacturer=sprd
-ro.vendor.product.model=sl8541e_cus_gofu
-ro.vendor.product.brand=SPRD
-ro.vendor.product.name=sl8541e_cus_gofu_osea
-ro.vendor.product.device=sl8541e_cus_go
+### System.prop and Persist
 #####
-ro.storage.flash_type=2
-sys.internal.emulated=1
-persist.storage.type=2
-ro.storage.install2internal=0
-drm.service.enabled=true
-ro.product.first_api_level=26
-ro.vendor.vndk.version=1
-persist.sys.sprd.wcnreset=1
+# from device/sprd/sharkle/sl8541e_cus_go/system.prop
+#
+# Default density config, 240 for WVGA
+ro.sf.lcd_density=128
+#ro.sf.lcd_width=54
+#ro.sf.lcd_height=96
+ro.product.hardware=sl8541e_1h10_go
+# FRP property for pst device
+ro.frp.pst=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/persist
+#fase thumb enable
+persist.sys.cam.fast.thumb=false
+persist.nolosingframe.support=true
 persist.sys.heartbeat.enable=1
 persist.sys.power.touch=1
-ro.lovelyfonts_support=1
-ro.wcn.hardware.product=sharkle
-ro.wcn.hardware.etcpath=/vendor/etc
-ro.bt.bdaddr_path=/data/misc/bluedroid/btmac.txt
-reset_default_http_response=true
-ro.void_charge_tip=true
-ro.softaplte.coexist=true
-ro.wcn=enabled
-ro.af.client_heap_size_kbyte=1536
-ro.support.auto.roam=disabled
-ro.modem.wcn.enable=1
-ro.modem.wcn.diag=/dev/slog_wcn
-ro.modem.wcn.id=1
-ro.modem.wcn.count=1
-ro.modem.gnss.diag=/dev/slog_gnss
-persist.sys.support.vt=true
-ro.control_privapp_permissions=log
-ro.opa.eligible_device=true
-ro.setupwizard.mode=OPTIONAL
-persist.support.fingerprint=true
-persist.sprd.fp.lockapp=true
-persist.sprd.fp.launchapp=true
-ro.soter.support=true
-ro.ifaa.support=true
-ro.ifaa.testmode.off=false
-ro.ifaa.device.vendor=0x08
-ro.lmk.critical_upgrade=true
-pm.dexopt.downgrade_after_inactive_days=10
-pm.dexopt.shared=quicken
-dalvik.vm.heapgrowthlimit=128m
-dalvik.vm.heapsize=256m
-ro.opengles.version=196610
-persist.recents.sprd=1
-ro.se.copy_map_src=mnt/sdcard/0/Sygic
-ro.se.copy_map_aim=mnt/extsd/Sygic
-persist.sys.iscanInstall=true
-persist.sys.isDefault_imei=true
 persist.sys.support.system_sleep_new=true
-ro.product.locale.language=ru
-persist.sys.language=ru
-persist.sys.country=RU
-ro.product.region=RU
+#####
+### End my System.prop
+#####
