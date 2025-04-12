@@ -6,7 +6,7 @@ on:
       MANIFEST_BRANCH:
         description: 'PBRP Manifest Branch'
         required: true
-        default: 'android-9.0'
+        default: 'android-10.0'
         type: choice
         options:
         - android-14.0
@@ -24,7 +24,7 @@ on:
       DEVICE_TREE_BRANCH:
         description: 'Your Custom Recovery Tree Branch' # Your Device Tree Branch, make sure it's right.
         required: true
-        default: 'android-9.0'
+        default: 'android-10.0'
       DEVICE_NAME:
         description: 'Specify your Device Codename' # As is, just like your PRODUCT_DEVICE in your device tree.
         required: true
@@ -40,9 +40,10 @@ on:
       BUILD_TARGET:
         description: 'Specify your Build Target (choose "pbrp" instead of "recovery" for Android 11 or above)' # Pick among boot, recovery and vendor_boot
         required: true
-        default: 'pbrp'
+        default: 'adbd pbrp'
         type: choice
         options:
+        - adbd pbrp
         - pbrp
         - boot
         - recovery
@@ -121,10 +122,6 @@ jobs:
         git config --global user.name "vados-dev"
         git config --global user.email "vados@vados.ru"
         repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb.git -b ${{ inputs.MANIFEST_BRANCH }}
-        sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
-        sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
-        sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
-        sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/twrp-extras.xml ;
       id: pwd
     - name: Repo Sync
       run: |
