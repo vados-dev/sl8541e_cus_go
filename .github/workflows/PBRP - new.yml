@@ -7,7 +7,7 @@ on:
       MANIFEST_BRANCH:
         description: 'PBRP Manifest Branch'
         required: true
-        default: 'android-9-0'
+        default: 'android-10.0'
         type: choice
         options:
         - android-14.0
