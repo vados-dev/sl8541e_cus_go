@@ -60,13 +60,15 @@ on:
 jobs:
   build:
     name: Build PBRP by ${{ github.actor }}
-    runs-on: self-hosted:ubuntu-20.04
-    if: github.event.repository.owner.id == github.event.sender.id
+    runs-on: self-hosted
+    container:
+      image: ubuntu:20.04
+#    if: github.event.repository.owner.id == github.event.sender.id
     env:
-      GITHUB_TOKEN: ${{ secrets.amster }}
+#      GITHUB_TOKEN: ${{ secrets.amster }}
       LC_ALL: "C.UTF-8"
-    permissions:
-      contents: write
+#    permissions:
+#      contents: write
     steps:
     - name: Check Out
       uses: actions/checkout@v4
