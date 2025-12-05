@@ -44,12 +44,15 @@ on:
 jobs:
   build:
     name: Build PBRP (new) by ${{ github.actor }}
-    runs-on: self-hosted/ubuntu:20.04
-    if: github.event.repository.owner.id == github.event.sender.id
-    env:
-      GITHUB_TOKEN: ${{ secrets.amster }}
-    permissions:
-      contents: write
+    runs-on: self-hosted
+    container:
+      image: ubuntu:20.04
+      
+#    if: github.event.repository.owner.id == github.event.sender.id
+#    env:
+#      GITHUB_TOKEN: ${{ secrets.amster }}
+#    permissions:
+#      contents: write
 
     steps:
     - name: Initial Setup
