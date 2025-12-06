@@ -4,7 +4,7 @@ on:
   
 jobs:
   build:
-    name: Build PBRP by ${{ github.actor }}
+    name: Cleanup by ${{ github.actor }}
     runs-on: self-hosted
     container:
       image: ubuntu:20.04
