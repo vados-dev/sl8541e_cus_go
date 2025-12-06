@@ -69,6 +69,17 @@ jobs:
         echo "Makefile Name: ${{ github.event.inputs.MAKEFILE_NAME }}"
         if [ ${{ github.event.inputs.CLEANUP }} == true ]; then echo "Cleanup: Enabled"; else echo "Cleanup: Disabled"; fi
         echo "::endgroup::"   steps:
+
+    - name: Check Out
+      uses: actions/checkout@v4
+
+    # Cleanup The Actions Workspace Using Custom Composite Run Actions
+    - name: Cleanup
+      run: | 
+        sudo cp scripts/cleanup.sh /host_root/root
+        sudo chroot /host_root /root/cleanup.sh
+      if: ${{ inputs.CLEANUP }}
+      # That's it! Now use your normal steps
    
     - name: Cleanup
       uses: rokibhasansagar/slimhub_actions@main
