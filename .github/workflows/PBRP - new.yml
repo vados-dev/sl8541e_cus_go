@@ -10,14 +10,12 @@ on:
         default: 'android-10.0'
         type: choice
         options:
-        - android-14.0
         - android-12.1
         - android-11.0
         - android-10.0
         - android-9.0
         - android-8.1
         - android-7.1
-        - android-6.0
       DEVICE_TREE:
         description: 'Custom Recovery Tree URL'
         required: true
@@ -53,6 +51,9 @@ jobs:
 #      GITHUB_TOKEN: ${{ secrets.amster }}
 #    permissions:
 #      contents: write
+    env:
+      LC_ALL: "C.UTF-8"
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
     steps:
     - name: Initial Setup
