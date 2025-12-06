@@ -5,9 +5,9 @@ on:
 jobs:
  build:
    name: Cleanup by ${{ github.actor }}
-   runs-on: self-hosted:ubuntu-20.04
-#   container:
-#     image: self-hosted:ubuntu-20.04
+   runs-on: self-hosted
+   container:
+     image: self-hosted:ubuntu-20.04
 #    if: github.event.repository.owner.id == github.event.sender.id
    env:
 #      GITHUB_TOKEN: ${{ secrets.amster }}
