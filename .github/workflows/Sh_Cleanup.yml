@@ -6,8 +6,8 @@ jobs:
  build:
    name: Cleanup by ${{ github.actor }}
    runs-on: self-hosted
-   container:
-     image: ubuntu:20.04
+#   container:
+#     image: ubuntu:20.04
 #    if: github.event.repository.owner.id == github.event.sender.id
    env:
 #      GITHUB_TOKEN: ${{ secrets.amster }}
@@ -20,15 +20,15 @@ jobs:
 
    - name: Prepare the environment
      run: |
-       docker rmi `docker images -q`
+#       docker rmi `docker images -q`
        sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/sudo apt/sources.list.d
        sudo apt -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
        sudo apt -y autoremove --purge
        sudo apt -y autoclean
        sudo apt clean
         
- #   - name: Cleanup Workspace
- #     run: |
- #       cd ${{ github.workspace }}
- #       rm -rf android-recovery
- #       df -h
+   - name: Cleanup Workspace
+     run: |
+       cd ${{ github.workspace }}
+       rm -rf android-recovery
+       df -h
