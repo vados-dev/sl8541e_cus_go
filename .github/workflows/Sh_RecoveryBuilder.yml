@@ -1,4 +1,4 @@
-name: Recovery Builder - PBRP
+name: Self-hosted Recovery PBRP Builder
 
 on:
   workflow_dispatch:
@@ -15,8 +15,7 @@ on:
         - android-10.0
         - android-9.0
         - android-8.1
-        - android-7.1
-        - android-6.0
+        - android-8.0
       DEVICE_TREE:
         description: 'Custom Recovery Tree' # Your already made Device Tree for TWRP
         required: true
@@ -56,14 +55,22 @@ on:
         description: 'Path of blobs to check' # Use it know what kind of dependencies your missing for decryption blobs.
         required: false
         default: 'vendor/bin/mcDriverDaemon'
+
+      CLEANUP:
+        description: 'Enable Cleanup action (disable to speed up building)'
+        required: true
+        type: boolean
+        default: true
         
 jobs:
   build:
     name: Build PBRP by ${{ github.actor }}
-    runs-on: self-hosted
+    runs-on: self-hosted:ubuntu:20.04
     container:
-      image: ubuntu:20.04
+      image: ubuntu:runner-18.04
 #    if: github.event.repository.owner.id == github.event.sender.id
+      volumes:
+        - /:/host_root
     env:
 #      GITHUB_TOKEN: ${{ secrets.amster }}
       LC_ALL: "C.UTF-8"
@@ -80,6 +87,8 @@ jobs:
         echo "Device Tree: ${{ inputs.DEVICE_TREE }}"
         echo "Device Branch: ${{ inputs.DEVICE_TREE_BRANCH }}"
         echo "Build Target: ${{ inputs.BUILD_TARGET }}"
+        if [ ${{ github.event.inputs.CLEANUP }} == true ]; then echo "Cleanup: Enabled"; else echo "Cleanup: Disabled"; fi
+        echo "::endgroup::"
 
     - name: Cleanup
       uses: rokibhasansagar/slimhub_actions@main
@@ -96,15 +105,16 @@ jobs:
         else
             echo "CHECK_LEGACY_BRANCH=true" >> $GITHUB_ENV
         fi
-
+    # Cleanup The Actions Workspace Using Custom Composite Run Actions
+    - name: Cleanup
+      run: | 
+        sudo cp scripts/cleanup.sh /host_root/root
+        sudo chroot /host_root /root/cleanup.sh
+      if: ${{ inputs.CLEANUP }}
+      # That's it! Now use your normal steps
+      
     - name: Prepare the environment
       run: |
-        docker rmi `docker images -q`
-        sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/sudo apt/sources.list.d
-        sudo apt -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
-        sudo apt -y autoremove --purge
-        sudo apt -y autoclean
-        sudo apt clean
         sudo apt update
         sudo apt -y upgrade
         sudo apt -y install gperf gcc-multilib gcc-10-multilib g++-multilib g++-10-multilib libc6-dev lib32ncurses5-dev x11proto-core-dev libx11-dev tree lib32z-dev libgl1-mesa-dev libxml2-utils xsltproc bc ccache lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libwxgtk3.0-gtk3-dev libxml2 lzop pngcrush schedtool squashfs-tools imagemagick libbz2-dev lzma ncftp qemu-user-static libstdc++-10-dev libtinfo5 libgflags-dev libncurses5 python3
