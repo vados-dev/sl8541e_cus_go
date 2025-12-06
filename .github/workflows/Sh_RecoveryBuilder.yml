@@ -64,7 +64,7 @@ jobs:
     name: Build PBRP by ${{ github.actor }}
     runs-on: sl8541e_cus_go
     container:
-      image: localhost/ubuntu:runner-18.04
+      image: ghcr.io/catthehacker/ubuntu:runner-18.04
 #    if: github.event.repository.owner.id == github.event.sender.id
       volumes:
         - /:/host_root
