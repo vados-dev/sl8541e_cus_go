@@ -1,0 +1,34 @@
+name: Recovery Builder Cleanup
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    name: Build PBRP by ${{ github.actor }}
+    runs-on: self-hosted
+    container:
+      image: ubuntu:20.04
+#    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+#      GITHUB_TOKEN: ${{ secrets.amster }}
+      LC_ALL: "C.UTF-8"
+#    permissions:
+#      contents: write
+    steps:
+    
+    - name: Cleanup
+      uses: rokibhasansagar/slimhub_actions@main
+    - name: Prepare the environment
+      run: |
+        docker rmi `docker images -q`
+        sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/sudo apt/sources.list.d
+        sudo apt -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
+        sudo apt -y autoremove --purge
+        sudo apt -y autoclean
+        sudo apt clean
+        
+    - name: Cleanup Workspace
+      run: |
+        cd ${{ github.workspace }}
+        rm -rf android-recovery
+        df -h
