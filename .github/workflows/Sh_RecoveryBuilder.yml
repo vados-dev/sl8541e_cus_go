@@ -81,7 +81,7 @@ jobs:
         echo "Makefile Name: ${{ inputs.MAKEFILE_NAME }}"
         echo "Device Path: ${{ inputs.DEVICE_PATH }}"
         echo "Build Target: ${{ inputs.BUILD_TARGET }}"
-        if [ ${{ github.event.inputs.CLEANUP }} == true ]; then echo "Cleanup: Enabled"; else echo "Cleanup: Disabled"; fi
+        if [ ${{ inputs.CLEANUP }} == true ]; then echo "Cleanup: Enabled"; else echo "Cleanup: Disabled"; fi
         echo "::endgroup::"
 
     - name: Cleanup
