@@ -1,34 +1,88 @@
-name: Recovery Builder Cleanup
+name: Self-hosted Recovery Builder Cleanup
 on:
   workflow_dispatch:
-  
+    inputs:
+      MANIFEST_URL:
+        description: 'MANIFEST_URL (if want to use SSH keys, use git@github.com:XXXXX)'
+        required: true
+        default: 'https://github.com/PitchBlackRecoveryProject/manifest_pb.git'
+      MANIFEST_BRANCH:
+        description: 'MANIFEST_BRANCH'
+        required: true
+        default: 'android-9.0'
+      DEVICE_TREE_URL:
+        description: 'DEVICE_TREE_URL'
+        required: true
+        default: 'https://github.com/vados-dev/sl8541e_cus_go.git'
+      DEVICE_TREE_BRANCH:
+        description: 'DEVICE_TREE_BRANCH'
+        required: true
+        default: 'android-9.0'
+      DEVICE_PATH:
+        description: 'DEVICE_PATH'
+        required: true
+        default: 'device/sprd/sl8541e_cus_go'
+      COMMON_TREE_URL:
+        description: 'COMMON_TREE_URL (if no common tree, leave blank)'
+        required: false
+      COMMON_PATH:
+        description: 'COMMON_PATH (if no common tree, leave blank)'
+        required: false
+      DEVICE_NAME:
+        description: 'DEVICE_NAME'
+        required: true
+        default: 'sl8541e_cus_go'
+      MAKEFILE_NAME:
+        description: 'MAKEFILE_NAME'
+        required: true
+        default: 'omni_sl8541e_cus_go'
+      CLEANUP:
+        description: 'Enable Cleanup action (disable to speed up building)'
+        required: true
+        type: boolean
+        default: true
+        
 jobs:
  build:
    name: Cleanup by ${{ github.actor }}
    runs-on: self-hosted
-#   container:
-#     image: ubuntu:20.04
+   container:
+     image: ghcr.io/catthehacker/ubuntu:runner-18.04
+     volumes:
+       - /:/host_root
 #    if: github.event.repository.owner.id == github.event.sender.id
    env:
 #      GITHUB_TOKEN: ${{ secrets.amster }}
       LC_ALL: "C.UTF-8"
-#    permissions:
-#      contents: write
-   steps:
-   - name: Cleanup
-     uses: rokibhasansagar/slimhub_actions@main
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
-   - name: Prepare the environment
-     run: |
-       #docker rmi `docker images -q`
+   steps:
+    - name: Display Run Parameters
+      run: |
+        echo "::group::User Environment Variables"
+        echo "Manifest URL: ${{ github.event.inputs.MANIFEST_URL }}"
+        echo "Manifest Branch: ${{ github.event.inputs.MANIFEST_BRANCH }}"
+        echo "Device Tree URL: ${{ github.event.inputs.DEVICE_TREE_URL }}"
+        echo "Device Tree Branch: ${{ github.event.inputs.DEVICE_TREE_BRANCH }}"
+        echo "Device Path: ${{ github.event.inputs.DEVICE_PATH }}"
+        echo "Device Name: ${{ github.event.inputs.DEVICE_NAME }}"
+        echo "Makefile Name: ${{ github.event.inputs.MAKEFILE_NAME }}"
+        if [ ${{ github.event.inputs.CLEANUP }} == true ]; then echo "Cleanup: Enabled"; else echo "Cleanup: Disabled"; fi
+        echo "::endgroup::"   steps:
+   
+    - name: Cleanup
+      uses: rokibhasansagar/slimhub_actions@main
+
+    - name: Prepare the environment
+      run: |
        sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/sudo apt/sources.list.d
        sudo apt -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
        sudo apt -y autoremove --purge
        sudo apt -y autoclean
        sudo apt clean
         
-   - name: Cleanup Workspace
-     run: |
+    - name: Cleanup Workspace
+      run: |
        cd ${{ github.workspace }}
        rm -rf android-recovery
        df -h
