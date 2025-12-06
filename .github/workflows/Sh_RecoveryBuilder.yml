@@ -3,10 +3,14 @@ name: Self-hosted Recovery PBRP Builder
 on:
   workflow_dispatch:
     inputs:
+      MANIFEST_URL:
+        description: 'MANIFEST_URL (if want to use SSH keys, use git@github.com:XXXXX)'
+        required: true
+        default: 'https://github.com/PitchBlackRecoveryProject/manifest_pb.git'
       MANIFEST_BRANCH:
         description: 'PBRP Manifest Branch'
         required: true
-        default: 'android-9.0'
+        default: 'android-10.0'
         type: choice
         options:
         - android-12.1
@@ -44,15 +48,6 @@ on:
         - boot
         - recovery
         - vendorboot
-      LDCHECK:
-        description: 'Use LDCHECK'
-        required: true
-        default: 'false'
-        type: boolean
-      LDCHECKPATH:
-        description: 'Path of blobs to check' # Use it know what kind of dependencies your missing for decryption blobs.
-        required: false
-        default: 'vendor/bin/mcDriverDaemon'
       CLEANUP:
         description: 'Enable Cleanup action (disable to speed up building)'
         required: true
@@ -62,17 +57,15 @@ on:
 jobs:
   build:
     name: Build PBRP by ${{ github.actor }}
-    runs-on: sl8541e_cus_go
+    runs-on: sl8541e_cus_go/ubuntu-20.04
     container:
-      image: ghcr.io/catthehacker/ubuntu:runner-18.04
+      image: ubuntu:20.04
 #    if: github.event.repository.owner.id == github.event.sender.id
-      volumes:
+#      volumes:
         - /:/host_root
     env:
-#      GITHUB_TOKEN: ${{ secrets.amster }}
       LC_ALL: "C.UTF-8"
-#    permissions:
-#      contents: write
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
     - name: Check Out
       uses: actions/checkout@v4
@@ -80,9 +73,13 @@ jobs:
     - name: Display Inputs
       run: |
         echo "Displaying variables/inputs."
+        echo "Manifest URL: ${{ inputs.MANIFEST_URL }}"
         echo "Manifest Branch: ${{ inputs.MANIFEST_BRANCH }}"
         echo "Device Tree: ${{ inputs.DEVICE_TREE }}"
         echo "Device Branch: ${{ inputs.DEVICE_TREE_BRANCH }}"
+        echo "Device Name: ${{ inputs.DEVICE_NAME }}"
+        echo "Makefile Name: ${{ inputs.MAKEFILE_NAME }}"
+        echo "Device Path: ${{ inputs.DEVICE_PATH }}"
         echo "Build Target: ${{ inputs.BUILD_TARGET }}"
         if [ ${{ github.event.inputs.CLEANUP }} == true ]; then echo "Cleanup: Enabled"; else echo "Cleanup: Disabled"; fi
         echo "::endgroup::"
