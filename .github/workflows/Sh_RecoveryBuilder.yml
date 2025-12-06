@@ -9,13 +9,11 @@ on:
         default: 'android-9.0'
         type: choice
         options:
-        - android-14.0
         - android-12.1
         - android-11.0
         - android-10.0
         - android-9.0
         - android-8.1
-        - android-8.0
       DEVICE_TREE:
         description: 'Custom Recovery Tree' # Your already made Device Tree for TWRP
         required: true
@@ -55,7 +53,6 @@ on:
         description: 'Path of blobs to check' # Use it know what kind of dependencies your missing for decryption blobs.
         required: false
         default: 'vendor/bin/mcDriverDaemon'
-
       CLEANUP:
         description: 'Enable Cleanup action (disable to speed up building)'
         required: true
