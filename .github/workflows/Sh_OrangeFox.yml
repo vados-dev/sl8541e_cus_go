@@ -72,7 +72,7 @@ jobs:
     - name: Swap Space
       uses: pierotofy/set-swap-space@master
       with:
-        swap-size-gb: 12
+        swap-size-gb: 16
       
     - name: Build Environment
       run: |
@@ -138,6 +138,7 @@ jobs:
         # Move device_tree folder to device_directory and rename it to $DEVICE_NAME
         echo "Moving device_tree to $DEVICE_DIRECTORY/$DEVICE_NAME"
         mv device_tree "$DEVICE_DIRECTORY"/"$DEVICE_NAME"
+      continue-on-error: true
 
     - name: Installing python2 for legacy builds
       if: env.CHECK_LEGACY_BRANCH == 'true'
