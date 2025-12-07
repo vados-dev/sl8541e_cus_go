@@ -100,11 +100,11 @@ jobs:
             echo "CHECK_LEGACY_BRANCH=true" >> $GITHUB_ENV
         fi
     # Cleanup The Actions Workspace Using Custom Composite Run Actions
-    - name: Cleanup
-      run: | 
-        sudo cp scripts/cleanup.sh /host_root/root
-        sudo chroot /host_root /root/cleanup.sh
-      if: ${{ inputs.CLEANUP }}
+#    - name: Cleanup
+#      run: | 
+#        sudo cp scripts/cleanup.sh /host_root/root
+#        sudo chroot /host_root /root/cleanup.sh
+#      if: ${{ inputs.CLEANUP }}
       # That's it! Now use your normal steps
       
     - name: Prepare the environment
@@ -132,7 +132,7 @@ jobs:
         cd android-recovery
         git config --global user.name "vados-dev"
         git config --global user.email "vados@vados.ru"
-        repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb.git -b ${{ inputs.MANIFEST_BRANCH }}
+        repo init --depth=1 -u ${{ inputs.MANIFEST_URL }} -b ${{ inputs.MANIFEST_BRANCH }}
         sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
         sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
         sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
@@ -223,18 +223,7 @@ jobs:
           Device: [Device Tree/Branch](${{ inputs.DEVICE_TREE }}/tree/${{ inputs.DEVICE_TREE_BRANCH }})
           Commit: Most recent [commit](${{ inputs.DEVICE_TREE }}/commit/${{ env.COMMIT_ID }}) during building.
         prerelease: true
-
-    - name: Run LDCheck
-      if: inputs.LDCHECK == 'true'
-      run: |
-        cd tools
-        mv -n libneeds ${GITHUB_WORKSPACE}/android-recovery/out/target/product/${{ env.DEVICE_NAME }}/recovery/root/
-        mv -n ldcheck ${GITHUB_WORKSPACE}/android-recovery/out/target/product/${{ env.DEVICE_NAME }}/recovery/root/
-        cd ../android-recovery/out/target/product/${{ env.DEVICE_NAME }}/recovery/root
-        python3 ldcheck -p system/lib64:vendor/lib64:system/lib:vendor/lib -d ${{ inputs.LDCHECK_PATH }}
-        echo "Done checking missing dependencies. Review, and reconfigure your tree."
-      continue-on-error: true
-    
+   
     - name: Cleanup Workspace
       run: |
         cd ${{ github.workspace }}
