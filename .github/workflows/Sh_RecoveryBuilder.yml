@@ -59,7 +59,7 @@ jobs:
     name: Build PBRP by ${{ github.actor }}
     runs-on: self-hosted
     container:
-      image: ubuntu:20.04
+      image: ghcr.io/catthehacker/ubuntu:runner-20.04
 #    if: github.event.repository.owner.id == github.event.sender.id
 #      volumes:
 #        - /:/host_root
