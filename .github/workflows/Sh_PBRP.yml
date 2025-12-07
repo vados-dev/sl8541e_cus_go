@@ -95,7 +95,7 @@ jobs:
 
     - name: Check Manifest Branch
       run: |
-        if [ ${{ inputs.MANIFEST_BRANCH }} > 'android-10.0' ]; then
+        if [ ${{ inputs.MANIFEST_BRANCH }} == '11.0' ] || [ ${{ inputs.MANIFEST_BRANCH }} == '12.1' ]; then
             echo "CHECK_LEGACY_BRANCH=false" >> $GITHUB_ENV
         else
             echo "CHECK_LEGACY_BRANCH=true" >> $GITHUB_ENV
