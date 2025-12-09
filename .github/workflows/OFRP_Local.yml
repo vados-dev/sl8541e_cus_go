@@ -6,7 +6,7 @@ on:
       MANIFEST_PATH:
         description: 'OrangeFox Manifest Path'
         required: true
-        default: '/home/runner/_work/OrangeFox'
+        default: '_work/OrangeFox'
       MANIFEST_BRANCH:
         description: 'OrangeFox Manifest Path'
         required: true
